@@ -1,7 +1,8 @@
 <%@page contentType="text/html;charset=utf-8" %>
 <html>
 <head>
-    <script src="/resource/showdown.js"></script>
+    <script src="/resource/js/showdown.js"></script>
+    <script src="/resource/js/jquery-3.3.1.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -54,8 +55,6 @@
 </head>
 <body class="one-column">
 <div style="display: none">
-    <textarea id="content1" style="height: 300px;width: 400px" onblur="compile();"></textarea>
-    <span id="result" style=" float: right;height: 300px;width: 400px"></span>
 </div>
 <div id="container">
     <div id="container-inner">
@@ -76,10 +75,19 @@
                 </div>
             </div>
         </div>
-        <div id="content">
 
-        </div>
     </div>
+</div>
+<div style="height: auto;width: 100%"><input type="button" onclick="compile();" value="生成markdown文章"
+                                             style="float:left;"></div>
+<div id="content" style="width: 100%;height: 700px ">
+    <div style="width: 50%;height: 100%;float: left">
+        <textarea style="width: 100%;height: 100%;" id="content1"></textarea>
+    </div>
+    <div style="width: 50%;height: 100%;float: left" id="result">
+
+    </div>
+
 </div>
 </body>
 </html>
@@ -89,5 +97,13 @@
         var converter = new showdown.Converter();
         var html = converter.makeHtml(content);
         document.getElementById("result").innerHTML = html;
+        var url = "http://localhost/aaa/insertContent.do";
+        $.post(url, {content: content}, function (json) {
+            //alert(json);
+            var converter = new showdown.Converter();
+            var html = converter.makeHtml(json);
+            document.getElementById("result").innerHTML = html;
+        });
     }
+
 </script>

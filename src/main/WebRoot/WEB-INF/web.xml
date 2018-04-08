@@ -42,4 +42,7 @@
         <servlet-name>DispatcherServlet</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>/pages/jsp/index.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
