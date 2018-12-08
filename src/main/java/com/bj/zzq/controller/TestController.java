@@ -2,33 +2,26 @@ package com.bj.zzq.controller;
 
 import com.bj.zzq.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 
-@RestController
-@RequestMapping("/q")
+@Controller
+@RequestMapping
 public class TestController {
 
-    @Autowired
-    private TestService testService;
 
-    @RequestMapping("/a")
-    public Object test() {
-        List<Integer> test = testService.getData();
-        return test;
+    @RequestMapping("/")
+    public String test() {
+        /**
+         * 此处相当于又发了一次，http://localhost:8888/index.html的请求，然后映射到静态页面/static/index.html
+         */
+        return "/index.html";
     }
 
-    public static void main(String[] args) {
-        //IntStream.of(1,3,6).forEach(System.out::println);
-        Stream<String> stream = Stream.of("12", "32", "333");
-        stream.toArray(String[]::new);
-        new Thread(() -> {
-            System.out.println("123");
-        });
-    }
 }
