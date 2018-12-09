@@ -1,0 +1,84 @@
+#container-inner {
+    margin: 2rem auto;
+    height: auto;
+    width: 78%;
+}
+
+body {
+    font-family: Georgia, serif;
+    letter-spacing: -0.01rem;
+    word-spacing: 0.2rem;
+    line-height: 1.8rem;
+    color: #111111;
+    width: 98%;
+}
+
+#navbar, .categary, span, div, ul, li, a {
+    font-size: 1.8rem;
+}
+
+hr {
+    border-color: #0f0f0f33;
+}
+
+.content-header {
+    height: 6rem;
+    background-color: rgba(3,54,116,0.34);
+    border-radius: 1.2rem;
+    /**rgba(18, 51, 122, 0.42) **/
+}
+
+.categary {
+    margin-top: 1.3rem;
+    margin-left: 1.2rem;
+    float: left;
+}
+
+.pre-next-article {
+    float: right;
+    margin-top: 0.8rem;
+    margin-right: 1.3rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+span{
+    margin-right: 0.1rem;
+}
+li{
+    line-height: 2.5rem;
+}
+#content-title{
+    margin: 2.5rem 0;
+}
+#article-header{
+    margin: 2rem 0;
+    color: rgba(4,1,4,0.65);
+}
+#article-header-author,article-header-date{
+    margin: 1.8rem 0;
+}
+#comment-header span{
+    font-size: 3rem
+}
+#comment{
+    margin-top: 3rem;
+}
+#comment-item{
+    background-color: #1b6d85;
+}
+.indent{
+    margin: 1rem 0;
+    text-indent: 2rem;
+}
+.comment-item-footer a,.comment-item-footer span,.comment-item-footer{
+    font-size: 20%;
+}
+.comment-item-footer{
+    float: right;
+}
+.comment-item hr{
+    clear: both;
+}

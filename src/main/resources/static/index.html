@@ -7,12 +7,140 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>赵志强的网络日志</title>
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/blog.css" rel="stylesheet">
 </head>
 <body>
-<h1>你好，世界！</h1>
 
-反倒是反倒是
+<div class="container">
+    <div id="container-inner">
+        <div id="header">
+            <div id="navbar">
+                <ol class="breadcrumb">
+                    <li>赵志强的网络日志</li>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">档案</a></li>
+                </ol>
+            </div>
+            <hr/>
+            <div class="content-header">
+                <div class="categary">
+                    <span>分类:</span>
+                    <a href="#">Java</a>
+                </div>
+                <div class="pre-next-article">
+                    <ul>
+                        <li><span>上一篇：</span><a href="#">hello你好</a></li>
+                        <li><span>下一篇：</span><a href="#">redis学习之旅</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            <div id="content-title">
+                <h2><strong>每周分享第 33 期</strong></h2>
+            </div>
+            <hr/>
+            <div id="article">
+                <div id="article-header">
+                    <div id="article-header-author"><span>作者：</span>赵志强<span></span></div>
+                    <div id="article-header-date"><span>日期：</span>2018年12月9日<span></span></div>
+                </div>
+                <div id="article-content">
+
+                </div>
+                <div id="article-footer">
+
+                </div>
+                <hr/>
+                <div id="comment">
+                    <div id="comment-header">
+                        <span>留言</span><span>（39条）</span>
+                    </div>
+                    <hr/>
+                    <div id="comment-list">
+                        <div class="comment-item">
+                            <span class="comment-username">小明</span>
+                            <span>说：</span>
+                            <p class="indent">
+                                在最大限度保证选举的公平公正和便利之间哪个优先，这种问题根本就不应该拿出来讨论。
+                                你说的电子投票的方法反而可以在中国推行，很简单就能追溯到投票人。
+                            </p>
+                            <div class="comment-item-footer">
+                                <span>2018年12月 1日 09:21</span>|
+                                <a href="#">#</a>|
+                                <a href="#">引用</a>
+                            </div>
+                            <hr/>
+                        </div>
+                        <div class="comment-item">
+                            <a class="comment-username" href="#">小亮</a>
+                            <span>说：</span>
+                            <p class="indent">
+                                用CSS实现段落首缩进两个字符
+
+                                实现首行缩进的通用方法是加四个小角空格。
+
+                                其实呢，用CSS样式来定义更为高效。
+
+                                比如在style里定义如下缩进样式：
+
+                                .suojin{text-indent:2em}
+
+                                在需要缩进的地方使用class="suojin"即可，
+
+                                比如用一个div定义一整块段落首先缩进，
+
+                                凡在div区域里，
+
+                                浏览器一碰上p语句（即一个新段的开始），
+
+                                就会执行.suojin所定义的缩进。
+
+                                也可以在正文中使用嵌入式CSS样式来定义，
+
+                                下面举个实例（使用时请将尖括号改为小角尖括号）：
+
+                                ＜div style="text-indent:2em"＞
+                                ＜p＞段落一＜／p＞
+                                ＜p＞段落二＜/p＞
+                                ＜p＞段落三＜p＞
+                                ＜/div＞
+
+                                两种方法各有长处短处,可根据需要决定使用哪一种方法。
+
+                                注：div标签不要忘记起始符。text-indent只对p或div标签有效，对br标签不生效，原因是br标签是换行标签不是分段标签。
+                            </p>
+                            <div class="comment-item-footer">
+                                <span>2018年12月 1日 09:21</span>|
+                                <a href="#">#</a>|
+                                <a href="#">引用</a>
+                            </div>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 <script src="js/jquery-3.3.1.js"></script>
+<script src="js/showdown.js"></script>
 <script src="js/bootstrap.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#convert").on("click", function () {
+            // var converter = new showdown.Converter(),
+            //     html = converter.makeHtml($("#input").val());
+            // $("#output").html(html);
+            //md = converter.makeMd('<a href="https://patreon.com/showdownjs">Please Support us!</a>');
+
+        })
+        var converter = new showdown.Converter(),
+            html = converter.makeHtml("#第一级标题 \n##第二级标题  \n###第三级标题 \n####第四级标题 \n#####第五级标题 \n\n第一，潜艇设备有缺陷。对于常规潜艇充电时存在安全隐患，这是各国军方都清楚知道的事情。作为这种隐患的防备技术，并不难解决，只要简单的对艇内氧气检测，一旦低于危险标准就自动关闭柴油机或者至少进行报警就行了。但遗憾的是，361号潜艇压根没有这种设备。\n\n第二，潜艇官兵有失误。正常的充电期间，只要启动柴油机，就务必确认通气管是否打开。柴油机工作时，最好将机舱密封，防止危及全艇。如发现情况，操作员就要以最短的时间使柴油机停止工作，并进行通风换气。但遗憾的是：所有这些，361号潜艇都没有做到，以至遭受灭顶之灾\n");
+        $("#article-content").html(html);
+
+    });
+</script>
