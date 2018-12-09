@@ -82,3 +82,6 @@ li{
 .comment-item hr{
     clear: both;
 }
+p{
+    line-height: 2.4rem;
+}
