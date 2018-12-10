@@ -1,14 +1,7 @@
 package com.bj.zzq.controller;
 
-import com.bj.zzq.service.TestService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 
 @Controller
@@ -21,7 +14,14 @@ public class TestController {
         /**
          * 此处相当于又发了一次，http://localhost:8888/index.html的请求，然后映射到静态页面/static/index.html
          */
-        return "/index.html";
+        return "blog/index";
+    }
+    @RequestMapping("/archives")
+    public String archives() {
+        /**
+         * 此处相当于又发了一次，http://localhost:8888/index.html的请求，然后映射到静态页面/static/index.html
+         */
+        return "blog/archives";
     }
 
 }
