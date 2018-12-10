@@ -4,4 +4,4 @@
 .classpath
 .project
 .settings
-/add ./*.vscode
+/.vscode
