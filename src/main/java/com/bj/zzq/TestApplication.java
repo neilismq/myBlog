@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfigurati
 @MapperScan(basePackages = "com.bj.zzq.dao")
 public class TestApplication {
     public static void main(String[] args){
+
         SpringApplication.run(TestApplication.class,args);
     }
 }
