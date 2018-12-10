@@ -1,8 +1,7 @@
 /target
-! *.gitignore
 *.iml
 *.idea
 .classpath
 .project
 .settings
-.vscode
+/add ./*.vscode
