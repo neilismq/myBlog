@@ -40,7 +40,7 @@ hr {
     margin-right: 1.3rem;
 }
 
-ul {
+.pre-next-article   ul {
     list-style: none;
     padding: 0;
 }
@@ -109,17 +109,40 @@ p{
     height: auto;
 }
 #archives-content{
-    margin: 1.5rem 1rem 1rem 1rem;
+    margin: 1rem 1rem 1rem 1rem;
+    width: 62%;
     float: left;
 }
 #archives-content-title{
-    height: 2rem;
+    height: 4rem;
     background-color: #2aabd288;
-    width: 70%;
+    border-radius: 2rem;
     text-align: center;
+    display: flex;
+    align-items:center;/*垂直居中*/
+    justify-content: center;/*水平居中*/
 }
 #archives-category{
-    width: 28%;
-    background-color: #4cae4c;
+    width: 25%;
     float: right;
+    margin:3rem auto;
+}
+#archives-content-detail div,#archives-content-detail span,#archives-content-detail a{
+    font-size: 1.6rem;
+}
+#archives-content-detail ul{
+    list-style-type: square;
+}
+#archives-content-detail h3{
+    text-align: center;
+    margin: 2rem 0 0 0;
+}
+#archives-content-detail hr{
+    margin: 0.7rem 1rem;
+}
+#archives-content-detail li{
+    line-height: 3rem;
+}
+.archives-content-detail{
+    margin: 3rem auto;
 }
