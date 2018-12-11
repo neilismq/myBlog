@@ -146,3 +146,6 @@ p{
 .archives-content-detail{
     margin: 3rem auto;
 }
+#archives-category-inner hr{
+    margin: 0.7rem 0.5rem;
+}
