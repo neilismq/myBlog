@@ -47,32 +47,32 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 列出要生成代码的所有表-->
-        <table tableName="blog_article" domainObjectName="BlogArticleEntity" enableCountByExample="true"
+        <table tableName="blog_article" domainObjectName="ArticleEntity" enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="blog_article_tag" domainObjectName="BlogArticleTagEntity" enableCountByExample="true"
+        <table tableName="blog_article_tag" domainObjectName="ArticleTagEntity" enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="blog_comment" domainObjectName="BlogCommentEntity" enableCountByExample="true"
+        <table tableName="blog_comment" domainObjectName="CommentEntity" enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="blog_setting" domainObjectName="BlogSettingEntity" enableCountByExample="true"
+        <table tableName="blog_setting" domainObjectName="SettingEntity" enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="blog_tag" domainObjectName="BlogTagEntity" enableCountByExample="true"
+        <table tableName="blog_tag" domainObjectName="TagEntity" enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="blog_user" domainObjectName="BlogUserEntity" enableCountByExample="true"
+        <table tableName="blog_user" domainObjectName="UserEntity" enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false"/>
