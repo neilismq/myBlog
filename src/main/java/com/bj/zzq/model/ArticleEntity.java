@@ -32,7 +32,7 @@ public class ArticleEntity implements Serializable {
     /**
      * 文章内容
      */
-    private byte[] content;
+    private String content;
 
     private static final long serialVersionUID = 1L;
 
@@ -76,11 +76,28 @@ public class ArticleEntity implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public byte[] getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(byte[] content) {
-        this.content = content;
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", title=").append(title);
+        sb.append(", author=").append(author);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
+        sb.append(", content=").append(content);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

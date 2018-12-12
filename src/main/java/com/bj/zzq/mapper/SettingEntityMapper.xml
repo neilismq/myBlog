@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bj.zzq.dao.SettingEntityMapper" >
   <resultMap id="BaseResultMap" type="com.bj.zzq.model.SettingEntity" >
-    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="id" property="id" jdbcType="CHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -80,10 +80,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from blog_setting
-    where id = #{id,jdbcType=CHAR}
-  </delete>
   <delete id="deleteByExample" parameterType="com.bj.zzq.model.SettingEntityExample" >
     delete from blog_setting
     <if test="_parameter != null" >

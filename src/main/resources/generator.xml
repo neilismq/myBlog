@@ -5,13 +5,14 @@
 
     <context id="MSTables" targetRuntime="MyBatis3" defaultModelType="flat">
 
-
         <property name="autoDelimitKeywords" value="true"/>
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
         <property name="javaFileEncoding" value="utf-8"/>
         <!-- 生成的pojo，将implements Serializable-->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- genenat entity时,生成toString -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
         <!-- type为自动生成注释用-->
         <commentGenerator type="com.zhubajie.mybatis.plugins.ZbjCommentGenerator">
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->

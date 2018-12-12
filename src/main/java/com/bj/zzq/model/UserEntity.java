@@ -70,4 +70,20 @@ public class UserEntity implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", name=").append(name);
+        sb.append(", email=").append(email);
+        sb.append(", personalSite=").append(personalSite);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
 }

@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bj.zzq.dao.ArticleEntityMapper" >
   <resultMap id="BaseResultMap" type="com.bj.zzq.model.ArticleEntity" >
-    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="id" property="id" jdbcType="CHAR" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="author" property="author" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.bj.zzq.model.ArticleEntity" extends="BaseResultMap" >
-    <result column="content" property="content" jdbcType="LONGVARBINARY" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -107,18 +107,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from blog_article
-    where id = #{id,jdbcType=CHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from blog_article
-    where id = #{id,jdbcType=CHAR}
-  </delete>
   <delete id="deleteByExample" parameterType="com.bj.zzq.model.ArticleEntityExample" >
     delete from blog_article
     <if test="_parameter != null" >
@@ -130,7 +118,7 @@
       create_time, update_time, content
       )
     values (#{id,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARBINARY}
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.bj.zzq.model.ArticleEntity" >
@@ -172,7 +160,7 @@
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="content != null" >
-        #{content,jdbcType=LONGVARBINARY},
+        #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -201,7 +189,7 @@
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.content != null" >
-        content = #{record.content,jdbcType=LONGVARBINARY},
+        content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -215,7 +203,7 @@
       author = #{record.author,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      content = #{record.content,jdbcType=LONGVARBINARY}
+      content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -230,43 +218,5 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bj.zzq.model.ArticleEntity" >
-    update blog_article
-    <set >
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="author != null" >
-        author = #{author,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=LONGVARBINARY},
-      </if>
-    </set>
-    where id = #{id,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bj.zzq.model.ArticleEntity" >
-    update blog_article
-    set title = #{title,jdbcType=VARCHAR},
-      author = #{author,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      content = #{content,jdbcType=LONGVARBINARY}
-    where id = #{id,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.bj.zzq.model.ArticleEntity" >
-    update blog_article
-    set title = #{title,jdbcType=VARCHAR},
-      author = #{author,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

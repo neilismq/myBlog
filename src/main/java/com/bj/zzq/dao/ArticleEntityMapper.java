@@ -10,8 +10,6 @@ public interface ArticleEntityMapper {
 
     int deleteByExample(ArticleEntityExample example);
 
-    int deleteByPrimaryKey(String id);
-
     int insert(ArticleEntity record);
 
     int insertSelective(ArticleEntity record);
@@ -20,17 +18,9 @@ public interface ArticleEntityMapper {
 
     List<ArticleEntity> selectByExample(ArticleEntityExample example);
 
-    ArticleEntity selectByPrimaryKey(String id);
-
     int updateByExampleSelective(@Param("record") ArticleEntity record, @Param("example") ArticleEntityExample example);
 
     int updateByExampleWithBLOBs(@Param("record") ArticleEntity record, @Param("example") ArticleEntityExample example);
 
     int updateByExample(@Param("record") ArticleEntity record, @Param("example") ArticleEntityExample example);
-
-    int updateByPrimaryKeySelective(ArticleEntity record);
-
-    int updateByPrimaryKeyWithBLOBs(ArticleEntity record);
-
-    int updateByPrimaryKey(ArticleEntity record);
 }

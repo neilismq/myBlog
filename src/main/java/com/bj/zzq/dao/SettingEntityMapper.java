@@ -10,8 +10,6 @@ public interface SettingEntityMapper {
 
     int deleteByExample(SettingEntityExample example);
 
-    int deleteByPrimaryKey(String id);
-
     int insert(SettingEntity record);
 
     int insertSelective(SettingEntity record);

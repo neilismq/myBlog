@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bj.zzq.dao.TagEntityMapper" >
   <resultMap id="BaseResultMap" type="com.bj.zzq.model.TagEntity" >
-    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="id" property="id" jdbcType="CHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -82,16 +82,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from blog_tag
-    where id = #{id,jdbcType=CHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from blog_tag
-    where id = #{id,jdbcType=CHAR}
-  </delete>
   <delete id="deleteByExample" parameterType="com.bj.zzq.model.TagEntityExample" >
     delete from blog_tag
     <if test="_parameter != null" >
@@ -160,23 +150,5 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bj.zzq.model.TagEntity" >
-    update blog_tag
-    <set >
-      <if test="name != null" >
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.bj.zzq.model.TagEntity" >
-    update blog_tag
-    set `name` = #{name,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>
