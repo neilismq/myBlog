@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BlogService {
+public class ArticleService {
     @Autowired
     private ArticleEntityMapper articleEntityMapper;
 
