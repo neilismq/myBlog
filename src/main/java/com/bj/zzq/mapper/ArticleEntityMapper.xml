@@ -5,6 +5,7 @@
     <result column="id" property="id" jdbcType="CHAR" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, title, author, create_time, update_time
+    id, title, author, create_time, update_time,content
   </sql>
   <sql id="Blob_Column_List" >
     content
