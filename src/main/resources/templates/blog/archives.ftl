@@ -17,4 +17,4 @@
     });
 </script>
 </@override>
-<@extends name="../layout/archives_layout.html"/>
+<@extends name="../layout/archives_layout.ftl"/>

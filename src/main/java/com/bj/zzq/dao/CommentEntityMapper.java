@@ -3,6 +3,9 @@ package com.bj.zzq.dao;
 import com.bj.zzq.model.CommentEntity;
 import com.bj.zzq.model.CommentEntityExample;
 import java.util.List;
+import java.util.Map;
+
+import com.bj.zzq.model.dto.CommentResp;
 import org.apache.ibatis.annotations.Param;
 
 public interface CommentEntityMapper {
@@ -19,4 +22,6 @@ public interface CommentEntityMapper {
     int updateByExampleSelective(@Param("record") CommentEntity record, @Param("example") CommentEntityExample example);
 
     int updateByExample(@Param("record") CommentEntity record, @Param("example") CommentEntityExample example);
+
+    List<CommentResp> selectCommentRespByArticleId(Map map);
 }

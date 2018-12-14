@@ -2,9 +2,7 @@ package com.bj.zzq.controller;
 
 import com.bj.zzq.dao.ArticleDao;
 import com.bj.zzq.model.*;
-import com.bj.zzq.service.ArticleService;
-import com.bj.zzq.service.ArticleTagService;
-import com.bj.zzq.service.TagService;
+import com.bj.zzq.model.dto.CommentResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +42,8 @@ public class ArticleController {
             }
 
             //获取评论和用户信息
-
+            List<CommentResp> CommentResp = articleDao.selectCommentRespByArticleId(articleEntity.getId());
+            map.put("comments",CommentResp);
         }
 
         return "blog/article";

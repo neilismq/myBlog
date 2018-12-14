@@ -1,7 +1,4 @@
 <@override name="content">
-<div >
-    <div style="height: 300px;background-color: red"></div>
-</div>
 </@override>
 <@override name="js">
 <script type="text/javascript">
@@ -14,4 +11,4 @@
     });
 </script>
 </@override>
-<@extends name="../layout/article_layout.html"/>
+<@extends name="../layout/article_layout.ftl"/>
