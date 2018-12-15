@@ -5,9 +5,40 @@ import java.util.Date;
 import java.util.List;
 
 public class ArticleEntityExample {
+    //默认不开启limit
+    protected boolean limit;
+    //默认偏移量
+    protected int limitOffset=1;
+    //默认起始位置
+    protected int limitStart=0;
+
     protected String orderByClause;
 
     protected boolean distinct;
+
+    public boolean isLimit() {
+        return limit;
+    }
+
+    public void setLimit(boolean limit) {
+        this.limit = limit;
+    }
+
+    public int getLimitOffset() {
+        return limitOffset;
+    }
+
+    public void setLimitOffset(int limitOffset) {
+        this.limitOffset = limitOffset;
+    }
+
+    public int getLimitStart() {
+        return limitStart;
+    }
+
+    public void setLimitStart(int limitStart) {
+        this.limitStart = limitStart;
+    }
 
     protected List<Criteria> oredCriteria;
 

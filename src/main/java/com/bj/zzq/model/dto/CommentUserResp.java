@@ -3,7 +3,7 @@ package com.bj.zzq.model.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-public class CommentResp implements Serializable {
+public class CommentUserResp implements Serializable {
     /**
      * id
      */

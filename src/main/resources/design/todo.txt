@@ -2,3 +2,4 @@
 1、如何使IDEA支持freemarker提示
 2、讲解搭建博客的过程
 3、后期如何封装下，使别人稍微配置下也可以用这个博客
+4、mybatis如何热加载mapper.xml

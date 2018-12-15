@@ -2,7 +2,11 @@ package com.bj.zzq.dao;
 
 import com.bj.zzq.model.ArticleEntity;
 import com.bj.zzq.model.ArticleEntityExample;
+
+import java.util.HashMap;
 import java.util.List;
+
+import com.bj.zzq.model.dto.ArticleTagResp;
 import org.apache.ibatis.annotations.Param;
 
 public interface ArticleEntityMapper {
@@ -23,4 +27,6 @@ public interface ArticleEntityMapper {
     int updateByExampleWithBLOBs(@Param("record") ArticleEntity record, @Param("example") ArticleEntityExample example);
 
     int updateByExample(@Param("record") ArticleEntity record, @Param("example") ArticleEntityExample example);
+
+    List<ArticleTagResp> selectArticleTagRespByTagId(HashMap<Object, Object> map);
 }

@@ -107,6 +107,9 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <if test="limit">
+        limit ${limitStart},${limitOffset}
+    </if>
   </select>
   <delete id="deleteByExample" parameterType="com.bj.zzq.model.ArticleEntityExample" >
     delete from blog_article
@@ -220,4 +223,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  <select id="selectArticleTagRespByTagId" resultType="com.bj.zzq.model.dto.ArticleTagResp">
+      select a.id as articleId, a.title as title, a.author as author, a.create_time as articleCreateTime, a.update_time as articleUpdateTime,a.content as content,t.id as tagId,t.name as tagName,t.create_time as tagCreateTime from blog_article a,blog_tag t,blog_article_tag a_t where a.id=a_t.article_id and t.id=a_t.tag_id  and a_t.tag_id=#{id} order by a.create_time desc
+  </select>
 </mapper>

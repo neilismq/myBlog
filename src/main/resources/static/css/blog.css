@@ -47,8 +47,11 @@ hr {
 span{
     margin-right: 0.1rem;
 }
-li{
-    line-height: 2.5rem;
+.pre-next-article li{
+    line-height: 2.9rem;
+}
+#archives-category-inner li,#article-footer li{
+    line-height: 3rem;
 }
 #content-title{
     margin: 2.5rem 0;
