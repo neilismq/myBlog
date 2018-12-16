@@ -23,7 +23,7 @@ hr {
 
 .content-header {
     height: 6rem;
-    background-color: rgba(3,54,116,0.34);
+    background-color: rgba(3, 54, 116, 0.34);
     border-radius: 1.2rem;
     /**rgba(18, 51, 122, 0.42) **/
 }
@@ -40,115 +40,164 @@ hr {
     margin-right: 1.3rem;
 }
 
-.pre-next-article   ul {
+.pre-next-article ul {
     list-style: none;
     padding: 0;
 }
-span{
+
+span {
     margin-right: 0.1rem;
 }
-.pre-next-article li{
+
+.pre-next-article li {
     line-height: 2.9rem;
 }
-#archives-category-inner li,#article-footer li{
+
+#archives-category-inner li, #article-footer li {
     line-height: 3rem;
 }
-#content-title{
+
+#content-title {
     margin: 2.5rem 0;
 }
-#article-header{
+
+#article-header {
     margin: 2rem 0;
-    color: rgba(4,1,4,0.65);
+    color: rgba(4, 1, 4, 0.65);
 }
-#article-header-author,#article-header-date{
+
+#article-header-author, #article-header-date {
     margin: 1.8rem 0;
     padding-left: 1.8rem;
 }
-#comment-header span{
+
+#comment-header span {
     font-size: 3rem
 }
-#comment{
+
+#comment {
     margin-top: 3rem;
 }
-#comment-item{
+
+#comment-item {
     background-color: #1b6d85;
 }
-.indent{
+
+.indent {
     margin: 1rem 0;
     text-indent: 2rem;
 }
-.comment-item-footer a,.comment-item-footer span,.comment-item-footer{
+
+.comment-item-footer a, .comment-item-footer span, .comment-item-footer {
     font-size: 20%;
 }
-.comment-item-footer{
+
+.comment-item-footer {
     float: right;
 }
-.comment-item hr{
+
+.comment-item hr {
     clear: both;
 }
-p{
+
+p {
     line-height: 2.4rem;
 }
-#article-content h1{
+
+#article-content h1 {
     margin-left: 0.5rem;
 }
-#article-content h2{
+
+#article-content h2 {
     margin-left: 0.7rem;
 }
-#article-content h3{
+
+#article-content h3 {
     margin-left: 0.9rem;
 }
-#article-content h4{
+
+#article-content h4 {
     margin-left: 1.1rem;
 }
-#article-content h5{
+
+#article-content h5 {
     margin-left: 1.3rem;
 }
-#article-content p{
+
+#article-content p {
     margin-left: 2.1rem;
 }
-#container-common{
+
+#container-common {
     margin: 2rem auto;
     height: auto;
 }
-#archives-content{
+
+#archives-content {
     margin: 1rem 1rem 1rem 1rem;
     width: 62%;
     float: left;
 }
-#archives-content-title{
+
+#archives-content-title {
     height: 4rem;
     background-color: #2aabd288;
     border-radius: 2rem;
     text-align: center;
     display: flex;
-    align-items:center;/*垂直居中*/
-    justify-content: center;/*水平居中*/
+    align-items: center; /*垂直居中*/
+    justify-content: center; /*水平居中*/
 }
-#archives-category{
+
+#archives-category {
     width: 25%;
     float: right;
-    margin:3rem auto;
+    margin: 3rem auto;
 }
-#archives-content-detail div,#archives-content-detail span,#archives-content-detail a{
+
+#archives-content-detail div, #archives-content-detail span, #archives-content-detail a {
     font-size: 1.6rem;
 }
-#archives-content-detail ul{
+
+#archives-content-detail ul {
     list-style-type: square;
 }
-#archives-content-detail h3{
+
+#archives-content-detail h3 {
     text-align: center;
     margin: 2rem 0 0 0;
 }
-#archives-content-detail hr{
+
+#archives-content-detail hr {
     margin: 0.7rem 1rem;
 }
-#archives-content-detail li{
+
+#archives-content-detail li {
     line-height: 3rem;
 }
-.archives-content-detail{
+
+.archives-content-detail {
     margin: 3rem auto;
 }
-#archives-category-inner hr{
+
+#archives-category-inner hr {
     margin: 0.7rem 0.5rem;
+}
+
+.comment-content blockquote {
+    background-color: rgb(224, 223, 204);
+    font-size: 1.2rem;
+    padding: 2rem;
+    margin: 2rem;
+    border-radius: 1rem;
+    border-left-style: none;
+}
+.comment-content pre{
+    background-color: transparent;
+    border: none;
+    padding-left: 0;
+    font-weight: bold;
+}
+.comment-content p {
+    text-indent: 2rem;
 }

@@ -89,6 +89,10 @@
                                 <#if comments??>
                                 <#list comments as comment>
                                 <div id="comment-${comment.commentId}" class="comment-item">
+                                <div class="inner">
+                                <div class="comment-header">
+                                <div class="asset-meta">
+                                <p>
                                     <#if comment.personalSite?? && comment.personalSite!=''>
                                     <a class="comment-username" href="${comment.personalSite!'#'}" target="_blank">
                                         ${comment.name!'未知用户'}
@@ -97,15 +101,19 @@
                                     <span class="comment-username">${comment.name!'未知用户'}</span>
                                 </#if>
                                 <span>说：</span>
-                                <p class="indent">
-                                    ${comment.content!''}
                                 </p>
+                                </div>
+                                </div>
+                                <div class="comment-content" id="comment-quote-${comment.commentId}">
+                                    ${comment.content!''}
+                                </div>
                                 <div class="comment-item-footer">
                                     <span>${comment.commentCreateTime?datetime}</span>|
                                     <a href="http://localhost/article?id=${article.id}#comment-${comment.commentId}">#</a>|
-                                    <a href="#">引用</a>
+                                    <a href="#comment-text" title="引用${comment.name!'未知用户'}的这条留言" onclick="return CommentQuote('comment-quote-${comment.commentId}','${comment.name}');">引用</a>
                                 </div>
                                 <hr/>
+                                </div>
                             </div>
                         </#list>
                     </#if>
@@ -128,7 +136,7 @@
                                     </label>
                                 </p>
                                 <p>
-                                    <textarea id="comment-text" name="content" rows="10" cols="50"></textarea>
+                                    <textarea id="comment-text" name="content" style="height:20rem;width:90%"></textarea>
                                 </p>
                             </div>
                             <div id="comment-form-name">
@@ -315,6 +323,35 @@
         {setTimeout("stick_count()",200);}
         else
         {}
+        }
+        function CommentQuote(v,f) {
+
+        window.location.href=window.location.href+"#comment-text";
+
+        string=document.forms["comments_form"].content.value;
+        string2=ignoreSpaces(RemoveHTML(RemoveBlockquote(document.getElementById(v).innerHTML)));
+        document.forms["comments_form"].content.value="<blockquote>\n<pre>引用"+f+"的发言：</pre>\n"+string2+"\n</blockquote>\n\n"+string;
+
+        return true;
+        }
+        function ignoreSpaces(string) {
+        var temp = "";
+        string = '' + string;
+        splitstring = string.split("  "); //双引号之间是个空格；
+        for(i = 0; i < splitstring.length; i++)
+        temp += splitstring[i];
+        return temp;
+        }
+        function RemoveHTML(strText)
+        {
+        var regEx = /<[^>]*>/g;
+        return strText.replace(regEx, "");
+        }
+        function RemoveBlockquote(strText)
+        {
+        var regEx = /<blockquote>(.|\n|\r)*<\/blockquote>/ig;
+        regEx.multiline=true;
+        return strText.replace(regEx, "");
         }
 </script>
 </html>

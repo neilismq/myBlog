@@ -133,6 +133,12 @@ public class ArticleController {
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     @ResponseBody
     public String comment(CommentUserResp commentUserResp) throws InterruptedException {
+        String content = commentUserResp.getContent().trim();
+        if(!content.contains("</blockquote>")){
+            content="<p>"+content;
+        }
+        content+="</p>";
+        commentUserResp.setContent(content);
         boolean success = articleDao.insertComment(commentUserResp);
         Thread.sleep(4000);
         if (success) {
