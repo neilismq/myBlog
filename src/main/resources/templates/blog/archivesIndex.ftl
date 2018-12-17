@@ -25,26 +25,10 @@
                 </div>
                 <div id="archives-content">
                     <div id="archives-content-title">
-                            <div>${currentTag.name!''}(${(articleCount?c)!0}篇)</div>
+                            <div>(篇)</div>
                     </div>
                     <div id="archives-content-detail">
-                        <#if articleList??>
-                        <#list articleList as articleMap>
-                        <div class="archives-content-detail">
-                            <h3>${articleMap.year}</h3>
-                            <hr/>
-                            <ul>
-                                <#if (articleMap.articleList)??>
-                                <#list articleMap.articleList as article >
-                                    <li><span><a href="/article?articleId=${article.articleId!''}">${article.title!''}</a><span>（@${article.articleCreateTime?date}）</span></li>
-                                </#list>
-                                </#if>
-                            </ul>
-                        </div>
-                        </#list>
-                        <#else>
-                        <h3 style="margin:5rem auto">暂无内容</h3>
-                        </#if>
+
                     </div>
                 </div>
                 <div id="archives-category">
@@ -56,7 +40,7 @@
                             <ul>
                                 <#if tags??>
                                     <#list tags as tag>
-                                    <li><a href="/archives?tagId=${tag.id}">${tag.name}</a></li>
+                                    <li><a href="/archives?tagId=${tag.id!''}">${tag.name!''}</a></li>
                                     </#list>
                                 </#if>
                             </ul>

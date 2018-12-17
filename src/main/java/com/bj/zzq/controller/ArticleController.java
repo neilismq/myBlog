@@ -4,17 +4,14 @@ import com.bj.zzq.dao.ArticleDao;
 import com.bj.zzq.model.*;
 import com.bj.zzq.model.dto.ArticleTagResp;
 import com.bj.zzq.model.dto.CommentUserResp;
-import javafx.scene.input.InputMethodTextRun;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.time.Year;
 import java.util.*;
 
 
@@ -140,11 +137,15 @@ public class ArticleController {
         content+="</p>";
         commentUserResp.setContent(content);
         boolean success = articleDao.insertComment(commentUserResp);
-        Thread.sleep(4000);
         if (success) {
             return "评论成功！";
         } else {
             return "评论失败，请稍后再试！";
         }
     }
+    @RequestMapping(value = "/archivesIndex", method = RequestMethod.GET)
+    public String archives_index()  {
+       return "blog/archivesIndex";
+    }
+
 }

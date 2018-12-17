@@ -20,7 +20,7 @@
                                 <a href="/article">首页</a>
                             </li>
                             <li>
-                                <a href="/archives">档案</a>
+                                <a href="/archivesIndex">档案</a>
                             </li>
                         </ol>
                     </div>
