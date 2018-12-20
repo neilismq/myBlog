@@ -26,7 +26,7 @@ public class ArticleController {
     public String test(Map map, String articleId) {
         ArticleEntityExample example = new ArticleEntityExample();
         example.setOrderByClause("create_time desc");
-        List<ArticleEntity> list = articleDao.selectByExample(example);
+        List<ArticleEntity> list = articleDao.selectArticleByExample(example);
         if (list != null && list.size() > 0) {
             ArticleEntity articleEntity = new ArticleEntity();
             if (StringUtils.isBlank(articleId)) {
@@ -45,7 +45,7 @@ public class ArticleController {
             map.put("article", articleEntity);
 
             //当前文章所询标签
-            TagEntity tagEntity = articleDao.selecTagByArticleId(articleEntity.getId());
+            TagEntity tagEntity = articleDao.selectTagByArticleId(articleEntity.getId());
             if (tagEntity != null) {
                 map.put("tag", tagEntity);
             }
@@ -131,10 +131,10 @@ public class ArticleController {
     @ResponseBody
     public String comment(CommentUserResp commentUserResp) throws InterruptedException {
         String content = commentUserResp.getContent().trim();
-        if(!content.contains("</blockquote>")){
-            content="<p>"+content;
+        if (!content.contains("</blockquote>")) {
+            content = "<p>" + content;
         }
-        content+="</p>";
+        content += "</p>";
         commentUserResp.setContent(content);
         boolean success = articleDao.insertComment(commentUserResp);
         if (success) {
@@ -143,9 +143,48 @@ public class ArticleController {
             return "评论失败，请稍后再试！";
         }
     }
+
     @RequestMapping(value = "/archivesIndex", method = RequestMethod.GET)
-    public String archives_index()  {
-       return "blog/archivesIndex";
+    public String archives_index(Map map) {
+
+        HashMap<Object, Object> param = new HashMap<>();
+        param.put("limitStart", 0);
+        param.put("limitOffset", 20);
+        List<ArticleEntity> list = articleDao.selectArticleWithCommentCount(param);
+        if (list != null && list.size() > 0) {
+            ArticleEntity articleEntity = list.get(0);
+            String content = articleEntity.getContent();
+            content = content.substring(0, content.indexOf("\\n") == -1 ? content.length() : content.indexOf("\\n"));
+            articleEntity.setContent(content);
+            //最新文章
+            map.put("article", articleEntity);
+
+            //最新文章列表，默认显示20篇
+            map.put("recentArticles", list);
+
+            //最新文章所属标签
+            TagEntity tagEntity = articleDao.selectTagByArticleId(articleEntity.getId());
+            if (tagEntity != null) {
+                map.put("tag", tagEntity);
+            }
+            CommentEntityExample commentEntityExample = new CommentEntityExample();
+            commentEntityExample.createCriteria().andArticleIdEqualTo(articleEntity.getId());
+            int commentCount = articleDao.selectCommentsCountByExample(commentEntityExample);
+
+            //最新文章评论数量
+            map.put("commentCount", commentCount);
+            ArticleEntityExample articleEntityExample = new ArticleEntityExample();
+            int articleCount = articleDao.selectArticleCountByExample(articleEntityExample);
+
+            //全部文章数量
+            map.put("artcileCount", articleCount);
+            List<TagEntity> tagEntities = articleDao.selectAllTagWithArticleCount();
+
+            //所有标签的（带文章数量）
+            map.put("tags", tagEntities);
+        }
+
+        return "blog/archivesIndex";
     }
 
 }

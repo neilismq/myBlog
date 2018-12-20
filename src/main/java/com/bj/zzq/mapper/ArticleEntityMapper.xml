@@ -8,6 +8,7 @@
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="commentCount" property="commentCount" javaType="INTEGER"/>
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.bj.zzq.model.ArticleEntity" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
@@ -225,5 +226,8 @@
   </update>
   <select id="selectArticleTagRespByTagId" resultType="com.bj.zzq.model.dto.ArticleTagResp">
       select a.id as articleId, a.title as title, a.author as author, a.create_time as articleCreateTime, a.update_time as articleUpdateTime,a.content as content,t.id as tagId,t.name as tagName,t.create_time as tagCreateTime from blog_article a,blog_tag t,blog_article_tag a_t where a.id=a_t.article_id and t.id=a_t.tag_id  and a_t.tag_id=#{id} order by a.create_time desc
+  </select>
+  <select id="selectArticleWithCommentCount" resultMap="BaseResultMap">
+    select a.* ,(select count(*) from blog_comment c where c.article_id=a.id)  as commentCount from blog_article a  order by a.create_time desc limit #{limitStart},#{limitOffset}
   </select>
 </mapper>

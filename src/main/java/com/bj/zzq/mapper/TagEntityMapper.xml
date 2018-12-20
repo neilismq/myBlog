@@ -5,6 +5,7 @@
         <result column="id" property="id" jdbcType="CHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="articleCount" property="articleCount" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -154,11 +155,14 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <select id="selecTagByArticleId" resultMap="BaseResultMap" >
+    <select id="selecTagByArticleId" resultMap="BaseResultMap">
         select t.id,t.name,t.create_time
         from blog_article_tag a_t,
              blog_tag t
         where a_t.article_id = #{id}
           and a_t.tag_id = t.id limit 1
+    </select>
+    <select id="selectAllTagWithArticleCount" resultMap="BaseResultMap">
+        select t.* ,(select count(*) from blog_article_tag a_t where a_t.tag_id=t.id)  as articleCount from blog_tag t
     </select>
 </mapper>

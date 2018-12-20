@@ -27,46 +27,29 @@
             <div style="float: left;width: 63%">
                 <div class="archives-content-article">
                     <h2>
-                        <a href="aaaa">每周分享第 35 期</a>
+                        <a href="/article?articleId=${article.id}">${article.title!''}</a>
                     </h2>
                     <hr/>
                     <div>
-                        <span>分类<a>剪贴板</a></span>
+                        <span>分类<a href="/archives?tagId=${tag.id!''}">${tag.name!''}</a></span>
                     </div>
                     <div class="archives-content-article-content">
-                        <p>这里记录过去一周，我看到的值得分享的东西，每周五发布</p>
+
                     </div>
                     <div>
-                        <a>继续阅读全文</a>
+                        <a href="/article?articleId=${article.id}">继续阅读全文</a>
                     </div>
                     <hr/>
                     <div>
-                        2018年12月14日 12:24 | 留言（41）
+                        ${article.createTime?datetime} | 留言（${commentCount}）
                     </div>
                     <div>
-                        <h2>最近的20篇文章（共1756篇）</h2>
+                        <h2>最近的${recentArticles?size}篇文章（${artcileCount!0}）</h2>
                         <hr/>
                         <ul>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
-                            <li>2018.12.12：<a>异步 API 的设计</a>（12条评论）</li>
+                            <#list recentArticles  as item>
+                                <li>${item.createTime?date}：<a href="/article?articleId=${item.id}">${item.title!''}</a>（${item.commentCount}条评论）</li>
+                            </#list>
                         </ul>
                     </div>
                 </div>
@@ -79,24 +62,10 @@
                         <hr/>
                         <div style="min-height:25rem;">
                             <ul>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                                <li><a>散文</a>（161）</li>
-                        </ul>
+                                <#list tags as item>
+                                <li><a href="/archives?tagId=${item.id}">${item.name}</a>（${item.articleCount}）</li>
+                                </#list>
+                            </ul>
                     </div>
                 </div>
             </div>
@@ -108,5 +77,13 @@
 <script src="../js/jquery-3.3.1.js"></script>
 <script src="../js/showdown.js"></script>
 <script src="../js/bootstrap.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var aa = "${article.content?j_string}";
+            var converter = new showdown.Converter(),
+                html = converter.makeHtml(aa);
+            $("#archives-content-article-content").html(html);
+        });
+    </script>
 </body>
 </html>

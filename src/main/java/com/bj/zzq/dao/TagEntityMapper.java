@@ -23,4 +23,6 @@ public interface TagEntityMapper {
     int updateByExample(@Param("record") TagEntity record, @Param("example") TagEntityExample example);
 
     TagEntity selecTagByArticleId(Map articleIdMap);
+
+    List<TagEntity> selectAllTagWithArticleCount();
 }

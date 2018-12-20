@@ -21,22 +21,29 @@ public class ArticleDao {
     private CommentEntityMapper commentEntityMapper;
     @Autowired
     private UserEntityMapper userEntityMapper;
+    @Autowired
+    private ArticleTagEntityMapper articleTagEntityMapper;
 
     public List<ArticleEntity> selectByExample(ArticleEntityExample example) {
         return articleEntityMapper.selectByExample(example);
     }
 
-    public TagEntity selecTagByArticleId(String id) {
+    public TagEntity selectTagByArticleId(String id) {
         HashMap<String, String> map = new HashMap();
         map.put("id", id);
         return tagEntityMapper.selecTagByArticleId(map);
     }
+
     public List<TagEntity> selecTagByExample(TagEntityExample example) {
         return tagEntityMapper.selectByExample(example);
     }
 
-    public List<CommentEntity> selectCommentsByExample(CommentEntityExample example) {
-        return commentEntityMapper.selectByExample(example);
+    public int selectArticleCountByExample(ArticleEntityExample example) {
+        return articleEntityMapper.countByExample(example);
+    }
+
+    public int selectCommentsCountByExample(CommentEntityExample example) {
+        return commentEntityMapper.countByExample(example);
     }
 
     public List<CommentUserResp> selectCommentRespByArticleId(String id) {
@@ -79,8 +86,15 @@ public class ArticleDao {
         map.put("id", tagId);
         return articleEntityMapper.selectArticleTagRespByTagId(map);
     }
+
     public List<ArticleEntity> selectArticleByExample(ArticleEntityExample example) {
         return articleEntityMapper.selectByExample(example);
     }
+    public List<TagEntity> selectAllTagWithArticleCount(){
+        return tagEntityMapper.selectAllTagWithArticleCount();
+    }
 
+    public List<ArticleEntity> selectArticleWithCommentCount(HashMap<Object, Object> param) {
+        return articleEntityMapper.selectArticleWithCommentCount(param);
+    }
 }

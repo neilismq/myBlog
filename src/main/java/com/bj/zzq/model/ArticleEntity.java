@@ -34,7 +34,16 @@ public class ArticleEntity implements Serializable {
      */
     private String content;
 
+    private Integer CommentCount;
     private static final long serialVersionUID = 1L;
+
+    public Integer getCommentCount() {
+        return CommentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        CommentCount = commentCount;
+    }
 
     public String getId() {
         return id;

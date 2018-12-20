@@ -19,7 +19,16 @@ public class TagEntity implements Serializable {
      */
     private Date createTime;
 
+    private Integer articleCount;
     private static final long serialVersionUID = 1L;
+
+    public Integer getArticleCount() {
+        return articleCount;
+    }
+
+    public void setArticleCount(Integer articleCount) {
+        this.articleCount = articleCount;
+    }
 
     public String getId() {
         return id;
