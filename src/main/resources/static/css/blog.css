@@ -53,7 +53,7 @@ span {
     line-height: 2.9rem;
 }
 
-#archives-category-inner li, #article-footer li {
+#archives-category-inner li, #article-footer li,#recentArticleList li {
     line-height: 3rem;
 }
 
@@ -200,4 +200,14 @@ p {
 }
 .comment-content p {
     text-indent: 2rem;
+}
+.archives-content-article  > a:hover:first-child{
+    color: #2aabd2;
+}
+.archives-content-article  > a:first-child{
+    text-decoration-line: none;
+    color: #0f0f0f
+}
+.archives-content-article hr{
+    margin: 0.5rem 0;
 }

@@ -26,25 +26,23 @@
         <div>
             <div style="float: left;width: 63%">
                 <div class="archives-content-article">
-                    <h2>
-                        <a href="/article?articleId=${article.id}">${article.title!''}</a>
-                    </h2>
+                        <a href="/article?articleId=${article.id}"  ><h2><strong>${article.title!''}</strong></h2></a>
                     <hr/>
-                    <div>
-                        <span>分类<a href="/archives?tagId=${tag.id!''}">${tag.name!''}</a></span>
+                    <div style="text-align: right">
+                        <span style="margin-right: 0.5rem">分类:&nbsp;&nbsp;&nbsp;<a href="/archives?tagId=${(tag.id)!''}">${(tag.name)!'剪贴板'}</a></span>
                     </div>
                     <div class="archives-content-article-content">
 
                     </div>
-                    <div>
-                        <a href="/article?articleId=${article.id}">继续阅读全文</a>
+                    <div style="margin: 2rem 0">
+                        <a href="/article?articleId=${article.id}">继续阅读全文 »</a>
                     </div>
                     <hr/>
-                    <div>
-                        ${article.createTime?datetime} | 留言（${commentCount}）
+                    <div style="font-size: 20%">
+                        ${article.createTime?datetime} | <a href="/article?articleId=${article.id}#comment-${(currentArticleFirstComment.commentId)!''}" style="font-size: 20%">留言（${commentCount}）</a>
                     </div>
-                    <div>
-                        <h2>最近的${recentArticles?size}篇文章（${artcileCount!0}）</h2>
+                    <div id="recentArticleList">
+                        <h2><strong>最近的${recentArticles?size}篇文章（共${artcileCount!0}篇）</strong></h2>
                         <hr/>
                         <ul>
                             <#list recentArticles  as item>
@@ -82,7 +80,7 @@
             var aa = "${article.content?j_string}";
             var converter = new showdown.Converter(),
                 html = converter.makeHtml(aa);
-            $("#archives-content-article-content").html(html);
+            $(".archives-content-article-content").html(html);
         });
     </script>
 </body>

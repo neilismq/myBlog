@@ -36,7 +36,7 @@
                             <ul>
                                 <#if (articleMap.articleList)??>
                                 <#list articleMap.articleList as article >
-                                    <li><span><a href="/article?articleId=${article.articleId!''}">${article.title!''}</a><span>（@${article.articleCreateTime?date}）</span></li>
+                                    <li><span><a href="/article?articleId=${(article.id)!''}">${article.title!''}</a><span>（@${(article.createTime)?date}）</span></li>
                                 </#list>
                                 </#if>
                             </ul>

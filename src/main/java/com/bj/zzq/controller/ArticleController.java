@@ -78,6 +78,7 @@ public class ArticleController {
 
     @RequestMapping(value = "/archives", method = RequestMethod.GET)
     public String archives(Map map, String tagId) {
+
         TagEntityExample tagEntityExample = new TagEntityExample();
         tagEntityExample.setOrderByClause(" create_time desc");
         List<TagEntity> tagEntities = articleDao.selecTagByExample(tagEntityExample);
@@ -92,32 +93,39 @@ public class ArticleController {
                 return false;
             });
         }
+
         //当前tag
         map.put("currentTag", tagEntity);
         //全部tag
         map.put("tags", tagEntities);
-
-        List<ArticleTagResp> articleTagRespList = articleDao.selectArticleTagRespByTagId(tagId);
+        String id = tagEntity.getId();
+        List<ArticleEntity> articlesList = null;
+        if (StringUtils.isBlank(id)) {
+            //剪贴板
+             articlesList = articleDao.selectAllClipboardArticles();
+        }else {
+             articlesList = articleDao.selectArticlesByTagId(tagId);
+        }
         Map<String, Map<String, Object>> articlesMap = new LinkedHashMap();
-        if (articleTagRespList != null && articleTagRespList.size() > 0) {
+        if (articlesList != null && articlesList.size() > 0) {
             //当前tag文章数量
-            map.put("articleCount", articleTagRespList.size());
-            for (int i = 0; i < articleTagRespList.size(); i++) {
-                ArticleTagResp articleTagResp = articleTagRespList.get(i);
-                Date articleCreateTime = articleTagResp.getArticleCreateTime();
+            map.put("articleCount", articlesList.size());
+            for (int i = 0; i < articlesList.size(); i++) {
+                ArticleEntity article = articlesList.get(i);
+                Date articleCreateTime = article.getCreateTime();
                 int year = articleCreateTime.getYear() + 1900;
                 if (!articlesMap.keySet().contains(String.valueOf(year))) {
                     HashMap<String, Object> itemMap = new HashMap<>();
                     itemMap.put("year", String.valueOf(year));
                     LinkedList<Object> articleList = new LinkedList<>();
-                    articleList.add(articleTagResp);
+                    articleList.add(article);
                     itemMap.put("articleList", articleList);
                     articlesMap.put(String.valueOf(year), itemMap);
                     continue;
                 } else {
                     Map<String, Object> itemMap = articlesMap.get(String.valueOf(year));
                     List articleList = (List) itemMap.get("articleList");
-                    articleList.add(articleTagResp);
+                    articleList.add(article);
                 }
             }
             ArrayList articleList = new ArrayList<>(articlesMap.values());
@@ -158,7 +166,12 @@ public class ArticleController {
             articleEntity.setContent(content);
             //最新文章
             map.put("article", articleEntity);
-
+            List<CommentUserResp> commentUserResps = articleDao.selectCommentRespByArticleId(articleEntity.getId());
+            if (commentUserResps != null && commentUserResps.size() > 0) {
+                CommentUserResp commentUserResp = commentUserResps.get(0);
+                //最新文章的第一条评论
+                map.put("currentArticleFirstComment", commentUserResp);
+            }
             //最新文章列表，默认显示20篇
             map.put("recentArticles", list);
 
@@ -186,5 +199,13 @@ public class ArticleController {
 
         return "blog/archivesIndex";
     }
+    @RequestMapping(value = "email",method = RequestMethod.GET)
+    public String email(){
+        return "blog/email";
+    }
 
+    @RequestMapping(value = "login",method = RequestMethod.GET)
+    public String login(){
+        return "blog/login";
+    }
 }

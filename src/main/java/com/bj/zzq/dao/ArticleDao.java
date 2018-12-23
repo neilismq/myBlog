@@ -81,10 +81,10 @@ public class ArticleDao {
         return false;
     }
 
-    public List<ArticleTagResp> selectArticleTagRespByTagId(String tagId) {
+    public List<ArticleEntity> selectArticlesByTagId(String tagId) {
         HashMap<Object, Object> map = new HashMap();
         map.put("id", tagId);
-        return articleEntityMapper.selectArticleTagRespByTagId(map);
+        return articleEntityMapper.selectArticlesByTagId(map);
     }
 
     public List<ArticleEntity> selectArticleByExample(ArticleEntityExample example) {
@@ -96,5 +96,9 @@ public class ArticleDao {
 
     public List<ArticleEntity> selectArticleWithCommentCount(HashMap<Object, Object> param) {
         return articleEntityMapper.selectArticleWithCommentCount(param);
+    }
+
+    public List<ArticleEntity> selectAllClipboardArticles() {
+        return articleEntityMapper.selectAllClipboardArticles();
     }
 }

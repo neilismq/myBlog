@@ -28,7 +28,9 @@ public interface ArticleEntityMapper {
 
     int updateByExample(@Param("record") ArticleEntity record, @Param("example") ArticleEntityExample example);
 
-    List<ArticleTagResp> selectArticleTagRespByTagId(HashMap<Object, Object> map);
+    List<ArticleEntity> selectArticlesByTagId(HashMap<Object, Object> map);
 
     List<ArticleEntity> selectArticleWithCommentCount(HashMap<Object, Object> param);
+
+    List<ArticleEntity> selectAllClipboardArticles();
 }
