@@ -204,8 +204,4 @@ public class ArticleController {
         return "blog/email";
     }
 
-    @RequestMapping(value = "login",method = RequestMethod.GET)
-    public String login(){
-        return "blog/login";
-    }
 }
