@@ -15,7 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.List;
 
-@RequestMapping(value = "/user")
+@RequestMapping
 @Controller
 public class UserController {
     @Autowired
@@ -47,5 +47,10 @@ public class UserController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login() {
         return "blog/login";
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() {
+        return "admin/starter";
     }
 }
