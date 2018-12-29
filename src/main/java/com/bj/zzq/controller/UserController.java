@@ -1,6 +1,5 @@
 package com.bj.zzq.controller;
 
-import com.bj.zzq.config.TokenCache;
 import com.bj.zzq.dao.UserDao;
 import com.bj.zzq.model.AdminEntity;
 import com.bj.zzq.model.AdminEntityExample;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.List;
 
 @RequestMapping
@@ -51,6 +49,14 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        return "admin/starter";
+        return "admin/admin_template";
+    }
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String test() {
+        return "admin/test";
+    }
+    @RequestMapping(value = "/partial", method = RequestMethod.GET)
+    public String partial() {
+        return "admin/partial";
     }
 }
