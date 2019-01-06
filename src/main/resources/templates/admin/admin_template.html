@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Starter</title>
+    <title>赵志强的网络日志</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
@@ -262,8 +262,19 @@ desired effect
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li><a href="/test"><i class="fa fa-book"></i> <span>文章管理</span></a></li>
-                <li><a href="javascript:void(0);" onclick="partial()"><i class="fa fa-book"></i> <span>标签管理</span></a></li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>文章管理</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/articleManage"><i class="fa fa-circle-o"></i> 新增文章</a></li>
+                    </ul>
+                </li>
+                <li><a href="/partial"><i class="fa fa-book"></i> <span>标签管理</span></a></li>
                 <li><a href="#"><i class="fa fa-book"></i> <span>评论管理</span></a></li>
                 <li><a href="#"><i class="fa fa-book"></i> <span>仪表盘</span></a></li>
             </ul>
@@ -294,7 +305,7 @@ desired effect
               -------------------------->
             <@block name="content">
 
-            </@block>
+        </@block>
         </section>
         <!-- /.content -->
     </div>
@@ -304,7 +315,7 @@ desired effect
     <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-            Anything you want
+        Anything you want
         </div>
         <!-- Default to the left -->
         <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
@@ -397,14 +408,23 @@ desired effect
 <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../plugins/admin-lte/js/adminlte.min.js"></script>
-<@block name="js"></@block>
+<script src="../js/showdown.js"></script>
+<@block name="js">
+</@block>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
 <script type="text/javascript">
-    function partial() {
-        $("div.content-wrapper").load("/partial");
-    }
+    $(document).ready(function () {
+        $("ul.sidebar-menu a").click(function () {
+            if($(this).attr("href")=='#'){
+                return true;
+            }
+            $(this).parent().addClass("active");
+            $("div.content-wrapper").load(this.href);
+            return false;
+        });
+    });
 </script>
 </body>
 </html>

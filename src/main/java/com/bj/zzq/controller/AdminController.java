@@ -15,7 +15,7 @@ import java.util.List;
 
 @RequestMapping
 @Controller
-public class UserController {
+public class AdminController {
     @Autowired
     private UserDao userDao;
 
@@ -53,10 +53,10 @@ public class UserController {
     }
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
-        return "admin/test";
+        return "aricle_manage";
     }
-    @RequestMapping(value = "/partial", method = RequestMethod.GET)
+    @RequestMapping(value = "/articleManage", method = RequestMethod.GET)
     public String partial() {
-        return "admin/partial";
+        return "admin/article_manage";
     }
 }
