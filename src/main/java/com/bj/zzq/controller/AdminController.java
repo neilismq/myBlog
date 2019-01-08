@@ -13,12 +13,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-@RequestMapping
+@RequestMapping(value = "/admin")
 @Controller
 public class AdminController {
     @Autowired
     private UserDao userDao;
 
+    /**
+     * 登录
+     * @param username
+     * @param password
+     * @return
+     * @throws UnsupportedEncodingException
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(String username, String password) throws UnsupportedEncodingException {
         if (StringUtils.isBlank(username)) {
@@ -42,21 +49,27 @@ public class AdminController {
         return null;
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
+    /**
+     * 登陆页面
+     * @return
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "blog/login";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    /**
+     * 后台首页
+     * @return
+     */
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
-        return "admin/admin_template";
+        return "admin/template";
     }
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String test() {
-        return "aricle_manage";
-    }
-    @RequestMapping(value = "/articleManage", method = RequestMethod.GET)
+
+
+    @RequestMapping(value = "/article/add", method = RequestMethod.GET)
     public String partial() {
-        return "admin/article_manage";
+        return "admin/articleManage/add";
     }
 }

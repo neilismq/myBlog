@@ -18,6 +18,7 @@ import java.util.*;
 @Controller
 @RequestMapping
 public class ArticleController {
+
     @Autowired
     private ArticleDao articleDao;
 
@@ -102,9 +103,9 @@ public class ArticleController {
         List<ArticleEntity> articlesList = null;
         if (StringUtils.isBlank(id)) {
             //剪贴板
-             articlesList = articleDao.selectAllClipboardArticles();
-        }else {
-             articlesList = articleDao.selectArticlesByTagId(tagId);
+            articlesList = articleDao.selectAllClipboardArticles();
+        } else {
+            articlesList = articleDao.selectArticlesByTagId(tagId);
         }
         Map<String, Map<String, Object>> articlesMap = new LinkedHashMap();
         if (articlesList != null && articlesList.size() > 0) {
@@ -199,8 +200,9 @@ public class ArticleController {
 
         return "blog/archivesIndex";
     }
-    @RequestMapping(value = "email",method = RequestMethod.GET)
-    public String email(){
+
+    @RequestMapping(value = "email", method = RequestMethod.GET)
+    public String email() {
         return "blog/email";
     }
 
