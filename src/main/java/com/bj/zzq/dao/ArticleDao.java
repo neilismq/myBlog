@@ -1,7 +1,7 @@
 package com.bj.zzq.dao;
 
+import com.bj.zzq.mapper.*;
 import com.bj.zzq.model.*;
-import com.bj.zzq.model.dto.ArticleTagResp;
 import com.bj.zzq.model.dto.CommentUserResp;
 import com.bj.zzq.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;

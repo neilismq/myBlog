@@ -1,4 +1,4 @@
-package com.bj.zzq.dao;
+package com.bj.zzq.mapper;
 
 import com.bj.zzq.model.UserEntity;
 import com.bj.zzq.model.UserEntityExample;

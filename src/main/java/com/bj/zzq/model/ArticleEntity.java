@@ -33,6 +33,10 @@ public class ArticleEntity implements Serializable {
      * 文章内容
      */
     private String content;
+    /**
+     * 是否是草稿，1-是,0-不是
+     */
+    private String isDraft;
 
     private Integer CommentCount;
     private static final long serialVersionUID = 1L;
@@ -93,6 +97,14 @@ public class ArticleEntity implements Serializable {
         this.content = content == null ? null : content.trim();
     }
 
+    public String getIsDraft() {
+        return isDraft;
+    }
+
+    public void setIsDraft(String isDraft) {
+        this.isDraft = isDraft;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -105,6 +117,7 @@ public class ArticleEntity implements Serializable {
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", content=").append(content);
+        sb.append(", isDraft=").append(isDraft);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

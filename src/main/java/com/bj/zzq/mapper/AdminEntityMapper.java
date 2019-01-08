@@ -1,4 +1,4 @@
-package com.bj.zzq.dao;
+package com.bj.zzq.mapper;
 
 import com.bj.zzq.model.AdminEntity;
 import com.bj.zzq.model.AdminEntityExample;

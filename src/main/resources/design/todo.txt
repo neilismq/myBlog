@@ -3,3 +3,5 @@
 2、讲解搭建博客的过程
 3、后期如何封装下，使别人稍微配置下也可以用这个博客
 4、mybatis如何热加载mapper.xml
+
+article表添加is_draft字段（是否草稿），char-1

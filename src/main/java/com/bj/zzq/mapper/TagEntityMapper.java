@@ -1,4 +1,4 @@
-package com.bj.zzq.dao;
+package com.bj.zzq.mapper;
 
 import com.bj.zzq.model.TagEntity;
 import com.bj.zzq.model.TagEntityExample;

@@ -1,10 +1,7 @@
 package com.bj.zzq.service;
 
 
-import com.bj.zzq.dao.ArticleTagEntityMapper;
-import com.bj.zzq.dao.TagEntityMapper;
-import com.bj.zzq.model.ArticleTagEntity;
-import com.bj.zzq.model.ArticleTagEntityExample;
+import com.bj.zzq.mapper.TagEntityMapper;
 import com.bj.zzq.model.TagEntity;
 import com.bj.zzq.model.TagEntityExample;
 import org.springframework.beans.factory.annotation.Autowired;

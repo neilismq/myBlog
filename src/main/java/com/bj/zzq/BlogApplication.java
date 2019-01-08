@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.bj.zzq.dao")
+@MapperScan(basePackages = "com.bj.zzq.mapper")
 public class BlogApplication {
     public static void main(String[] args){
 

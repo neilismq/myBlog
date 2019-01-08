@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bj.zzq.dao.ArticleTagEntityMapper" >
+<mapper namespace="com.bj.zzq.mapper.ArticleTagEntityMapper" >
   <resultMap id="BaseResultMap" type="com.bj.zzq.model.ArticleTagEntity" >
     <result column="id" property="id" jdbcType="CHAR" />
     <result column="article_id" property="articleId" jdbcType="CHAR" />
