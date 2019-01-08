@@ -5,3 +5,6 @@
 4、mybatis如何热加载mapper.xml
 
 article表添加is_draft字段（是否草稿），char-1
+
+first:
+写一个自动挂号程序
