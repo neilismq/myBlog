@@ -103,7 +103,7 @@ public class AdminController {
         articleEntityExample.setOrderByClause("create_time desc");
         articleDao.selectArticleByExample(articleEntityExample);
 
-        PageInfo info = new PageInfo<>(page, pageInfo.getNavigatePages());
+        PageInfo info = new PageInfo(page, pageInfo.getNavigatePages());
         BeanUtils.copyProperties(info, pageInfo);
         map.put("pageInfo", pageInfo);
         return "admin/articleManage/query";
