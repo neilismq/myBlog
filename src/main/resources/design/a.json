@@ -1,0 +1,48 @@
+{
+  "status": "200",
+  "author": "张海洋",
+  "articleId": 1553404535,
+  "originalAuthor": "张海洋",
+  "articleTitle": "2019春招-字节跳动面试",
+  "publishDate": "2019-03-24",
+  "updateDate": "2019-03-24",
+  "articleContent": "![](https://zhy-myblog.oss-cn-shenzhen.aliyuncs.com/public/blogArticles/2019-03-24/1553403162.jpeg)\n\n这是一篇来自字节跳动的凉经，面试过程很不顺畅。\n\n## 视频面试：40分钟\n1.\thttps的加密过程？为什么要用客户端这边的会话密钥进行加密，直接用服务器端的公私钥不行吗？\n2.\t说一说https的CA证书原理？\n3.\t进程间调度方式有哪些？\n4.\t进程间通信方式有哪些？ \n5.\t说说进程和线程的区别吧，如果没有进程只有线程会怎么样？那如果没有线程只有进程喃？\n6.\t出了下面那道算法题？(读题都要读崩溃，还要考虑怎么获得输入，更奔溃)\n7.\t介绍下你的博客系统吧？\n8.\t索引底层是怎么实现的？\n8.\t聚簇索引和非聚簇索引是什么？它们有什么区别？\n10.\tB树与B+树有什么区别?\n\n#### 算法题\n网络灾难\n> 字节跳动在全国各地都建立了服务器集群，各个服务器之间通过光缆连接形成了网状拓扑结构。\n有一天邪恶的外星人入侵了集群，他们想破坏字节跳动的网络。\n他们会残忍地切断一条一条网线，直到所有光缆都被切断。\n现在给出这个拓扑结构以及外星人切断光缆的顺序，求当外星人切到第几根光缆时，字节跳动的网络会完全断裂成多块。\n断裂成多块的定义为：当某一次光缆被切断后，若服务器A和服务器B完全没有光缆直接或间接连接，则称整个网络结构断裂成多块。\n\n输入描述\n> 第一行有两个数n m 表示字节跳动的服务器集群个数，以及光缆的数目。\n\n> 接下来m行 第1+x行 有两个数 a,b 表示服务器集群a 和 服务器集群b有光缆相连，该光缆编号为x。\n\n> 接下来还有m行 第1+m+x行 有一个数c，表示外星人在第x步会切断编号为c的光缆。\n保证初始网络没有分裂。\n\n输出描述\n> 只有一个数 ans，表示外星人在第ans步切断光缆之后，字节跳动的网络会分裂成多个块。\n\n示例1\n输入\n> 4&nbsp;&nbsp;&nbsp;&nbsp;5\n1&nbsp;&nbsp;&nbsp;&nbsp;2\n1&nbsp;&nbsp;&nbsp;&nbsp;3\n1&nbsp;&nbsp;&nbsp;&nbsp;4\n2&nbsp;&nbsp;&nbsp;&nbsp;3\n2&nbsp;&nbsp;&nbsp;&nbsp;4\n1\n2\n3\n4\n5\n\n输出\n> 3\n\n说明\n> 当1-2、1-3、1-4的光缆被切断后，服务器集群1  和 其他服务器集群完全断裂。\n\n## 总结(自闭ing)\n字节跳动算是我投的第一家公司了，在今年春节放假回家那天内推了字节，内推人说过几天就有Hr打电话约面试，然后我苦等着，然后年过完了也没见着电话，真是简历太菜了吧。\n\n上周参加字节笔试，一共四道编程题，ak了两道半，第三道测试用例死活过不了100%。结果还是收到了面试通知，奇迹呦。\n\n开始面试前有个小插曲，我拿着我的电脑坐在楼梯上等着面试，结果面试刚开始手机信号仿佛被勾引了，吓得我赶紧让面试官等我一哈哈，回到团队用有线网插着就开始面试了，emmmm，在团队里面试确实挺紧张的。\n\n面试开始，面试官就开始怼计算机网络，问了我前两个问题发现我虽然说得有点瓜皮，但还是有点对的，然后转角开始怼操作系统，呜呜呜，怎么不问java，怎么不问后端，我应聘的是web后端啊，好嘛，我承认我大二上学完操作系统到现在啥子都不记得了。结果面试官可能也不好意思了，给我出了道算法题拯救下我。。。\n\n我一看题就蒙了，这题咋那么长，2分钟看完题，10分钟理解题(也没读懂)，然后没法了跟面试官交流了一下题意，接着又花了5分钟看怎么输入，无语，当时就想结束面试了，哭死，最后时间长了面试官让讲一下思路，草草的结束了算法题。\n\n最后终于还是给我机会说了下我的项目，然后我又指引面试官讲我比较熟悉的数据库底层。最终的结果可想而知，操作系统回答不上了，算法题思路又不对，这都不挂，天理难容了。\n\n## 最后\n最后想说两句，面试完当晚翻牛客网关于今天字节跳动的面经，满满的凉经，有些抱怨字节面试官面试迟到，有的抱怨面试官面试时边看剧边面试，甚至还有的说面试时旁边传来麻将的声音。。。。看了今天不止我一人对于字节面试感同身受啊。\n\n虽然都传宇宙条是多么的恐怖，不经历一次确实体会不到哈。这次面试面的我确实都要自闭了。算是我有史以来面试打击的最惨的一次，腾讯现场面都没这么惨。。。\n\n经过这次面试也知道了操作系统跟计算机网络也并不是不会问，像字节、tx这样的公司应该就喜欢问这些吧。哈哈哈，好了，不哔哔了，我要去寻找我那该死的，不知道在哪的计网跟操作系统书了。",
+  "articleTags": [
+    "面经",
+    "春招",
+    "面试",
+    "原创"
+  ],
+  "articleType": "原创",
+  "articleCategories": "面试",
+  "articleUrl": "https://www.zhyocean.cn/article/1553404535",
+  "likes": 3,
+  "isLiked": 0,
+  "lastStatus": "200",
+  "lastArticleTitle": "LinkedHashMap源码解读",
+  "lastArticleUrl": "/article/1552638530",
+  "nextStatus": "200",
+  "nextArticleTitle": "HashMap为什么是线程不安全的？",
+  "nextArticleUrl": "/article/1553946904"
+}
+
+
+
+dbms_logmnr.add_logfile(logfilename=>'/arp/oraarp/oradata/arpdb/redo03.log',options=>dbms_logmnr.NEW);
+dbms_logmnr.add_logfile(logfilename=>'/arp/oraarp/oradata/arpdb/redo03.log',options=>dbms_logmnr.ADDFILE);
+EXECUTE dbms_logmnr.start_logmnr(dictfilename=>'/arp/oraarp/logmnr/dictionary.ora');
+SELECT sql_redo, sql_undo, seg_owner FROM v$logmnr_contents WHERE  seg_owner='LOGMINER';
+SELECT sql_redo, sql_undo, seg_owner FROM v$logmnr_contents WHERE  seg_owner='eosgw';
+SELECT sql_redo, sql_undo, seg_owner FROM v$logmnr_contents WHERE  seg_owner='sysdba';
+
+ BEGIN
+ dbms_logmnr.add_logfile(logfilename=>'/arp/oraarp/oradata/arpdb/redo03.log',options=>dbms_logmnr.NEW);
+  end;
+/
+
+
+EXECUTE dbms_logmnr.start_logmnr(DictFileName =>'/arp/oraarp/logmnr/dictionary.ora', StartTime =>to_date('2019-5-8 00:00:00','YYYY-MM-DD HH24:MI:SS'),EndTime =>to_date('2019-5-8 23:59:59','YYYY-MM-DD HH24:MI:SS'));
+
+select operation,sql_redo,sql_undo,TIMESTAMP from v$logmnr_contents where username='eosgw' and timestamp>to_date('2019-05-08 00:00:00','yyyy-mm-dd hh24:mi:ss')
+
+select operation,sql_redo,sql_undo,TIMESTAMP from v$logmnr_contents where timestamp>to_date('2019-05-08 00:00:00','yyyy-mm-dd hh24:mi:ss');
