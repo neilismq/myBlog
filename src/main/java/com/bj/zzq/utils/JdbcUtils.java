@@ -71,8 +71,10 @@ public class JdbcUtils {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        Connection connection = getConnection();
-
+    public static void main(String[] args) {
+        Double aDouble = new Double(2.1);
+        System.out.println(aDouble == 2.1);
+        float a = 1.00f;
+        System.out.println(a==1d);
     }
 }
