@@ -26,10 +26,10 @@
         <div>
             <div style="float: left;width: 63%">
                 <div class="archives-content-article">
-                        <a href="/article?articleId=${article.id}"  ><h2><strong>${article.title!''}</strong></h2></a>
+                        <a href="${base}/article/${article.id}"  ><h2><strong>${article.title!''}</strong></h2></a>
                     <hr/>
                     <div style="text-align: right">
-                        <span style="margin-right: 0.5rem">分类:&nbsp;&nbsp;&nbsp;<a href="/archives?tagId=${(tag.id)!''}">${(tag.name)!'剪贴板'}</a></span>
+                        <span style="margin-right: 0.5rem">分类:&nbsp;&nbsp;&nbsp;<a href="${base}/archives/${(tag.id)!''}">${(tag.name)!'剪贴板'}</a></span>
                     </div>
                     <div class="archives-content-article-content">
 
@@ -39,14 +39,14 @@
                     </div>
                     <hr/>
                     <div style="font-size: 20%">
-                        ${article.createTime?datetime} | <a href="/article?articleId=${article.id}#comment-${(currentArticleFirstComment.commentId)!''}" style="font-size: 20%">留言（${commentCount}）</a>
+                        ${article.createTime?datetime} | <a href="${base}/article/${article.id}#comment-${(currentArticleFirstComment.commentId)!''}" style="font-size: 20%">留言（${commentCount}）</a>
                     </div>
                     <div id="recentArticleList">
                         <h2><strong>最近的${recentArticles?size}篇文章（共${artcileCount!0}篇）</strong></h2>
                         <hr/>
                         <ul>
                             <#list recentArticles  as item>
-                                <li>${item.createTime?date}：<a href="/article?articleId=${item.id}">${item.title!''}</a>（${item.commentCount}条评论）</li>
+                                <li>${item.createTime?date}：<a href="${base}/article/${item.id}">${item.title!''}</a>（${item.commentCount}条评论）</li>
                             </#list>
                         </ul>
                     </div>
@@ -61,7 +61,7 @@
                         <div style="min-height:25rem;">
                             <ul>
                                 <#list tags as item>
-                                <li><a href="/archives?tagId=${item.id}">${item.name}</a>（${item.articleCount}）</li>
+                                <li><a href="${base}/archives/${item.id}">${item.name}</a>（${item.articleCount}）</li>
                                 </#list>
                             </ul>
                     </div>
@@ -69,12 +69,12 @@
             </div>
         </div>
         <div style="clear: both"></div>
-        <#include "../footer.html">
+        <#include "../footer.ftl">
     </div>
 </div>
-<script src="../js/jquery-3.3.1.js"></script>
-<script src="../js/showdown.js"></script>
-<script src="../plugins/bootstrap/js/bootstrap.js"></script>
+<script src="${base}/js/jquery-3.3.1.js"></script>
+<script src="${base}/js/showdown.js"></script>
+<script src="${base}/plugins/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var aa = "${article.content?j_string}";

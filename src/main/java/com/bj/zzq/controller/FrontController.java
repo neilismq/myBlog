@@ -8,23 +8,21 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
 
 @Controller
 @RequestMapping
-public class ArticleController {
+public class FrontController {
 
     @Autowired
     private ArticleDao articleDao;
 
 
-    @RequestMapping(value = "/article", method = RequestMethod.GET)
-    public String test(Map map, String articleId) {
+    @RequestMapping(value = "/article/{articleId}", method = RequestMethod.GET)
+    public String test(Map map, @PathVariable String articleId) {
         ArticleEntityExample example = new ArticleEntityExample();
         example.setOrderByClause("create_time desc");
         List<ArticleEntity> list = articleDao.selectArticleByExample(example);
@@ -74,7 +72,7 @@ public class ArticleController {
             List<CommentUserResp> CommentUserResp = articleDao.selectCommentRespByArticleId(articleEntity.getId());
             map.put("comments", CommentUserResp);
         }
-        return "blog/article";
+        return "front/article";
     }
 
     @RequestMapping(value = "/archives", method = RequestMethod.GET)
@@ -133,7 +131,7 @@ public class ArticleController {
             map.put("articleList", articleList);
         }
 
-        return "blog/archives";
+        return "front/archives";
     }
 
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
@@ -198,12 +196,12 @@ public class ArticleController {
             map.put("tags", tagEntities);
         }
 
-        return "blog/archivesIndex";
+        return "front/archivesIndex";
     }
 
     @RequestMapping(value = "email", method = RequestMethod.GET)
     public String email() {
-        return "blog/email";
+        return "front/email";
     }
 
 }
