@@ -1,16 +1,15 @@
 package com.bj.zzq.controller;
 
 import com.bj.zzq.dao.ArticleDao;
-import com.bj.zzq.dao.UserDao;
-import com.bj.zzq.model.AdminEntity;
-import com.bj.zzq.model.AdminEntityExample;
-import com.bj.zzq.model.ArticleEntity;
+import com.bj.zzq.dao.AdminDao;
 import com.bj.zzq.model.ArticleEntityExample;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
-import org.apache.tomcat.util.security.MD5Encoder;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 import java.util.Map;
 
 @RequestMapping(value = "/admin")
@@ -26,7 +24,7 @@ import java.util.Map;
 public class AdminController {
 
     @Autowired
-    private UserDao userDao;
+    private AdminDao userDao;
 
     @Autowired
     private ArticleDao articleDao;
@@ -40,26 +38,23 @@ public class AdminController {
      * @throws UnsupportedEncodingException
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(String username, String password) throws UnsupportedEncodingException {
+    public String login(String username, String password) {
         if (StringUtils.isBlank(username)) {
             return "账号不能为空";
         }
         if (StringUtils.isBlank(password)) {
             return "密码不能为空";
         }
-        AdminEntityExample example = new AdminEntityExample();
-        example.createCriteria().andUsernameEqualTo(username);
-        List<AdminEntity> adminEntities = userDao.selectUserEntityByExample(example);
-        if (adminEntities != null) {
-            AdminEntity adminEntity = adminEntities.get(0);
-            if (password.equals(adminEntity.getPassword())) {
-                //todo:根据用户名密码生成token,放到cookie中，然后重定向到首页
-                String tokenOrigin = username + "fdsfds$&*#$^3hjkdshfds" + password;
-                String token = MD5Encoder.encode(tokenOrigin.getBytes("UTF-8"));
 
-            }
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        try {
+            subject.login(token);
+        } catch (Exception e) {
+            return "用户名密码不正确";
         }
-        return null;
+
+        return "admin/index";
     }
 
     /**
@@ -69,7 +64,7 @@ public class AdminController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        return "blog/login";
+        return "admin/login";
     }
 
     /**

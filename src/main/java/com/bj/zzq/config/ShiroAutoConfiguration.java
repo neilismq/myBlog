@@ -28,7 +28,7 @@ public class ShiroAutoConfiguration {
     @Value("${shiro.loginSuccessUrl}")
     private String loginSuccessUrl;
 
-    @Value("${shiro.unAuthorizedUrl}")
+    @Value("${shiro.unauthorizedUrl}")
     private String unauthorizedUrl;
 
 
@@ -38,7 +38,7 @@ public class ShiroAutoConfiguration {
      * @return
      */
     @Bean
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean() {
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         //登陆url
         shiroFilter.setLoginUrl(loginUrl);
@@ -46,10 +46,7 @@ public class ShiroAutoConfiguration {
         shiroFilter.setSuccessUrl(loginSuccessUrl);
         //未授权的页面
         shiroFilter.setUnauthorizedUrl(unauthorizedUrl);
-
-        Map<String, Filter> filterMap = new LinkedHashMap();
-
-        shiroFilter.setFilters(filterMap);
+        shiroFilter.setSecurityManager(securityManager);
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
         map.put("/**/*.js", "anon");
         map.put("/**/*.css", "anon");
@@ -58,9 +55,9 @@ public class ShiroAutoConfiguration {
         map.put("/**/*.png", "anon");
         map.put("/**/*.map", "anon");
         map.put("/**/*.gif", "anon");
+        map.put("/front/**", "anon");
+        map.put("/admin/logout", "logout");
         map.put("/**", "authc");
-        map.put("/public/login", "anon");
-        map.put("/public/logout", "logout");
         shiroFilter.setFilterChainDefinitionMap(map);
         return shiroFilter;
     }

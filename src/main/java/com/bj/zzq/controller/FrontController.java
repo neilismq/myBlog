@@ -14,7 +14,7 @@ import java.util.*;
 
 
 @Controller
-@RequestMapping
+@RequestMapping(value = "/front")
 public class FrontController {
 
     @Autowired

@@ -72,7 +72,7 @@
         <#include "../footer.ftl">
     </div>
 </div>
-<script src="${base}/js/jquery-3.3.1.js"></script>
+<script src="${base}/js/jquery.js"></script>
 <script src="${base}/js/showdown.js"></script>
 <script src="${base}/plugins/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript">
