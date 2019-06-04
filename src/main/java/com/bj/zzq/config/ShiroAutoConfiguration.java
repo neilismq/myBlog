@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class ShiroAutoConfiguration {
      * @return
      */
     @Bean
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(SecurityManager securityManager) {
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean(SecurityManager securityManager, AdminAuthenticationFilter adminAuthenticationFilter) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         //登陆url
         shiroFilter.setLoginUrl(loginUrl);
@@ -56,8 +57,12 @@ public class ShiroAutoConfiguration {
         map.put("/**/*.map", "anon");
         map.put("/**/*.gif", "anon");
         map.put("/front/**", "anon");
-        map.put("/admin/logout", "logout");
+        map.put(logoutUrl, "logout");
         map.put("/**", "authc");
+        //map.put("/**", "adminAuthc");
+        HashMap<String, Filter> filterMap = new HashMap<>();
+        filterMap.put("adminAuthc", adminAuthenticationFilter);
+        //shiroFilter.setFilters(filterMap);
         shiroFilter.setFilterChainDefinitionMap(map);
         return shiroFilter;
     }
