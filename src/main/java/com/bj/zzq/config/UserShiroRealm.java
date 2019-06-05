@@ -34,7 +34,6 @@ public class UserShiroRealm extends AuthorizingRealm {
     public AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         logger.info("##################执行Shiro权限认证##################");
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-
         info.addRole("admin");
         // 返回null的话，就会导致任何用户访问被拦截的请求时，都会自动跳转到unauthorizedUrl指定的地址
         return null;
@@ -42,8 +41,11 @@ public class UserShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        UsernamePasswordToken token= (UsernamePasswordToken) authenticationToken;
+        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         AdminEntity adminEntity = adminService.selectAdminByUsername(token.getUsername());
+        if (adminEntity == null) {
+            throw new UnknownAccountException("没有此账户");
+        }
         // 若存在，将此用户存放到登录认证info中，无需自己做密码对比，Shiro会为我们进行密码对比校验
         return new SimpleAuthenticationInfo(adminEntity.getUsername(), adminEntity.getPassword(), getName());
     }

@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>赵志强的网络日志</title>
+    <title>1111</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
@@ -181,7 +181,7 @@ desired effect
                             <!-- The user image in the navbar-->
                             <img src="../plugins/admin-lte/img/user2-160x160.jpg" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">赵志强</span>
+                            <span class="hidden-xs">1111</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
@@ -215,7 +215,7 @@ desired effect
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="${base}/admin/logout" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -240,7 +240,7 @@ desired effect
                     <img src="../plugins/admin-lte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>赵志强</p>
+                    <p>111</p>
                     <!-- Status -->
                     <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>

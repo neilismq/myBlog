@@ -3,6 +3,7 @@ package com.bj.zzq.utils;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @Author: zhaozhiqiang
@@ -62,4 +63,5 @@ public class CommonResponse<T> implements Serializable {
     public T getBody() {
         return body;
     }
+
 }

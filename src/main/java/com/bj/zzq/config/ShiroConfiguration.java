@@ -19,7 +19,7 @@ import java.util.Map;
 @Configuration
 @ConditionalOnWebApplication
 @Setter
-public class ShiroAutoConfiguration {
+public class ShiroConfiguration {
     @Value("${shiro.loginUrl}")
     private String loginUrl;
 
@@ -39,7 +39,7 @@ public class ShiroAutoConfiguration {
      * @return
      */
     @Bean
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(SecurityManager securityManager, AdminAuthenticationFilter adminAuthenticationFilter) {
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         //登陆url
         shiroFilter.setLoginUrl(loginUrl);
@@ -59,10 +59,9 @@ public class ShiroAutoConfiguration {
         map.put("/front/**", "anon");
         map.put(logoutUrl, "logout");
         map.put("/**", "authc");
-        //map.put("/**", "adminAuthc");
-        HashMap<String, Filter> filterMap = new HashMap<>();
-        filterMap.put("adminAuthc", adminAuthenticationFilter);
-        //shiroFilter.setFilters(filterMap);
+        HashMap<String, Filter> filterHashMap = new HashMap<>();
+        filterHashMap.put("authc",new AdminAuthenticationFilter());
+        shiroFilter.setFilters(filterHashMap);
         shiroFilter.setFilterChainDefinitionMap(map);
         return shiroFilter;
     }

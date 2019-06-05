@@ -9,7 +9,8 @@
     <link href="${base}/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="${base}/css/blog.css" rel="stylesheet">
 </head>
-<body style="background-color: rgb(43,105,166)">
+<body>
+        <!--style="background-color: rgb(43,105,166)"-->
 <div style="width: 50%;margin: 0 auto;">
     <h1 style="color: azure;text-space: 2rem;text-align: center;margin: 10rem auto 2rem auto">321312321</h1>
     <div style="background-color: rgb(230,230,230);height: 22rem;border-radius: 0.5rem">

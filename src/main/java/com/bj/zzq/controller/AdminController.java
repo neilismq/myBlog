@@ -9,8 +9,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,8 +45,12 @@ public class AdminController {
      */
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public CommonResponse login() {
-
+    public CommonResponse login(HttpServletRequest request) {
+        //登录失败会在request属性中添加一个，FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME属性
+        String exceptionName = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+        if(StringUtils.isNotEmpty(exceptionName) && exceptionName.equals(AuthenticationException.class.getName())){
+            return CommonResponse.fail("账号密码不正确！");
+        }
         HashMap<String, String> body = new HashMap<>();
         body.put("adminIndexUrl", adminIndexUrl);
         return CommonResponse.success().setBody(body);
