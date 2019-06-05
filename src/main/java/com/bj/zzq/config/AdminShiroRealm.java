@@ -3,23 +3,18 @@ package com.bj.zzq.config;
 
 import com.bj.zzq.model.AdminEntity;
 import com.bj.zzq.service.AdminService;
-import com.bj.zzq.utils.CommonResponse;
-import org.apache.commons.lang.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-public class UserShiroRealm extends AuthorizingRealm {
-    private static final Logger logger = LoggerFactory.getLogger(UserShiroRealm.class);
+public class AdminShiroRealm extends AuthorizingRealm {
+    private static final Logger logger = LoggerFactory.getLogger(AdminShiroRealm.class);
 
     @Autowired
     private AdminService adminService;

@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 @Configuration
 @ConditionalOnWebApplication
@@ -77,15 +76,15 @@ public class ShiroConfiguration {
 
     //权限管理，配置主要是Realm的管理认证
     @Bean
-    public SecurityManager securityManager(UserShiroRealm userShiroRealm) {
+    public SecurityManager securityManager(AdminShiroRealm adminShiroRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(userShiroRealm);
+        securityManager.setRealm(adminShiroRealm);
         return securityManager;
     }
 
     @Bean
-    public UserShiroRealm userShiroRealm(CredentialsMatcher credentialsMatcher) {
-        UserShiroRealm shiroRealm = new UserShiroRealm();
+    public AdminShiroRealm userShiroRealm(CredentialsMatcher credentialsMatcher) {
+        AdminShiroRealm shiroRealm = new AdminShiroRealm();
         shiroRealm.setCredentialsMatcher(credentialsMatcher);
         return shiroRealm;
     }
