@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.prefs.BackingStoreException;
 
 
 @Controller
@@ -201,6 +202,9 @@ public class FrontController {
 
     @RequestMapping(value = "email", method = RequestMethod.GET)
     public String email() {
+        if(true){
+            throw new NullPointerException("123");
+        }
         return "front/email";
     }
 

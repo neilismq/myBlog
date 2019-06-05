@@ -57,7 +57,8 @@ public class ShiroConfiguration {
         map.put("/**/*.gif", "anon");
         map.put("/front/**", "anon");
         map.put(logoutUrl, "logout");
-        map.put("/**", "authc");
+        map.put("/admin/**", "authc");
+        map.put("/**", "anon");
         HashMap<String, Filter> filterHashMap = new HashMap<>();
         filterHashMap.put("authc",new AdminAuthenticationFilter());
         shiroFilter.setFilters(filterHashMap);
@@ -75,6 +76,7 @@ public class ShiroConfiguration {
     }
 
     //权限管理，配置主要是Realm的管理认证
+    //todo:未加shiro缓存管理
     @Bean
     public SecurityManager securityManager(AdminShiroRealm adminShiroRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();

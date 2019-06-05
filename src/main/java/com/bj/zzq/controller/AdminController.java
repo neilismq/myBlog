@@ -37,27 +37,6 @@ public class AdminController {
     private ArticleDao articleDao;
 
     /**
-     * 登录
-     *
-
-     * @return
-     * @throws UnsupportedEncodingException
-     */
-    @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public CommonResponse login(HttpServletRequest request) {
-        //登录失败会在request属性中添加一个，FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME属性
-        String exceptionName = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-        if(StringUtils.isNotEmpty(exceptionName) && exceptionName.equals(AuthenticationException.class.getName())){
-            return CommonResponse.fail("账号密码不正确！");
-        }
-        HashMap<String, String> body = new HashMap<>();
-        body.put("adminIndexUrl", adminIndexUrl);
-        return CommonResponse.success().setBody(body);
-
-    }
-
-    /**
      * 登陆页面
      *
      * @return
