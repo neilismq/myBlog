@@ -5,6 +5,7 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -60,6 +61,9 @@ public class ShiroConfiguration {
         map.put("/admin/**", "authc");
         map.put("/**", "anon");
         HashMap<String, Filter> filterHashMap = new HashMap<>();
+        LogoutFilter logoutFilter = new LogoutFilter();
+        logoutFilter.setRedirectUrl(loginUrl);
+        filterHashMap.put("logout",logoutFilter);
         filterHashMap.put("authc",new AdminAuthenticationFilter());
         shiroFilter.setFilters(filterHashMap);
         shiroFilter.setFilterChainDefinitionMap(map);
@@ -95,4 +99,6 @@ public class ShiroConfiguration {
     public UserCredentialsMatcher userCredentialsMatcher() {
         return new UserCredentialsMatcher();
     }
+
+
 }

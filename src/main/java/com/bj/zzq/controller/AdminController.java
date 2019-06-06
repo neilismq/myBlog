@@ -29,6 +29,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/admin")
+//@RequestMapping(value = "/admin-admin-admin123456")
 public class AdminController {
     @Value(value = "${shiro.loginSuccessUrl}")
     private String adminIndexUrl;
@@ -82,4 +83,5 @@ public class AdminController {
         map.put("pageInfo", pageInfo);
         return "admin/articleManage/query";
     }
+
 }

@@ -10,17 +10,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>1111</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${base}/plugins/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${base}/plugins/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="../plugins/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="${base}/plugins/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../plugins/admin-lte/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="${base}/plugins/admin-lte/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
-    <link rel="stylesheet" href="../plugins/admin-lte/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="${base}/plugins/admin-lte/css/skins/skin-blue.min.css">
     <!-- todo 去了解hack -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -271,8 +271,8 @@ desired effect
                     </span>
                     </a>
                     <ul class="treeview-menu" style="display: none;">
-                        <li><a href="/admin/article/add"><i class="fa fa-circle-o"></i> 新增文章</a></li>
-                        <li><a href="/admin/article/query"><i class="fa fa-circle-o"></i> 文章查询</a></li>
+                        <li><a href="${base}/admin/article/add"><i class="fa fa-circle-o"></i> 新增文章</a></li>
+                        <li><a href="${base}/admin/article/query"><i class="fa fa-circle-o"></i> 文章查询</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa fa-book"></i> <span>标签管理</span></a></li>

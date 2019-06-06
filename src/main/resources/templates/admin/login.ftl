@@ -25,7 +25,7 @@
                 </div>
                 <div style="margin-top: 1rem">
                     <div>密码：</div>
-                    <div style="margin-top: 0.4rem"><input id="password" name="password"/></div>
+                    <div style="margin-top: 0.4rem"><input id="password" name="password" type="password"/></div>
                 </div>
                 <div style="margin-top: 1rem">
                     <input type="submit" value="登录" id="loginBtn">
