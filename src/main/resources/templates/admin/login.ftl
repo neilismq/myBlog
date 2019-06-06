@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>111</title>
-    <link href="${base}/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="${base}/css/blog.css" rel="stylesheet">
+    <base href="${base}">
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <link rel="bookmark" href="img/favicon.ico"/>
+    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="css/blog.css" rel="stylesheet">
 </head>
 <body>
         <!--style="background-color: rgb(43,105,166)"-->
@@ -35,9 +38,9 @@
         </div>
     </div>
 </div>
-<script src="${base}/js/jquery.js"></script>
-<script src="${base}/plugins/jquery-validation/jquery.validate.js"></script>
-<script src="${base}/plugins/bootstrap/js/bootstrap.js"></script>
+<script src="js/jquery.js"></script>
+<script src="plugins/jquery-validation/jquery.validate.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.js"></script>
 </body>
 </html>
 <script type="text/javascript">

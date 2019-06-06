@@ -1,5 +1,6 @@
 package com.bj.zzq.config;
 
+import freemarker.template.TemplateModelException;
 import lombok.Setter;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -9,17 +10,19 @@ import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.web.servlet.DelegatingFilterProxyRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.servlet.Filter;
+import javax.servlet.*;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 @Configuration
 @ConditionalOnWebApplication
 @Setter
-public class ShiroConfiguration {
+public class SecurityConfiguration {
     @Value("${shiro.loginUrl}")
     private String loginUrl;
 
@@ -63,8 +66,8 @@ public class ShiroConfiguration {
         HashMap<String, Filter> filterHashMap = new HashMap<>();
         LogoutFilter logoutFilter = new LogoutFilter();
         logoutFilter.setRedirectUrl(loginUrl);
-        filterHashMap.put("logout",logoutFilter);
-        filterHashMap.put("authc",new AdminAuthenticationFilter());
+        filterHashMap.put("logout", logoutFilter);
+        filterHashMap.put("authc", new AdminAuthenticationFilter());
         shiroFilter.setFilters(filterHashMap);
         shiroFilter.setFilterChainDefinitionMap(map);
         return shiroFilter;
@@ -100,5 +103,12 @@ public class ShiroConfiguration {
         return new UserCredentialsMatcher();
     }
 
+
+    @Bean
+    public DelegatingFilterProxyRegistrationBean delegatingFilterProxyRegistrationBean() {
+        DelegatingFilterProxyRegistrationBean bean = new DelegatingFilterProxyRegistrationBean("proxyFilter");
+        bean.addUrlPatterns("/*");
+        return bean;
+    }
 
 }

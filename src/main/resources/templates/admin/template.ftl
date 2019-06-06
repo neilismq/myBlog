@@ -8,19 +8,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>1111</title>
+    <base href="${base}">
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <link rel="bookmark" href="img/favicon.ico"/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="${base}/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="${base}/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="${base}/plugins/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="plugins/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="${base}/plugins/admin-lte/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="plugins/admin-lte/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
-    <link rel="stylesheet" href="${base}/plugins/admin-lte/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="plugins/admin-lte/css/skins/skin-blue.min.css">
     <!-- todo 去了解hack -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -92,7 +95,7 @@ desired effect
                                         <a href="#">
                                             <div class="pull-left">
                                                 <!-- User Image -->
-                                                <img src="../plugins/admin-lte/img/user2-160x160.jpg" class="img-circle"
+                                                <img src="plugins/admin-lte/img/user2-160x160.jpg" class="img-circle"
                                                      alt="User Image">
                                             </div>
                                             <!-- Message title and timestamp -->
@@ -179,14 +182,14 @@ desired effect
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="../plugins/admin-lte/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img src="plugins/admin-lte/img/user2-160x160.jpg" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">1111</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="../plugins/admin-lte/img/user2-160x160.jpg" class="img-circle"
+                                <img src="plugins/admin-lte/img/user2-160x160.jpg" class="img-circle"
                                      alt="User Image">
 
                                 <p>
@@ -215,7 +218,7 @@ desired effect
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="${base}/admin/logout" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="admin/logout" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -237,7 +240,7 @@ desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="../plugins/admin-lte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="plugins/admin-lte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>111</p>
@@ -271,8 +274,8 @@ desired effect
                     </span>
                     </a>
                     <ul class="treeview-menu" style="display: none;">
-                        <li><a href="${base}/admin/article/add"><i class="fa fa-circle-o"></i> 新增文章</a></li>
-                        <li><a href="${base}/admin/article/query"><i class="fa fa-circle-o"></i> 文章查询</a></li>
+                        <li><a href="admin/article/add"><i class="fa fa-circle-o"></i> 新增文章</a></li>
+                        <li><a href="admin/article/query"><i class="fa fa-circle-o"></i> 文章查询</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa fa-book"></i> <span>标签管理</span></a></li>
@@ -286,6 +289,7 @@ desired effect
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+        <@block name="content">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -304,11 +308,10 @@ desired effect
             <!--------------------------
               | Your Page Content Here |
               -------------------------->
-            <@block name="content">
 
-        </@block>
         </section>
         <!-- /.content -->
+    </@block>
     </div>
     <!-- /.content-wrapper -->
 
@@ -404,28 +407,27 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="../plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../plugins/admin-lte/js/adminlte.min.js"></script>
-<script src="../js/showdown.js"></script>
-<@block name="js">
-</@block>
+<script src="plugins/admin-lte/js/adminlte.min.js"></script>
+<script src="js/showdown.js"></script>
+
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("ul.sidebar-menu a").click(function () {
-            if($(this).attr("href")=='#'){
-                return true;
-            }
-            $(this).parent().addClass("active");
-            $("div.content-wrapper").load(this.href);
-            return false;
-        });
-    });
+    // $(document).ready(function () {
+    //     $("ul.sidebar-menu a").click(function () {
+    //         if($(this).attr("href")=='#'){
+    //             return true;
+    //         }
+    //         $(this).parent().addClass("active");
+    //         $("div.content-wrapper").load(this.href);
+    //         return false;
+    //     });
+    // });
 </script>
 </body>
 </html>

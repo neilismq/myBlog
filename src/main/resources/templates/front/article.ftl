@@ -4,10 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="${base}">
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <link rel="bookmark" href="img/favicon.ico"/>
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>赵志强的网络日志</title>
-    <link href="${base}/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="${base}/css/blog.css" rel="stylesheet">
+    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="css/blog.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -17,10 +20,10 @@
                 <ol class="breadcrumb">
                     <li>赵志强的网络日志</li>
                     <li>
-                        <a href="${base}/article">首页</a>
+                        <a href="article">首页</a>
                     </li>
                     <li>
-                        <a href="${base}/archivesIndex">档案</a>
+                        <a href="archivesIndex">档案</a>
                     </li>
                 </ol>
             </div>
@@ -31,20 +34,20 @@
             </#if>>
                 <div class="category">
                     <span>分类:</span>
-                    <a href="${base}/archives/${(tag.id)!''}">${(tag.name)!'剪贴板'}</a>
+                    <a href="archives/${(tag.id)!''}">${(tag.name)!'剪贴板'}</a>
                 </div>
                 <div class="pre-next-article">
                     <ul>
                 <#if preArticle??>
                 <li>
                     <span>上一篇：</span>
-                    <a href="${base}/article/${preArticle.id!''}">${preArticle.title!''}</a>
+                    <a href="article/${preArticle.id!''}">${preArticle.title!''}</a>
                 </li>
                 </#if>
             <#if nextArticle??>
             <li>
                 <span>下一篇：</span>
-                <a href="${base}/article/${nextArticle.id}">${nextArticle.title!''}</a>
+                <a href="article/${nextArticle.id}">${nextArticle.title!''}</a>
             </li>
             </#if>
                     </ul>
@@ -110,7 +113,7 @@
                         </div>
                         <div class="comment-item-footer">
                             <span>${comment.commentCreateTime?datetime}</span>|
-                            <a href="${base}/article/${article.id}#comment-${comment.commentId}">#</a>|
+                            <a href="article/${article.id}#comment-${comment.commentId}">#</a>|
                             <a href="#comment-text" title="引用${comment.name!'未知用户'}的这条留言"
                                onclick="return CommentQuote('comment-quote-${comment.commentId}','${comment.name}');">引用</a>
                         </div>
@@ -125,7 +128,7 @@
                     <h2 class="comments-open-header">我要发表看法</h2>
                     <hr/>
                     <div class="comments-open-content">
-                        <form method="post" action="${base}/comment"
+                        <form method="post" action="comment"
                               name="comments_form" id="comments-form" onsubmit="return pleaseWait();">
                             <div style="display: none">
                                 <input name="articleId" value="${article.id}"/>
@@ -211,9 +214,9 @@
 <#include "../footer.ftl">
     </div>
 </div>
-<script src="${base}/js/jquery.js"></script>
-<script src="${base}/js/showdown.js"></script>
-<script src="${base}/plugins/bootstrap/js/bootstrap.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.js"></script>
 </body>
 <script type="text/javascript">
     var bar = 0;

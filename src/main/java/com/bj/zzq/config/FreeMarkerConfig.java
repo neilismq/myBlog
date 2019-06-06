@@ -27,6 +27,8 @@ public class FreeMarkerConfig {
 
     @PostConstruct
     public void setSharedVariable() throws TemplateModelException {
+
+
         configuration.setSharedVariable("base", servletContext.getContextPath());
         configuration.setSharedVariable("block", new BlockDirective());
         configuration.setSharedVariable("override", new OverrideDirective());
