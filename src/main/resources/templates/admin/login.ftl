@@ -18,10 +18,10 @@
     <h1 style="color: azure;text-space: 2rem;text-align: center;margin: 10rem auto 2rem auto">321312321</h1>
     <div style="background-color: rgb(230,230,230);height: 22rem;border-radius: 0.5rem">
         <div style="float: left;width: 40%;height:22rem;">
-            <img src="${base}/img/aaa.jpg" width="100%" height="100%"/>
+            <img src="img/aaa.jpg" width="100%" height="100%"/>
         </div>
         <div style="float: right;width: 50%;height:22rem;">
-            <form action="${base}/admin/login" method="post" id="loginForm">
+            <form action="admin/login" method="post" id="loginForm">
                 <div style="margin-top: 3rem">
                     <div>用户名：</div>
                     <div style="margin-top: 0.4rem"><input name="username"/></div>

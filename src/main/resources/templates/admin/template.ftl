@@ -418,16 +418,19 @@ desired effect
      Both of these plugins are recommended to enhance the
      user experience. -->
 <script type="text/javascript">
-    // $(document).ready(function () {
-    //     $("ul.sidebar-menu a").click(function () {
-    //         if($(this).attr("href")=='#'){
-    //             return true;
-    //         }
-    //         $(this).parent().addClass("active");
-    //         $("div.content-wrapper").load(this.href);
-    //         return false;
-    //     });
-    // });
+    $(document).ready(function () {
+        // $("ul.sidebar-menu a").click(function () {
+        //     if($(this).attr("href")=='#'){
+        //         return true;
+        //     }
+        //     $(this).parent().addClass("active");
+        //     $("div.content-wrapper").load(this.href);
+        //     return false;
+        // });
+    });
 </script>
+<@block name="js">
+
+</@block>
 </body>
 </html>

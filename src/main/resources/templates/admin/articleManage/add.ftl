@@ -40,16 +40,25 @@
 
 </@override>
 
-<@override name="js">
 
+<@override name="js">
 <script type="text/javascript">
     $("#article-real-content").keyup(function () {
         var converter = new showdown.Converter(),
             html = converter.makeHtml($("#article-real-content").val());
         $("div.modal-content").html(html);
     });
+
+    $("#article-real-content").addEventListener("paste",setClipboardText);
+
+    function setClipboardText(event){
+        event.preventDefault();
+        event.clipboardData.getData("text");
+
+    };
 </script>
 </@override>
+
 
 <@extends name="../template.ftl" />
 

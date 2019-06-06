@@ -109,7 +109,7 @@ public class AdminAuthenticationFilter extends FormAuthenticationFilter {
             response.setStatus(HttpStatus.OK.value());
             response.setCharacterEncoding("utf-8");
             HashMap<String, String> body = new HashMap<>();
-            body.put("adminIndexUrl", "/admin/index");
+            body.put("adminIndexUrl", "admin/index");
             JsonUtils.writeValue(response.getWriter(), CommonResponse.success().setBody(body));
             return false;
         }
