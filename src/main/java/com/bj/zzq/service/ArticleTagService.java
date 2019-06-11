@@ -18,4 +18,9 @@ public class ArticleTagService {
         return articleTagEntityMapper.selectByExample(example);
     }
 
+    public void deleteByTagId(String tagId){
+        ArticleTagEntityExample articleTagEntityExample = new ArticleTagEntityExample();
+        articleTagEntityExample.createCriteria().andTagIdEqualTo(tagId);
+        articleTagEntityMapper.deleteByExample(articleTagEntityExample);
+    }
 }

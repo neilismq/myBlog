@@ -4,10 +4,13 @@ import freemarker.template.TemplateModelException;
 import lombok.Setter;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.web.servlet.DelegatingFilterProxyRegistrationBean;
@@ -83,14 +86,22 @@ public class SecurityConfiguration {
     }
 
     //权限管理，配置主要是Realm的管理认证
-    //todo:未加shiro缓存管理
+    //todo:shiro缓存管理
     @Bean
-    public SecurityManager securityManager(AdminShiroRealm adminShiroRealm) {
+    public SecurityManager securityManager(AdminShiroRealm adminShiroRealm, SessionManager sessionManager) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setSessionManager(sessionManager);
         securityManager.setRealm(adminShiroRealm);
         return securityManager;
     }
 
+    @Bean
+    public SessionManager sessionManager(){
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        //超时时间为3个小时，单位-毫秒
+        sessionManager.setGlobalSessionTimeout(10800000);
+        return sessionManager;
+    }
     @Bean
     public AdminShiroRealm userShiroRealm(CredentialsMatcher credentialsMatcher) {
         AdminShiroRealm shiroRealm = new AdminShiroRealm();

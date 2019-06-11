@@ -18,7 +18,9 @@ public class TagEntity implements Serializable {
      * 创建时间
      */
     private Date createTime;
-
+    /**
+     * 文章数量
+     */
     private Integer articleCount;
     private static final long serialVersionUID = 1L;
 

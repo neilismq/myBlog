@@ -3,17 +3,10 @@ package com.bj.zzq.config;
 import com.bj.zzq.utils.CommonResponse;
 import com.bj.zzq.utils.JsonUtils;
 import com.bj.zzq.utils.WebUtils;
-import lombok.Setter;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.env.PropertiesPropertySourceLoader;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;

@@ -18,4 +18,17 @@ public class TagService {
         return tagEntityMapper.selectByExample(example);
     }
 
+    public void insert(TagEntity tagEntity) {
+        tagEntityMapper.insert(tagEntity);
+    }
+
+    public void update(TagEntity tagEntity, TagEntityExample tagEntityExample) {
+        tagEntityMapper.updateByExampleSelective(tagEntity, tagEntityExample);
+    }
+
+    public void deleteById(String tagId) {
+        TagEntityExample tagEntityExample = new TagEntityExample();
+        tagEntityExample.createCriteria().andIdEqualTo(tagId);
+        tagEntityMapper.deleteByExample(tagEntityExample);
+    }
 }

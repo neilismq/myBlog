@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>1111</title>
+    <title>赵志强的网络日志</title>
     <base href="${base}">
     <link rel="shortcut icon" href="img/favicon.ico"/>
     <link rel="bookmark" href="img/favicon.ico"/>
@@ -24,6 +24,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="plugins/admin-lte/css/skins/skin-blue.min.css">
+
+    <link rel="stylesheet" href="plugins/select2/css/select2.css">
+    <link rel="stylesheet" href="css/common.css">
+
     <!-- todo 去了解hack -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,11 +67,11 @@ desired effect
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="javascript:void(0)" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
+            <span class="logo-mini"><b>Z</b>zq</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg" ><b>Admin Manage</b></span>
         </a>
 
         <!-- Header Navbar -->
@@ -79,153 +83,120 @@ desired effect
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
-                        <!-- Menu toggle button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
-                            <li>
-                                <!-- inner menu: contains the messages -->
-                                <ul class="menu">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <!-- User Image -->
-                                                <img src="plugins/admin-lte/img/user2-160x160.jpg" class="img-circle"
-                                                     alt="User Image">
-                                            </div>
-                                            <!-- Message title and timestamp -->
-                                            <h4>
-                                                Support Team
-                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                            </h4>
-                                            <!-- The message -->
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <!-- end message -->
-                                </ul>
-                                <!-- /.menu -->
-                            </li>
-                            <li class="footer"><a href="#">See All Messages</a></li>
-                        </ul>
-                    </li>
-                    <!-- /.messages-menu -->
 
                     <!-- Notifications Menu -->
-                    <li class="dropdown notifications-menu">
-                        <!-- Menu toggle button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
-                            <li>
-                                <!-- Inner Menu: contains the notifications -->
-                                <ul class="menu">
-                                    <li><!-- start notification -->
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li>
-                                    <!-- end notification -->
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">View all</a></li>
-                        </ul>
-                    </li>
+<#--                    <li class="dropdown notifications-menu">-->
+<#--                        <!-- Menu toggle button &ndash;&gt;-->
+<#--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+<#--                            <i class="fa fa-bell-o"></i>-->
+<#--                            <span class="label label-warning">10</span>-->
+<#--                        </a>-->
+<#--                        <ul class="dropdown-menu">-->
+<#--                            <li class="header">You have 10 notifications</li>-->
+<#--                            <li>-->
+<#--                                <!-- Inner Menu: contains the notifications &ndash;&gt;-->
+<#--                                <ul class="menu">-->
+<#--                                    <li><!-- start notification &ndash;&gt;-->
+<#--                                        <a href="#">-->
+<#--                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today-->
+<#--                                        </a>-->
+<#--                                    </li>-->
+<#--                                    <!-- end notification &ndash;&gt;-->
+<#--                                </ul>-->
+<#--                            </li>-->
+<#--                            <li class="footer"><a href="#">View all</a></li>-->
+<#--                        </ul>-->
+<#--                    </li>-->
                     <!-- Tasks Menu -->
-                    <li class="dropdown tasks-menu">
-                        <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-flag-o"></i>
-                            <span class="label label-danger">9</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 9 tasks</li>
-                            <li>
-                                <!-- Inner menu: contains the tasks -->
-                                <ul class="menu">
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <!-- Task title and progress text -->
-                                            <h3>
-                                                Design some buttons
-                                                <small class="pull-right">20%</small>
-                                            </h3>
-                                            <!-- The progress bar -->
-                                            <div class="progress xs">
-                                                <!-- Change the css width attribute to simulate progress -->
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%"
-                                                     role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">20% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all tasks</a>
-                            </li>
-                        </ul>
-                    </li>
+<#--                    <li class="dropdown tasks-menu">-->
+<#--                        <!-- Menu Toggle Button &ndash;&gt;-->
+<#--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+<#--                            <i class="fa fa-flag-o"></i>-->
+<#--                            <span class="label label-danger">9</span>-->
+<#--                        </a>-->
+<#--                        <ul class="dropdown-menu">-->
+<#--                            <li class="header">You have 9 tasks</li>-->
+<#--                            <li>-->
+<#--                                <!-- Inner menu: contains the tasks &ndash;&gt;-->
+<#--                                <ul class="menu">-->
+<#--                                    <li><!-- Task item &ndash;&gt;-->
+<#--                                        <a href="#">-->
+<#--                                            <!-- Task title and progress text &ndash;&gt;-->
+<#--                                            <h3>-->
+<#--                                                Design some buttons-->
+<#--                                                <small class="pull-right">20%</small>-->
+<#--                                            </h3>-->
+<#--                                            <!-- The progress bar &ndash;&gt;-->
+<#--                                            <div class="progress xs">-->
+<#--                                                <!-- Change the css width attribute to simulate progress &ndash;&gt;-->
+<#--                                                <div class="progress-bar progress-bar-aqua" style="width: 20%"-->
+<#--                                                     role="progressbar"-->
+<#--                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">-->
+<#--                                                    <span class="sr-only">20% Complete</span>-->
+<#--                                                </div>-->
+<#--                                            </div>-->
+<#--                                        </a>-->
+<#--                                    </li>-->
+<#--                                    <!-- end task item &ndash;&gt;-->
+<#--                                </ul>-->
+<#--                            </li>-->
+<#--                            <li class="footer">-->
+<#--                                <a href="#">View all tasks</a>-->
+<#--                            </li>-->
+<#--                        </ul>-->
+<#--                    </li>-->
                     <!-- User Account Menu -->
-                    <li class="dropdown user user-menu">
-                        <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <!-- The user image in the navbar-->
-                            <img src="plugins/admin-lte/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">1111</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- The user image in the menu -->
-                            <li class="user-header">
-                                <img src="plugins/admin-lte/img/user2-160x160.jpg" class="img-circle"
-                                     alt="User Image">
+<#--                    <li class="dropdown user user-menu">-->
+<#--                        <!-- Menu Toggle Button &ndash;&gt;-->
+<#--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+<#--                            <!-- The user image in the navbar&ndash;&gt;-->
+<#--                            <img src="plugins/admin-lte/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
+<#--                            <!-- hidden-xs hides the username on small devices so only the image appears. &ndash;&gt;-->
+<#--                            <span class="hidden-xs">赵志强</span>-->
+<#--                        </a>-->
+<#--                        <ul class="dropdown-menu">-->
+<#--                            <!-- The user image in the menu &ndash;&gt;-->
+<#--                            <li class="user-header">-->
+<#--                                <img src="plugins/admin-lte/img/user2-160x160.jpg" class="img-circle"-->
+<#--                                     alt="User Image">-->
 
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
-                                </p>
-                            </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                            </li>
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="admin/logout" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
+<#--                                <p>-->
+<#--                                    Alexander Pierce - Web Developer-->
+<#--                                    <small>Member since Nov. 2012</small>-->
+<#--                                </p>-->
+<#--                            </li>-->
+<#--                            <!-- Menu Body &ndash;&gt;-->
+<#--                            <li class="user-body">-->
+<#--                                <div class="row">-->
+<#--                                    <div class="col-xs-4 text-center">-->
+<#--                                        <a href="#">Followers</a>-->
+<#--                                    </div>-->
+<#--                                    <div class="col-xs-4 text-center">-->
+<#--                                        <a href="#">Sales</a>-->
+<#--                                    </div>-->
+<#--                                    <div class="col-xs-4 text-center">-->
+<#--                                        <a href="#">Friends</a>-->
+<#--                                    </div>-->
+<#--                                </div>-->
+<#--                                <!-- /.row &ndash;&gt;-->
+<#--                            </li>-->
+<#--                            <!-- Menu Footer&ndash;&gt;-->
+<#--                            <li class="user-footer">-->
+<#--                                <div class="pull-left">-->
+<#--                                    <a href="#" class="btn btn-default btn-flat">Profile</a>-->
+<#--                                </div>-->
+<#--                                <div class="pull-right">-->
+<#--                                    <a href="admin/logout" class="btn btn-default btn-flat">Sign out</a>-->
+<#--                                </div>-->
+<#--                            </li>-->
+<#--                        </ul>-->
+<#--                    </li>-->
                     <!-- Control Sidebar Toggle Button -->
+<#--                    <li>-->
+<#--                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>-->
+<#--                    </li>-->
                     <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                        <a href="admin/logout"  title="退出登录"><i class="fa fa-sign-out"></i></a>
                     </li>
                 </ul>
             </div>
@@ -243,9 +214,9 @@ desired effect
                     <img src="plugins/admin-lte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>111</p>
+                    <p>赵志强</p>
                     <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+                    <a href="javascript:void(0)"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
             </div>
 
@@ -265,9 +236,9 @@ desired effect
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-pie-chart"></i>
+                <li class="treeview" >
+                    <a href="#" id="article-manage-link">
+                        <i class="fa fa-book"></i>
                         <span>文章管理</span>
                         <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -275,12 +246,11 @@ desired effect
                     </a>
                     <ul class="treeview-menu" style="display: none;">
                         <li><a href="admin/article/add"><i class="fa fa-circle-o"></i> 新增文章</a></li>
-                        <li><a href="admin/article/query"><i class="fa fa-circle-o"></i> 文章查询</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><i class="fa fa-book"></i> <span>标签管理</span></a></li>
-                <li><a href="#"><i class="fa fa-book"></i> <span>评论管理</span></a></li>
-                <li><a href="#"><i class="fa fa-book"></i> <span>仪表盘</span></a></li>
+                <li><a href="admin/tag/add"><i class="fa fa-book"></i> <span>标签管理</span></a></li>
+                <li><a href="#"><i class="fa fa-pie-chart"></i> <span>网站统计</span></a></li>
+
             </ul>
             <!-- /.sidebar-menu -->
         </section>
@@ -316,14 +286,14 @@ desired effect
     <!-- /.content-wrapper -->
 
     <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="pull-right hidden-xs">
-        Anything you want
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
-    </footer>
+<#--    <footer class="main-footer">-->
+<#--        <!-- To the right &ndash;&gt;-->
+<#--        <div class="pull-right hidden-xs">-->
+<#--        Anything you want-->
+<#--        </div>-->
+<#--        <!-- Default to the left &ndash;&gt;-->
+<#--        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.-->
+<#--    </footer>-->
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -407,28 +377,18 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="plugins/admin-lte/js/adminlte.min.js"></script>
+<script src="plugins/admin-lte/js/adminlte.js"></script>
+<#--<script src="plugins/admin-lte/js/adminlte.min.js"></script>-->
 <script src="js/showdown.js"></script>
+<script src="plugins/select2/js/select2.full.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
-<script type="text/javascript">
-    $(document).ready(function () {
-        // $("ul.sidebar-menu a").click(function () {
-        //     if($(this).attr("href")=='#'){
-        //         return true;
-        //     }
-        //     $(this).parent().addClass("active");
-        //     $("div.content-wrapper").load(this.href);
-        //     return false;
-        // });
-    });
-</script>
 <@block name="js">
 
 </@block>
