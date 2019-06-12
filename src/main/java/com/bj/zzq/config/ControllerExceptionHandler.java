@@ -16,6 +16,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler({Exception.class})
     @ResponseBody
     public CommonResponse exceptionHandler(Exception e) {
+        e.printStackTrace();
         return CommonResponse.fail("服务器内部错误，具体请登录服务器上查看日志");
     }
 

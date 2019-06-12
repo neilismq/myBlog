@@ -16,6 +16,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.web.servlet.DelegatingFilterProxyRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -25,7 +27,7 @@ import java.util.LinkedHashMap;
 @Configuration
 @ConditionalOnWebApplication
 @Setter
-public class SecurityConfiguration {
+public abstract class SecurityConfiguration {
     @Value("${shiro.loginUrl}")
     private String loginUrl;
 
@@ -64,7 +66,7 @@ public class SecurityConfiguration {
         map.put("/**/*.gif", "anon");
         map.put("/front/**", "anon");
         map.put(logoutUrl, "logout");
-        map.put("/admin/**", "authc");
+//        map.put("/admin/**", "authc");
         map.put("/**", "anon");
         HashMap<String, Filter> filterHashMap = new HashMap<>();
         LogoutFilter logoutFilter = new LogoutFilter();

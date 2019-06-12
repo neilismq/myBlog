@@ -9,6 +9,13 @@ public class CommonUtils {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
+    public static boolean isImg(String contentType) {
+        if ("image/jpeg".equalsIgnoreCase(contentType) || "image/jpg".equalsIgnoreCase(contentType) || "image/png".equalsIgnoreCase(contentType) || "mage/gif".equalsIgnoreCase(contentType)) {
+            return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) throws IOException {
         File file = new File("C:\\Users\\18511\\Desktop\\think_dept.csv");
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));

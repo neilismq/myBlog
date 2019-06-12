@@ -7,7 +7,6 @@
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>你的标题</title>
-
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
 
@@ -36,10 +35,14 @@
 </head>
 <body>
 
-<div>开始写你的码...</div>
-
-<!--[if lt IE 9]>
-<script src="//libs.useso.com/js/jquery/1.11.1/jquery.min.js"></script>
+<div>
+    <form method="post" id="bannerForm" action="http://localhost/blog/admin/article/upload" enctype="multipart/form-data" >
+        <input type="file" title="上传图片" name="file" id="input_file"
+               accept="image/gif,image/jpeg,image/jpg,image/png" multiple="multiple" value="点击上传文件">
+        <input type="text" name="articleId">
+        <button type="submit">提交</button>
+    </form>
+</div>
 <script src="//cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="/js/polyfill/rem.min.js"></script>
 <script src="//libs.useso.com/js/respond.js/1.4.2/respond.min.js"></script>

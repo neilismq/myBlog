@@ -1,11 +1,12 @@
 package com.bj.zzq.controller;
 
 import com.bj.zzq.dao.ArticleDao;
-import com.bj.zzq.dao.AdminDao;
 import com.bj.zzq.model.ArticleEntityExample;
+import com.bj.zzq.model.FileEntity;
 import com.bj.zzq.model.TagEntity;
 import com.bj.zzq.model.TagEntityExample;
 import com.bj.zzq.service.ArticleTagService;
+import com.bj.zzq.service.FileService;
 import com.bj.zzq.service.TagService;
 import com.bj.zzq.utils.CommonResponse;
 import com.bj.zzq.utils.CommonUtils;
@@ -13,12 +14,6 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,13 +21,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
+import javax.swing.text.html.parser.Entity;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,10 @@ public class AdminController {
     @Value(value = "${shiro.loginSuccessUrl}")
     private String adminIndexUrl;
 
+    @Value(value = "${application.img.uploadPath}")
+    private String uploadPath;
+
+
     @Autowired
     private ArticleDao articleDao;
 
@@ -51,6 +56,9 @@ public class AdminController {
 
     @Autowired
     private ArticleTagService articleTagService;
+
+    @Autowired
+    private FileService fileService;
 
     /**
      * 登陆页面
@@ -69,10 +77,15 @@ public class AdminController {
      */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
-        return "admin/template";
+        return "index";
     }
 
-
+    /**
+     * 添加文章页面
+     *
+     * @param map
+     * @return
+     */
     @RequestMapping(value = "/article/add", method = RequestMethod.GET)
     public String articleAdd(ModelMap map) {
         TagEntityExample tagEntityExample = new TagEntityExample();
@@ -82,6 +95,101 @@ public class AdminController {
         return "admin/articleManage/add";
     }
 
+    /**
+     * 上传图片(支持批量上传)
+     *
+     * @param httpServletRequest
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/article/upload")
+    public CommonResponse uploadImg(HttpServletRequest httpServletRequest) throws IOException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        String dateStr = sdf.format(new Date());
+        StandardMultipartHttpServletRequest request = (StandardMultipartHttpServletRequest) httpServletRequest;
+
+        String articleId = request.getParameter("articleId");
+        List<MultipartFile> file = request.getFiles("file");
+        for (int i = 0; i < file.size(); i++) {
+            MultipartFile entity = file.get(i);
+            //文件类型
+            String contentType = entity.getContentType();
+            //文件原名称
+            String originalFilename = entity.getOriginalFilename();
+            //文件大小,单位-字节
+            long size = entity.getSize();
+            if (!CommonUtils.isImg(contentType)) {
+                return CommonResponse.fail("文件：" + originalFilename + "类型不正确！");
+            }
+
+            //如果图片大于30M，禁止上传
+            if (size > 30 * 1024 * 1024) {
+                return CommonResponse.fail("图片太大，不能上传（最大30M）");
+            }
+            String newFileName = dateStr + originalFilename;
+            FileEntity fileEntity = new FileEntity();
+            fileEntity.setId(CommonUtils.newUUID());
+            fileEntity.setArticleId(articleId);
+            fileEntity.setName(newFileName);
+            fileEntity.setOriginName(originalFilename);
+            fileEntity.setSize((int) size);
+            String path;
+            if (StringUtils.isEmpty(articleId)) {
+                path = "default/" + newFileName;
+            } else {
+                path = articleId + "/" + newFileName;
+            }
+            fileEntity.setPath(path);
+            fileEntity.setCreateTime(new Date());
+            fileService.insert(fileEntity);
+            //todo:复制图片
+            byte[] bytes = entity.getBytes();
+            File realFile = new File(uploadPath + path);
+            if (!realFile.exists()) {
+                realFile.createNewFile();
+            }
+            BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(realFile));
+            outputStream.write(bytes);
+            outputStream.flush();
+            outputStream.close();
+        }
+        return CommonResponse.success();
+    }
+
+    /**
+     * 查询文章页面
+     *
+     * @param map
+     * @param pageInfo
+     * @return
+     */
+    @RequestMapping(value = "/article/query")
+    public String articleQuery(Map map, PageInfo pageInfo) {
+        if (pageInfo.getPageSize() == 0) {
+            pageInfo.setNavigatePages(5);
+            pageInfo.setPageSize(10);
+            pageInfo.setPageNum(1);
+        }
+        Page page = PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
+        //分页合理化
+        page.setReasonable(true);
+
+        ArticleEntityExample articleEntityExample = new ArticleEntityExample();
+        articleEntityExample.setOrderByClause("create_time desc");
+        articleDao.selectArticleByExample(articleEntityExample);
+
+        PageInfo info = new PageInfo(page, pageInfo.getNavigatePages());
+        BeanUtils.copyProperties(info, pageInfo);
+        map.put("pageInfo", pageInfo);
+        return "admin/articleManage/query";
+    }
+
+    /**
+     * 添加标签页面
+     *
+     * @param mav
+     * @return
+     */
     @RequestMapping(value = "/tag/add", method = RequestMethod.GET)
     public String tagAdd(ModelMap mav) {
         TagEntityExample tagEntityExample = new TagEntityExample();
@@ -91,6 +199,12 @@ public class AdminController {
         return "admin/tagManage/add";
     }
 
+    /**
+     * 添加标签
+     *
+     * @param tagName
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/tag/add", method = RequestMethod.POST)
     public CommonResponse addTag(String tagName) {
@@ -112,6 +226,13 @@ public class AdminController {
         return CommonResponse.success();
     }
 
+    /**
+     * 修改标签
+     *
+     * @param tagId
+     * @param tagName
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/tag/update", method = RequestMethod.POST)
     public CommonResponse updateTag(String tagId, String tagName) {
@@ -134,6 +255,12 @@ public class AdminController {
         return CommonResponse.success();
     }
 
+    /**
+     * 删除标签
+     *
+     * @param tagId
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/tag/delete", method = RequestMethod.POST)
     public CommonResponse deleteTag(String tagId) {
@@ -148,26 +275,5 @@ public class AdminController {
         return CommonResponse.success();
     }
 
-
-    @RequestMapping(value = "/article/query")
-    public String articleQuery(Map map, PageInfo pageInfo) {
-        if (pageInfo.getPageSize() == 0) {
-            pageInfo.setNavigatePages(5);
-            pageInfo.setPageSize(10);
-            pageInfo.setPageNum(1);
-        }
-        Page page = PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
-        //分页合理化
-        page.setReasonable(true);
-
-        ArticleEntityExample articleEntityExample = new ArticleEntityExample();
-        articleEntityExample.setOrderByClause("create_time desc");
-        articleDao.selectArticleByExample(articleEntityExample);
-
-        PageInfo info = new PageInfo(page, pageInfo.getNavigatePages());
-        BeanUtils.copyProperties(info, pageInfo);
-        map.put("pageInfo", pageInfo);
-        return "admin/articleManage/query";
-    }
 
 }
