@@ -34,6 +34,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,7 +78,7 @@ public class AdminController {
      */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
-        return "index";
+        return "admin/index";
     }
 
     /**
@@ -105,11 +106,14 @@ public class AdminController {
     @RequestMapping("/article/upload")
     public CommonResponse uploadImg(HttpServletRequest httpServletRequest) throws IOException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         String dateStr = sdf.format(new Date());
+        String dateStr2 = sdf2.format(new Date());
         StandardMultipartHttpServletRequest request = (StandardMultipartHttpServletRequest) httpServletRequest;
 
-        String articleId = request.getParameter("articleId");
         List<MultipartFile> file = request.getFiles("file");
+        String baseUrl = (String) request.getAttribute("baseUrl")+"img/";
+        String allImgPath = "";
         for (int i = 0; i < file.size(); i++) {
             MultipartFile entity = file.get(i);
             //文件类型
@@ -129,20 +133,16 @@ public class AdminController {
             String newFileName = dateStr + "-" + originalFilename;
             FileEntity fileEntity = new FileEntity();
             fileEntity.setId(CommonUtils.newUUID());
-            fileEntity.setArticleId(articleId);
             fileEntity.setName(newFileName);
             fileEntity.setOriginName(originalFilename);
             fileEntity.setSize((int) size);
             String path;
-            if (StringUtils.isEmpty(articleId)) {
-                path = "default/";
-            } else {
-                path = articleId + "/";
-            }
-
+            path = dateStr2 + "/";
             byte[] bytes = entity.getBytes();
             File filePath = new File(uploadPath + path);
-            filePath.mkdirs();
+            if (!filePath.exists() && !filePath.isDirectory()) {
+                filePath.mkdirs();
+            }
             path = path + newFileName;
             File realFile = new File(uploadPath + path);
             fileEntity.setPath(path);
@@ -151,12 +151,18 @@ public class AdminController {
             if (!realFile.exists()) {
                 realFile.createNewFile();
             }
+            allImgPath += "," + baseUrl + path;
             BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(realFile));
             outputStream.write(bytes);
             outputStream.flush();
             outputStream.close();
         }
-        return CommonResponse.success();
+        if (allImgPath.startsWith(",")) {
+            allImgPath = allImgPath.substring(1);
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("imgUrl", allImgPath);
+        return CommonResponse.success().setBody(map);
     }
 
     /**

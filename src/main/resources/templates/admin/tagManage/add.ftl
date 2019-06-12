@@ -192,6 +192,6 @@
 </@override>
 
 
-<@extends name="../template.ftl" />
+<@extends name="../index.ftl" />
 
 

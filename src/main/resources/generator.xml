@@ -17,18 +17,18 @@
                         password="admin"/>
 
         <javaModelGenerator targetPackage="com.bj.zzq.model"
-                            targetProject="D:/IdeaProjects/myBlog/src/main/java">
+                            targetProject="D:/ideaProject/project_1/myBlog/src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <sqlMapGenerator targetPackage="com.bj.zzq.mapper"
-                         targetProject="D:/IdeaProjects/myBlog/src/main/java">
+                         targetProject="D:/ideaProject/project_1/myBlog/src/main/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <javaClientGenerator targetPackage="com.bj.zzq.mapper"
-                             targetProject="D:/IdeaProjects/myBlog/src/main/java" type="XMLMAPPER">
+                             targetProject="D:/ideaProject/project_1/myBlog/src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 

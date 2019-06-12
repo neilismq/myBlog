@@ -31,6 +31,7 @@ public class RequestContextFilter implements Filter {
 
         try {
             configuration.setSharedVariable("base",basePath);
+            request.setAttribute("baseUrl",basePath);
             chain.doFilter(request,response);
         } catch (TemplateModelException e) {
             e.printStackTrace();
