@@ -104,7 +104,7 @@ public class AdminController {
     @ResponseBody
     @RequestMapping("/article/upload")
     public CommonResponse uploadImg(HttpServletRequest httpServletRequest) throws IOException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String dateStr = sdf.format(new Date());
         StandardMultipartHttpServletRequest request = (StandardMultipartHttpServletRequest) httpServletRequest;
 
@@ -126,7 +126,7 @@ public class AdminController {
             if (size > 30 * 1024 * 1024) {
                 return CommonResponse.fail("图片太大，不能上传（最大30M）");
             }
-            String newFileName = dateStr + originalFilename;
+            String newFileName = dateStr + "-" + originalFilename;
             FileEntity fileEntity = new FileEntity();
             fileEntity.setId(CommonUtils.newUUID());
             fileEntity.setArticleId(articleId);
@@ -135,16 +135,19 @@ public class AdminController {
             fileEntity.setSize((int) size);
             String path;
             if (StringUtils.isEmpty(articleId)) {
-                path = "default/" + newFileName;
+                path = "default/";
             } else {
-                path = articleId + "/" + newFileName;
+                path = articleId + "/";
             }
+
+            byte[] bytes = entity.getBytes();
+            File filePath = new File(uploadPath + path);
+            filePath.mkdirs();
+            path = path + newFileName;
+            File realFile = new File(uploadPath + path);
             fileEntity.setPath(path);
             fileEntity.setCreateTime(new Date());
             fileService.insert(fileEntity);
-            //todo:复制图片
-            byte[] bytes = entity.getBytes();
-            File realFile = new File(uploadPath + path);
             if (!realFile.exists()) {
                 realFile.createNewFile();
             }
