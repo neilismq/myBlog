@@ -70,6 +70,7 @@ public class ArticleDao {
         }
         CommentEntity commentEntity = new CommentEntity();
         commentEntity.setId(CommonUtils.newUUID());
+        commentUserResp.setCommentId(commentEntity.getId());
         commentEntity.setArticleId(commentUserResp.getArticleId());
         commentEntity.setContent(commentUserResp.getContent());
         commentEntity.setCreateTime(new Date());
@@ -95,10 +96,15 @@ public class ArticleDao {
     }
 
     public List<ArticleEntity> selectArticleWithCommentCount(HashMap<Object, Object> param) {
+
         return articleEntityMapper.selectArticleWithCommentCount(param);
     }
 
     public List<ArticleEntity> selectAllClipboardArticles() {
         return articleEntityMapper.selectAllClipboardArticles();
+    }
+
+    public void insertArticle(ArticleEntity articleEntity){
+        articleEntityMapper.insert(articleEntity);
     }
 }

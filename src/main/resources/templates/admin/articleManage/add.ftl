@@ -10,25 +10,26 @@
     </div>
     <section id="add-article" style="margin: 2rem 2rem 0 2rem;" class="content">
         <div style="margin-top: 1rem">
-            <button class="btn btn-primary" style="float: right">取消</button>
-            <button class="btn btn-primary" style="float: right;margin-right: 10px">存为草稿</button>
-            <button class="btn btn-primary" style="float: right;margin-right: 10px">发布</button>
+            <button class="btn btn-primary" style="float: right" id="cancleBtn">取消</button>
+            <button class="btn btn-primary" style="float: right;margin-right: 10px" id="saveDraftBtn">存为草稿</button>
+            <button class="btn btn-primary" style="float: right;margin-right: 10px" id="releaseBtn">发布</button>
             <button class="btn btn-primary" style="float: right;margin-right: 10px" id="article_preview"
                     data-toggle="modal"
                     data-target="#modal-info">预览
             </button>
             <div style="clear: both"></div>
         </div>
-        <form role="form">
+        <form role="form" id="aritcle-form">
+            <input type="hidden" id="isDraft" name="isDraft">
             <div class="box box-default">
                 <div class="box-body">
                     <div class="form-group">
                         <label for="article_title">标题</label>
-                        <input class="form-control" id="article_title" placeholder="请输入标题" style="border-radius: 2px">
+                        <input class="form-control" id="article_title" placeholder="请输入标题" style="border-radius: 2px" name="title">
                     </div>
                     <div class="form-group">
-                        <label for="tags">选择标签</label>
-                        <select multiple="multiple" name="tagNames[]" class="form-control select2" id="tags">
+                        <label for="tags">标签</label>
+                        <select multiple="multiple" name="tagIds" class="form-control select2" id="tags">
                             <#if tags??>
                                 <#list tags as tag>
                                     <option value="${tag.id}">${tag.name}</option>
@@ -38,8 +39,7 @@
                     </div>
                     <div class="form-group" >
                         <label for="article-real-content">正文</label>
-                        <textarea class="form-control" id="article-real-content"
-                                  style="min-height: 300px;border-radius: 2px"></textarea>
+                        <textarea class="form-control" id="article-real-content" style="min-height: 300px;border-radius: 2px" name="content"></textarea>
                     </div>
                 </div>
             </div>
@@ -75,8 +75,25 @@
                 $("div.modal-content").html(html);
             });
             ZZQ.html5upload.init();
+            $("#saveDraftBtn").on('click',function () {
+               $("#isDraft").val("1");
+               submitForm();
+            });
+            $("#releaseBtn").on('click',function () {
+                $("#isDraft").val("0");
+               submitForm();
+            });
+            $("#cancleBtn").on('click',function () {
+               location.href="admin/index";
+            });
 
         });
+
+        function submitForm() {
+            $.post("admin/article/save",$("#aritcle-form").serialize(),function (data) {
+                alert(data.message);
+            });
+        }
         var ZZQ = {};
         ZZQ.html5upload = (function () {
             var _ID_UPLOAD_BOX = "article-real-content";

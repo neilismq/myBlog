@@ -35,7 +35,7 @@ public class CommonResponse<T> implements Serializable {
     }
 
     public static CommonResponse success() {
-        return new CommonResponse("200", "成功", null);
+        return new CommonResponse("200", "操作成功", null);
     }
 
     public static CommonResponse fail(String message) {

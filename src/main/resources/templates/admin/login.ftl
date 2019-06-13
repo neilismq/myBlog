@@ -3,47 +3,92 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>111</title>
+    <title>赵志强的网络日志</title>
     <base href="${base}">
     <link rel="shortcut icon" href="img/favicon.ico"/>
     <link rel="bookmark" href="img/favicon.ico"/>
-    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="css/blog.css" rel="stylesheet">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="plugins/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="plugins/admin-lte/css/AdminLTE.min.css">
+    <!-- iCheck -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        .back-img{
+            background:url(img/city.jpg) no-repeat center center;
+            background-size: cover;
+            background-attachment: local;
+        }
+    </style>
 </head>
-<body>
-        <!--style="background-color: rgb(43,105,166)"-->
-<div style="width: 50%;margin: 0 auto;">
-    <h1 style="color: azure;text-space: 2rem;text-align: center;margin: 10rem auto 2rem auto">321312321</h1>
-    <div style="background-color: rgb(230,230,230);height: 22rem;border-radius: 0.5rem">
-        <div style="float: left;width: 40%;height:22rem;">
-            <img src="img/aaa.jpg" width="100%" height="100%"/>
-        </div>
-        <div style="float: right;width: 50%;height:22rem;">
-            <form action="admin/login" method="post" id="loginForm">
-                <div style="margin-top: 3rem">
-                    <div>用户名：</div>
-                    <div style="margin-top: 0.4rem"><input name="username"/></div>
-                </div>
-                <div style="margin-top: 1rem">
-                    <div>密码：</div>
-                    <div style="margin-top: 0.4rem"><input id="password" name="password" type="password"/></div>
-                </div>
-                <div style="margin-top: 1rem">
-                    <input type="submit" value="登录" id="loginBtn">
-                    <!--<input type="button" value="注册">-->
-                </div>
-            </form>
-        </div>
+<body class="hold-transition back-img">
+<div class="login-box">
+    <div class="login-logo">
+        <span><b>后台管理系统</b></span>
     </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <!--    <p class="login-box-msg">填写登录信息</p>-->
+        <form action="admin/login" method="post" id="loginForm">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="用户名" name="username">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="密码" name="password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" id="loginBtn">登录</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+        <div class="social-auth-links text-center">
+            <!--      <p>- OR -</p>-->
+            <!--      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using-->
+            <!--        Facebook</a>-->
+            <!--      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using-->
+            <!--        Google+</a>-->
+        </div>
+        <!-- /.social-auth-links -->
+
+        <!--    <a href="#">I forgot my password</a><br>-->
+        <!--    <a href="register.html" class="text-center">Register a new membership</a>-->
+
+    </div>
+    <!-- /.login-box-body -->
 </div>
+<!-- /.login-box -->
+
+<!-- jQuery 3 -->
 <script src="js/jquery.js"></script>
+<script src="js/md5.min.js"></script>
 <script src="plugins/jquery-validation/jquery.validate.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.js"></script>
-</body>
-</html>
-<script type="text/javascript">
+<script>
+
     $(document).ready(function () {
         $("#loginForm").validate({
             rules: {
@@ -84,9 +129,12 @@
                 $(element).parents().addClass("has-success").removeClass("has-error");
             },
             submitHandler: function (form) {
-                $.post(form.action, $(form).serialize(), function (data, status, xhr) {
+                var $username = $("input[name='username']").val();
+                var $password = $("input[name='password']").val();
+                $password = md5($password + "${salt}")
+                $.post(form.action, {username:$username,password:$password}, function (data, status, xhr) {
                     if (data.code == "200") {
-                        window.location.href = "${base}"+data.body.adminIndexUrl;
+                        window.location.href = "${base}" + data.body.adminIndexUrl;
                     } else {
                         alert(data.message);
                     }
@@ -94,4 +142,7 @@
             }
         });
     });
+
 </script>
+</body>
+</html>

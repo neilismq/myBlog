@@ -68,7 +68,7 @@ span {
 
 #article-header-author, #article-header-date {
     margin: 1.8rem 0;
-    padding-left: 1.8rem;
+    /*padding-left: 1rem;*/
 }
 
 #comment-header span {
@@ -125,7 +125,7 @@ p {
 }
 
 #article-content p {
-    margin-left: 2.1rem;
+    /*margin-left: 2.1rem;*/
 }
 
 #container-common {
@@ -212,3 +212,9 @@ p {
     margin: 0.5rem 0;
 }
 
+#article-content img{
+    max-width: 100%;
+}
+.archives-content-article-content{
+    margin-top: 1.5rem;
+}

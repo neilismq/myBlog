@@ -1,10 +1,7 @@
 package com.bj.zzq.controller;
 
 import com.bj.zzq.dao.ArticleDao;
-import com.bj.zzq.model.ArticleEntityExample;
-import com.bj.zzq.model.FileEntity;
-import com.bj.zzq.model.TagEntity;
-import com.bj.zzq.model.TagEntityExample;
+import com.bj.zzq.model.*;
 import com.bj.zzq.service.ArticleTagService;
 import com.bj.zzq.service.FileService;
 import com.bj.zzq.service.TagService;
@@ -21,13 +18,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.html.parser.Entity;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -48,6 +43,9 @@ public class AdminController {
     @Value(value = "${application.img.uploadPath}")
     private String uploadPath;
 
+    @Value(value = "${application.secret}")
+    private String salt;
+
 
     @Autowired
     private ArticleDao articleDao;
@@ -67,7 +65,8 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage() {
+    public String loginPage(ModelMap map) {
+        map.put("salt", salt);
         return "admin/login";
     }
 
@@ -88,12 +87,43 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/article/add", method = RequestMethod.GET)
-    public String articleAdd(ModelMap map) {
+    public String addArticlePage(ModelMap map) {
         TagEntityExample tagEntityExample = new TagEntityExample();
         tagEntityExample.setOrderByClause("create_time desc");
         List<TagEntity> tagEntities = tagService.selectByExample(tagEntityExample);
         map.put("tags", tagEntities);
         return "admin/articleManage/add";
+    }
+
+    /**
+     * 保存文章页面
+     *
+     * @param map
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/article/save", method = RequestMethod.POST)
+    public CommonResponse saveArticle(ModelMap map, String title, String[] tagIds, String content, String isDraft) {
+        ArticleEntity articleEntity = new ArticleEntity();
+        articleEntity.setId(CommonUtils.newUUID());
+        articleEntity.setContent(content);
+        articleEntity.setTitle(title);
+        //todo：
+        articleEntity.setAuthor("赵志强");
+        articleEntity.setIsDraft(isDraft);
+        articleEntity.setCreateTime(new Date());
+        articleDao.insertArticle(articleEntity);
+        if (tagIds != null) {
+            for (int i = 0; i < tagIds.length; i++) {
+                String tagId = tagIds[i];
+                ArticleTagEntity articleTagEntity = new ArticleTagEntity();
+                articleTagEntity.setId(CommonUtils.newUUID());
+                articleTagEntity.setTagId(tagId);
+                articleTagEntity.setArticleId(articleEntity.getId());
+                articleTagService.insert(articleTagEntity);
+            }
+        }
+        return CommonResponse.success();
     }
 
     /**
@@ -112,7 +142,7 @@ public class AdminController {
         StandardMultipartHttpServletRequest request = (StandardMultipartHttpServletRequest) httpServletRequest;
 
         List<MultipartFile> file = request.getFiles("file");
-        String baseUrl = (String) request.getAttribute("baseUrl")+"img/";
+        String baseUrl = (String) request.getAttribute("baseUrl") + "img/";
         String allImgPath = "";
         for (int i = 0; i < file.size(); i++) {
             MultipartFile entity = file.get(i);
