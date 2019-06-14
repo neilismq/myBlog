@@ -205,9 +205,13 @@
     <select id="selectArticlesByTagId" resultMap="BaseResultMap">
       select a.* from blog_article a,blog_tag t,blog_article_tag a_t where a.id=a_t.article_id and t.id=a_t.tag_id  and a_t.tag_id=#{id} and a.is_draft = '0'  order by a.create_time desc
   </select>
-    <select id="selectArticleWithCommentCount" resultMap="BaseResultMap">
-    select a.* ,(select count(*) from blog_comment c where c.article_id=a.id)  as commentCount from blog_article a where a.is_draft = '0' order by a.create_time desc limit #{limitStart},#{limitOffset}
-  </select>
+    <select id="selectArticleWithCommentCount" resultMap="BaseResultMap" parameterType="map">
+        select a.* ,(select count(*) from blog_comment c where c.article_id=a.id) as commentCount from blog_article a
+        where 1=1
+        <if test="isDraft!=null"> and a.is_draft =#{isDraft,jdbcType=CHAR}</if>
+        <if test="selectKey!=null"> and a.title like #{selectKey,jdbcType=VARCHAR}</if>
+        order by a.create_time desc
+    </select>
     <select id="selectAllClipboardArticles" resultMap="BaseResultMap">
     select a.id, a.title, a.author, a.create_time, a.update_time,a.content from blog_article a where not EXISTS(SELECT * from blog_article_tag a_t WHERE a_t.article_id=a.id ) and a.is_draft = '0' order by a.create_time desc
   </select>

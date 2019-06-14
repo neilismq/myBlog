@@ -4,6 +4,8 @@ import com.bj.zzq.dao.ArticleDao;
 import com.bj.zzq.model.*;
 import com.bj.zzq.model.dto.ArticleTagResp;
 import com.bj.zzq.model.dto.CommentUserResp;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.*;
 import java.util.prefs.BackingStoreException;
 
@@ -22,6 +25,33 @@ public class FrontController {
     @Autowired
     private ArticleDao articleDao;
 
+
+    @RequestMapping(value = "/page/{pageNum}", method = RequestMethod.GET)
+    public String articlePage(ModelMap map, @PathVariable Integer pageNum) {
+        //默认每页显示10条数据
+        int pageSize = 10;
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        PageHelper.startPage(pageNum, pageSize);
+        ArticleEntityExample articleEntityExample = new ArticleEntityExample();
+        articleEntityExample.setOrderByClause("create_time desc");
+        List<ArticleEntity> articleEntities = articleDao.selectArticleByExample(articleEntityExample);
+        for (int i = 0; i < articleEntities.size(); i++) {
+            ArticleEntity articleEntity = articleEntities.get(i);
+            List<TagEntity> tagEntities = articleDao.selectTagsByArticleId(articleEntity.getId());
+            articleEntity.setTags(tagEntities);
+            //转换显示内容
+            String content = articleEntity.getContent();
+            String showText = content.split("/r/n/r/n")[0];
+            articleEntity.setContent(showText);
+        }
+
+        PageInfo<ArticleEntity> pageInfo = new PageInfo<>(articleEntities, 3);
+        map.put("pageInfo", pageInfo);
+        return "front/index";
+    }
+
     /**
      * 具体文章页面
      *
@@ -30,7 +60,7 @@ public class FrontController {
      * @return
      */
     @RequestMapping(value = {"/article/{articleId}"}, method = RequestMethod.GET)
-    public String test(Map map, @PathVariable String articleId) {
+    public String articlePage(Map map, @PathVariable String articleId) {
         ArticleEntityExample example = new ArticleEntityExample();
         example.createCriteria().andIdEqualTo(articleId);
         List<ArticleEntity> list = articleDao.selectArticleByExample(example);
@@ -194,11 +224,10 @@ public class FrontController {
      */
     @RequestMapping(value = "/archivesIndex", method = RequestMethod.GET)
     public String archives_index(Map map) {
-
-        HashMap<Object, Object> param = new HashMap<>();
-        param.put("limitStart", 0);
-        param.put("limitOffset", 20);
-        List<ArticleEntity> list = articleDao.selectArticleWithCommentCount(param);
+        PageHelper.startPage(1, 10);
+        HashMap<String, String> mapParam = new HashMap<>();
+        mapParam.put("isDraft", "0");
+        List<ArticleEntity> list = articleDao.selectArticleWithCommentCount(mapParam);
         if (list != null && list.size() > 0) {
             ArticleEntity articleEntity = list.get(0);
             String content = articleEntity.getContent();

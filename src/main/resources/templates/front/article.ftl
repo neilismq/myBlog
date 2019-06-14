@@ -85,7 +85,7 @@
                                     <div class="comment-item-footer">
                                         <span>${comment.commentCreateTime?datetime}</span>|
                                         <a href="front/article/${article.id}#comment-${comment.commentId}">#</a>|
-                                        <a href="#comment-text" title="引用${comment.name!'未知用户'}的这条留言"
+                                        <a title="引用${comment.name!'未知用户'}的这条留言"
                                            onclick="return CommentQuote('comment-quote-${comment.commentId}','${comment.name}');">引用</a>
                                     </div>
                                     <hr/>
@@ -301,7 +301,7 @@
 
         function CommentQuote(v, f) {
 
-            window.location.href = window.location.href + "#comment-text";
+            window.location.href = window.location.href.substr(0, window.location.href.indexOf("#")) + "#comment-text";
 
             string = document.forms["comments_form"].content.value;
             string2 = ignoreSpaces(RemoveHTML(RemoveBlockquote(document.getElementById(v).innerHTML)));
@@ -331,4 +331,4 @@
         }
     </script>
 </@override>
-<@extends name="./index.ftl" />
+<@extends name="./template.ftl" />

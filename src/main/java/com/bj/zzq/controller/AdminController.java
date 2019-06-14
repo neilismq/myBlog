@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -96,6 +97,62 @@ public class AdminController {
     }
 
     /**
+     * 管理文章页面（无参数时用）
+     *
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/article/manage", method = RequestMethod.GET)
+    public String manageArticlePage(ModelMap map) {
+        return manageArticlePageByPageNum(map, 1, null);
+    }
+
+    /**
+     * 管理文章页面（无参数时用）
+     *
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/article/manage/search", method = RequestMethod.POST)
+    public String searchArticlePage(ModelMap map, String selectKey) {
+        return manageArticlePageByPageNum(map, 1, selectKey);
+    }
+
+
+    /**
+     * 管理文章页面(分页用)
+     *
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/article/manage/{pageNum}", method = RequestMethod.GET)
+    public String manageArticlePageByPageNum(ModelMap map, @PathVariable Integer pageNum, String selectKey) {
+        //默认每页显示10条数据
+        int pageSize = 10;
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        PageHelper.startPage(pageNum, pageSize);
+        HashMap<String, String> mapParam = new HashMap<>();
+        if (StringUtils.isNotBlank(selectKey)) {
+            mapParam.put("selectKey", "%" + selectKey + "%");
+        }
+        List<ArticleEntity> articleEntities = articleDao.selectArticleWithCommentCount(mapParam);
+        for (int i = 0; i < articleEntities.size(); i++) {
+            ArticleEntity articleEntity = articleEntities.get(i);
+            List<TagEntity> tagEntities = articleDao.selectTagsByArticleId(articleEntity.getId());
+            articleEntity.setTags(tagEntities);
+        }
+        PageInfo<ArticleEntity> pageInfo = new PageInfo<>(articleEntities, 5);
+        map.put("pageInfo", pageInfo);
+        if (StringUtils.isNotBlank(selectKey)) {
+            map.put("selectKey", selectKey);
+        }
+        return "admin/articleManage/manage";
+    }
+
+
+    /**
      * 保存文章页面
      *
      * @param map
@@ -108,7 +165,6 @@ public class AdminController {
         articleEntity.setId(CommonUtils.newUUID());
         articleEntity.setContent(content);
         articleEntity.setTitle(title);
-        //todo：
         articleEntity.setAuthor("赵志强");
         articleEntity.setIsDraft(isDraft);
         articleEntity.setCreateTime(new Date());
@@ -123,6 +179,19 @@ public class AdminController {
                 articleTagService.insert(articleTagEntity);
             }
         }
+        return CommonResponse.success();
+    }
+
+
+    /**
+     * 删除文章
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/article/delete", method = RequestMethod.POST)
+    public CommonResponse deleteArticle(String articleId) {
+        articleDao.deleteArticleById(articleId);
         return CommonResponse.success();
     }
 

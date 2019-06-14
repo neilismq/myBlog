@@ -12,4 +12,4 @@
         </blockquote>
     </div>
 </@override>
-<@extends name="./index.ftl" />
+<@extends name="./template.ftl" />

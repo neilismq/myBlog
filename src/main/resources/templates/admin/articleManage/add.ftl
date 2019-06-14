@@ -25,7 +25,8 @@
                 <div class="box-body">
                     <div class="form-group">
                         <label for="article_title">标题</label>
-                        <input class="form-control" id="article_title" placeholder="请输入标题" style="border-radius: 2px" name="title">
+                        <input class="form-control" id="article_title" placeholder="请输入标题" style="border-radius: 2px"
+                               name="title">
                     </div>
                     <div class="form-group">
                         <label for="tags">标签</label>
@@ -37,9 +38,10 @@
                             </#if>
                         </select>
                     </div>
-                    <div class="form-group" >
+                    <div class="form-group">
                         <label for="article-real-content">正文</label>
-                        <textarea class="form-control" id="article-real-content" style="min-height: 300px;border-radius: 2px" name="content"></textarea>
+                        <textarea class="form-control" id="article-real-content"
+                                  style="min-height: 300px;border-radius: 2px" name="content"></textarea>
                     </div>
                 </div>
             </div>
@@ -63,7 +65,7 @@
         $(document).ready(function () {
             //document.getElementById("article-manage-link").click();
             // $('#article-manage-link').click();
-            var $li = $("aside.main-sidebar ul.sidebar-menu li:eq(2) ul li:eq(0)");
+            var $li = $("aside.main-sidebar ul.sidebar-menu > li:eq(1) > ul > li:eq(0)");
             $li.addClass('active');
             $li.parent().attr('style', 'display:block');
             $li.parent().parent().addClass('menu-open');
@@ -75,25 +77,26 @@
                 $("div.modal-content").html(html);
             });
             ZZQ.html5upload.init();
-            $("#saveDraftBtn").on('click',function () {
-               $("#isDraft").val("1");
-               submitForm();
+            $("#saveDraftBtn").on('click', function () {
+                $("#isDraft").val("1");
+                submitForm();
             });
-            $("#releaseBtn").on('click',function () {
+            $("#releaseBtn").on('click', function () {
                 $("#isDraft").val("0");
-               submitForm();
+                submitForm();
             });
-            $("#cancleBtn").on('click',function () {
-               location.href="admin/index";
+            $("#cancleBtn").on('click', function () {
+                location.href = "admin/index";
             });
 
         });
 
         function submitForm() {
-            $.post("admin/article/save",$("#aritcle-form").serialize(),function (data) {
+            $.post("admin/article/save", $("#aritcle-form").serialize(), function (data) {
                 alert(data.message);
             });
         }
+
         var ZZQ = {};
         ZZQ.html5upload = (function () {
             var _ID_UPLOAD_BOX = "article-real-content";
@@ -243,8 +246,8 @@
                             success: function (data) {
                                 alert("上传" + data.message);
                                 if (data.code == 200) {
-                                    var $content=$("#"+_ID_UPLOAD_BOX).val();
-                                    $("#"+_ID_UPLOAD_BOX).val($content+"\n"+"![]("+data.body.imgUrl+")")
+                                    var $content = $("#" + _ID_UPLOAD_BOX).val();
+                                    $("#" + _ID_UPLOAD_BOX).val($content + "\n" + "![](" + data.body.imgUrl + ")")
                                 }
                             },
                             error: function () {
@@ -264,7 +267,7 @@
              */
             function _uploadToServer(formData, li, progress, percentage) {
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", "http://localhost/blog/admin/article/upload", true);
+                xhr.open("POST", "http://localhost/admin/article/upload", true);
                 xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest', 'Content-Type', 'multipart/form-data;');
 
                 //HTML5新增的API，存储了上传过程中的信息

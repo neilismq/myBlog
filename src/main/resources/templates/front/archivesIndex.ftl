@@ -44,7 +44,7 @@
             <div style="margin: 2rem">
                 <h3><strong><i>分类</i></strong></h3>
                 <hr/>
-                <div style="min-height:25rem;">
+                <div style="min-height:20rem;">
                     <ul>
                         <#if tags??>
                             <#list tags as item>
@@ -58,6 +58,14 @@
                 </div>
             </div>
         </div>
+        <div class="my-info"
+             style=" margin:2rem 0;min-height: 200px;border-radius: 2rem;border: solid 1px ;border-color: #0f0f0f33 ">
+            <ul style="list-style: none;line-height: 4rem;margin: 4rem 0 ">
+                <li><a><i class="fa fa-link"></i>&nbsp;友情链接</a></li>
+                <li><a><i class="fa fa-copyright"></i>&nbsp;关于本站</a></li>
+                <li><a><i class="fa fa-user-circle-o"></i>&nbsp;关于我</a></li>
+            </ul>
+        </div>
     </div>
     <div style="clear: both"></div>
 </@override>
@@ -65,12 +73,12 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var content = "${article.content?j_string}";
-            var contentArray=content.split("\r\n");
-            var showText="";
-            if(contentArray.length>2){
-                showText=showText+contentArray[0]+"\r\n"+contentArray[1];
-            }else {
-                showText=content;
+            var contentArray = content.split("\r\n");
+            var showText = "";
+            if (contentArray.length > 2) {
+                showText = showText + contentArray[0] + "\r\n" + contentArray[1];
+            } else {
+                showText = content;
             }
             var converter = new showdown.Converter(),
                 html = converter.makeHtml(showText);
@@ -78,4 +86,4 @@
         });
     </script>
 </@override>
-<@extends name="./index.ftl" />
+<@extends name="./template.ftl" />

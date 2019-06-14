@@ -2,6 +2,7 @@ package com.bj.zzq.mapper;
 
 import com.bj.zzq.model.TagEntity;
 import com.bj.zzq.model.TagEntityExample;
+
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,8 @@ public interface TagEntityMapper {
     int updateByExample(@Param("record") TagEntity record, @Param("example") TagEntityExample example);
 
     TagEntity selecTagByArticleId(Map articleIdMap);
+
+    List<TagEntity> selecTagsByArticleId(Map articleIdMap);
 
     List<TagEntity> selectAllTagWithArticleCount();
 }

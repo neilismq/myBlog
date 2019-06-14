@@ -2,6 +2,7 @@ package com.bj.zzq.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class ArticleEntity implements Serializable {
     /**
@@ -39,6 +40,8 @@ public class ArticleEntity implements Serializable {
     private String isDraft;
 
     private Integer CommentCount;
+
+    private List<TagEntity> tags;
     private static final long serialVersionUID = 1L;
 
     public Integer getCommentCount() {
@@ -103,6 +106,14 @@ public class ArticleEntity implements Serializable {
 
     public void setIsDraft(String isDraft) {
         this.isDraft = isDraft;
+    }
+
+    public List<TagEntity> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<TagEntity> tags) {
+        this.tags = tags;
     }
 
     @Override

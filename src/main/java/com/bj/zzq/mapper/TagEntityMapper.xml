@@ -163,7 +163,16 @@
         where a_t.article_id = #{id}
           and a_t.tag_id = t.id limit 0,1
     </select>
+    <select id="selecTagsByArticleId" resultMap="BaseResultMap">
+        select t.id,t.name,t.create_time
+        from blog_article_tag a_t,
+             blog_tag t
+        where a_t.article_id = #{id}
+          and a_t.tag_id = t.id order by t.create_time desc
+    </select>
     <select id="selectAllTagWithArticleCount" resultMap="BaseResultMap">
         select t.id ,t.name,t.create_time,(select count(*) from blog_article_tag a_t where a_t.tag_id=t.id)  as article_count from blog_tag t order by t.create_time desc
     </select>
+
+
 </mapper>

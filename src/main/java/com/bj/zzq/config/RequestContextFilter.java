@@ -27,12 +27,12 @@ public class RequestContextFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String path = request.getServletContext().getContextPath();
-        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+        String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 
         try {
-            configuration.setSharedVariable("base",basePath);
-            request.setAttribute("baseUrl",basePath);
-            chain.doFilter(request,response);
+            configuration.setSharedVariable("base", basePath);
+            request.setAttribute("baseUrl", basePath);
+            chain.doFilter(request, response);
         } catch (TemplateModelException e) {
             e.printStackTrace();
         }

@@ -26,7 +26,7 @@ public interface ArticleEntityMapper {
 
     List<ArticleEntity> selectArticlesByTagId(HashMap<Object, Object> map);
 
-    List<ArticleEntity> selectArticleWithCommentCount(HashMap<Object, Object> param);
+    List<ArticleEntity> selectArticleWithCommentCount(HashMap map);
 
     List<ArticleEntity> selectAllClipboardArticles();
 }

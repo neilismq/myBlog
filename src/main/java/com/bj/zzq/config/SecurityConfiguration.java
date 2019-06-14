@@ -1,7 +1,9 @@
 package com.bj.zzq.config;
 
+import com.github.pagehelper.PageHelper;
 import freemarker.template.TemplateModelException;
 import lombok.Setter;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.Session;
@@ -11,6 +13,7 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.web.servlet.DelegatingFilterProxyRegistrationBean;
@@ -23,6 +26,7 @@ import javax.servlet.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Properties;
 
 @Configuration
 @ConditionalOnWebApplication
@@ -98,12 +102,13 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public SessionManager sessionManager(){
+    public SessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         //超时时间为3个小时，单位-毫秒
         sessionManager.setGlobalSessionTimeout(10800000);
         return sessionManager;
     }
+
     @Bean
     public AdminShiroRealm userShiroRealm(CredentialsMatcher credentialsMatcher) {
         AdminShiroRealm shiroRealm = new AdminShiroRealm();

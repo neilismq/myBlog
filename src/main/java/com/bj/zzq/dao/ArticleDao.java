@@ -34,6 +34,12 @@ public class ArticleDao {
         return tagEntityMapper.selecTagByArticleId(map);
     }
 
+    public List<TagEntity> selectTagsByArticleId(String id) {
+        HashMap<String, String> map = new HashMap();
+        map.put("id", id);
+        return tagEntityMapper.selecTagsByArticleId(map);
+    }
+
     public List<TagEntity> selecTagByExample(TagEntityExample example) {
         return tagEntityMapper.selectByExample(example);
     }
@@ -91,20 +97,26 @@ public class ArticleDao {
     public List<ArticleEntity> selectArticleByExample(ArticleEntityExample example) {
         return articleEntityMapper.selectByExample(example);
     }
-    public List<TagEntity> selectAllTagWithArticleCount(){
+
+    public List<TagEntity> selectAllTagWithArticleCount() {
         return tagEntityMapper.selectAllTagWithArticleCount();
     }
 
-    public List<ArticleEntity> selectArticleWithCommentCount(HashMap<Object, Object> param) {
-
-        return articleEntityMapper.selectArticleWithCommentCount(param);
+    public List<ArticleEntity> selectArticleWithCommentCount(HashMap map) {
+        return articleEntityMapper.selectArticleWithCommentCount(map);
     }
 
     public List<ArticleEntity> selectAllClipboardArticles() {
         return articleEntityMapper.selectAllClipboardArticles();
     }
 
-    public void insertArticle(ArticleEntity articleEntity){
+    public void insertArticle(ArticleEntity articleEntity) {
         articleEntityMapper.insert(articleEntity);
+    }
+
+    public void deleteArticleById(String articleId) {
+        ArticleEntityExample articleEntityExample = new ArticleEntityExample();
+        articleEntityExample.createCriteria().andIdEqualTo(articleId);
+        articleEntityMapper.deleteByExample(articleEntityExample);
     }
 }
