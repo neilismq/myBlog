@@ -4,7 +4,7 @@
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li>tag</li>
-                <li class="active">add</li>
+                <li class="active">manage</li>
             </ol>
         </section>
     </div>
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="deleteTagModal" tabindex="-1" role="dialog" >
+        <div class="modal fade" id="deleteTagModal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document" aria-hidden="true">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -51,7 +51,7 @@
                         <h4 class="modal-title" id="myModalLabel"><b>删除标签</b></h4>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" id="deleteTagId" >
+                        <input type="hidden" id="deleteTagId">
                         您确定要删除<span style="color:red;font-weight: bold" id="deleteTageName"></span>吗？
                     </div>
                     <div class="modal-footer">
@@ -63,10 +63,22 @@
         </div>
 
         <div style="padding-left: 1rem">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTagModal" id="addTagBtn">
-                添加标签
-            </button>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTagModal"
+                            id="addTagBtn">
+                        添加标签
+                    </button>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-2">
+                    <form action="admin/tag/manage/1" method="GET">
+                        <input class="form-control input-group-sm" placeholder="请输入标签名称" name="selectKey"
+                               value="${selectKey!''}">
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="box" style="margin-top: 1rem">
             <!-- /.box-header -->
@@ -79,6 +91,7 @@
                         <th>文章数量</th>
                         <th style="width: 150px">操作</th>
                     </tr>
+                    <#assign tags=pageInfo.list />
                     <#if tags?? >
                         <#list tags as tag>
                             <tr tagId="${tag.id}">
@@ -95,6 +108,25 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="col-sm-12">
+                <div class="dataTables_paginate paging_simple_numbers"
+                     id="example2_paginate">
+                    <ul class="pagination" style="float: right;">
+                        <li class="paginate_button previous <#if pageInfo.navigateFirstPage==1>disabled</#if>">
+                            <a onclick="doClick(${pageInfo.navigateFirstPage-5})">Previous</a>
+                        </li>
+                        <#list pageInfo.navigateFirstPage..pageInfo.navigateLastPage as i>
+                            <li class="paginate_button <#if i==pageInfo.pageNum> active</#if>">
+                                <a onclick="doClick(${i})">${i}</a></li>
+                        </#list>
+                        <li class="paginate_button next <#if pageInfo.navigateLastPage==pageInfo.pages>disabled</#if>">
+                            <a onclick="doClick(${pageInfo.navigateLastPage+5})">Next</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
 
     </section>
@@ -129,8 +161,8 @@
                 });
             });
 
-            $("#ackDeleteTagBtn").on('click',function () {
-                $.post('admin/tag/delete',{tagId:$("#deleteTagId").val()},function (data) {
+            $("#ackDeleteTagBtn").on('click', function () {
+                $.post('admin/tag/delete', {tagId: $("#deleteTagId").val()}, function (data) {
                     alert(data.message);
                     if (data.code == 200) {
                         $('#deleteTagModal').modal('hide');
@@ -163,9 +195,8 @@
                         }
                     });
                 }
-
             });
-            var $li = $("a[href='admin/tag/add']").parent();
+            var $li = $("a[href^='admin/tag/manage']").parent();
             $li.addClass('active');
 
         });
@@ -175,6 +206,20 @@
             $("div.modal-content").html(html);
         });
 
+        function doClick(pageNum) {
+            var selectKey = $("input[name='selectKey']").val();
+            var addr;
+            if (location.port) {
+                addr = "http://" + location.host + ":" + location.port + "/admin/tag/manage/" + pageNum;
+            } else {
+                addr = "http://" + location.host + "/admin/tag/manage/" + pageNum;
+            }
+            if (selectKey) {
+                location.href = addr + "?selectKey=" + selectKey;
+            } else {
+                location.href = addr;
+            }
+        }
         // $("#article-real-content")[0].addEventListener("paste",setClipboardText);
         //
         // function setClipboardText(event){

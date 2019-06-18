@@ -81,6 +81,8 @@ public class ArticleDao {
         commentEntity.setContent(commentUserResp.getContent());
         commentEntity.setCreateTime(new Date());
         commentEntity.setUserId(userEntity.getId());
+        //未读
+        commentEntity.setIsRead("0");
         int insertNum = commentEntityMapper.insert(commentEntity);
         if (insertNum == 1) {
             return true;
@@ -118,5 +120,9 @@ public class ArticleDao {
         ArticleEntityExample articleEntityExample = new ArticleEntityExample();
         articleEntityExample.createCriteria().andIdEqualTo(articleId);
         articleEntityMapper.deleteByExample(articleEntityExample);
+    }
+
+    public void updateArticle(ArticleEntity articleEntity, ArticleEntityExample articleEntityExample) {
+        articleEntityMapper.updateByExampleSelective(articleEntity, articleEntityExample);
     }
 }

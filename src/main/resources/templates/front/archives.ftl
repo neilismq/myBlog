@@ -41,6 +41,7 @@
             </div>
         </div>
     </div>
+    <div style="clear: both"></div>
 </@override>
 <@extends name="./template.ftl" />
 

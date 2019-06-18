@@ -1,40 +1,21 @@
 package com.bj.zzq.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class CommentEntity implements Serializable {
-    /**
-     * id
-     */
+public class CommentEntity {
     private String id;
 
-    /**
-     * 评论内容
-     */
     private String content;
 
-    /**
-     * 评论用户id
-     */
     private String userId;
 
-    /**
-     * 文章id
-     */
     private String articleId;
 
-    /**
-     * 评论创建时间
-     */
+    private String isRead;
+
     private Date createTime;
 
-    /**
-     * 回复的哪条评论（id）
-     */
     private String pid;
-
-    private static final long serialVersionUID = 1L;
 
     public String getId() {
         return id;
@@ -68,6 +49,14 @@ public class CommentEntity implements Serializable {
         this.articleId = articleId == null ? null : articleId.trim();
     }
 
+    public String getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(String isRead) {
+        this.isRead = isRead == null ? null : isRead.trim();
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -82,22 +71,5 @@ public class CommentEntity implements Serializable {
 
     public void setPid(String pid) {
         this.pid = pid == null ? null : pid.trim();
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", content=").append(content);
-        sb.append(", userId=").append(userId);
-        sb.append(", articleId=").append(articleId);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", pid=").append(pid);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
     }
 }

@@ -25,6 +25,11 @@ public class CommentUserResp implements Serializable {
     private String articleId;
 
     /**
+     * 文章名称
+     */
+    private String articleName;
+
+    /**
      * 评论创建时间
      */
     private Date commentCreateTime;
@@ -131,5 +136,13 @@ public class CommentUserResp implements Serializable {
 
     public void setUserCreateTime(Date userCreateTime) {
         this.userCreateTime = userCreateTime;
+    }
+
+    public String getArticleName() {
+        return articleName;
+    }
+
+    public void setArticleName(String articleName) {
+        this.articleName = articleName;
     }
 }

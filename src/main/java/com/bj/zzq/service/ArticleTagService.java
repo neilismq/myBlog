@@ -27,4 +27,10 @@ public class ArticleTagService {
     public void insert(ArticleTagEntity entity) {
         articleTagEntityMapper.insert(entity);
     }
+
+    public void deleteByArticleId(String articleId) {
+        ArticleTagEntityExample articleTagEntityExample = new ArticleTagEntityExample();
+        articleTagEntityExample.createCriteria().andArticleIdEqualTo(articleId);
+        articleTagEntityMapper.deleteByExample(articleTagEntityExample);
+    }
 }

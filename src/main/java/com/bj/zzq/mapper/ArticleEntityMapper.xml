@@ -183,7 +183,7 @@
                 content = #{record.content,jdbcType=LONGVARCHAR},
             </if>
             <if test="record.isDraft != null">
-                content = #{record.isDraft,jdbcType=CHAR},
+                is_draft = #{record.isDraft,jdbcType=CHAR},
             </if>
         </set>
         <if test="_parameter != null">

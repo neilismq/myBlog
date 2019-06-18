@@ -58,8 +58,7 @@
                 </div>
             </div>
         </div>
-        <div class="my-info"
-             style=" margin:2rem 0;min-height: 200px;border-radius: 2rem;border: solid 1px ;border-color: #0f0f0f33 ">
+        <div class="my-info" style=" margin:2rem 0;min-height: 200px;border-radius: 2rem;border: solid 1px ;border-color: #0f0f0f33 ">
             <ul style="list-style: none;line-height: 4rem;margin: 4rem 0 ">
                 <li><a><i class="fa fa-link"></i>&nbsp;友情链接</a></li>
                 <li><a><i class="fa fa-copyright"></i>&nbsp;关于本站</a></li>
@@ -67,7 +66,7 @@
             </ul>
         </div>
     </div>
-    <div style="clear: both"></div>
+    <div style="clear:both"></div>
 </@override>
 <@override name="js">
     <script type="text/javascript">

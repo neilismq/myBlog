@@ -33,7 +33,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="blog_file" domainObjectName="FileEntity"
+        <table tableName="blog_comment" domainObjectName="CommentEntity"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">

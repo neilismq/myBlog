@@ -236,21 +236,23 @@ desired effect
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="treeview">
-                    <a href="#" id="article-manage-link">
-                        <i class="fa fa-book"></i>
-                        <span>文章管理</span>
-                        <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                    </a>
-                    <ul class="treeview-menu" style="display: none;">
-                        <li><a href="admin/article/add"><i class="fa fa-circle-o"></i> 新增文章</a></li>
-                        <li><a href="admin/article/manage"><i class="fa fa-circle-o"></i> 管理文章</a></li>
-                    </ul>
-                </li>
-                <li><a href="admin/tag/add"><i class="fa fa-book"></i> <span>标签管理</span></a></li>
-                <li><a href="#"><i class="fa fa-pie-chart"></i> <span>网站统计</span></a></li>
+<#--                <li class="treeview">-->
+<#--                    <a href="#" id="article-manage-link">-->
+<#--                        <i class="fa fa-book"></i>-->
+<#--                        <span>文章管理</span>-->
+<#--                        <span class="pull-right-container">-->
+<#--                        <i class="fa fa-angle-left pull-right"></i>-->
+<#--                    </span>-->
+<#--                    </a>-->
+<#--                    <ul class="treeview-menu" style="display: none;">-->
+<#--                        <li><a href="admin/article/add"><i class="fa fa-circle-o"></i> 新增文章</a></li>-->
+<#--                        <li><a href="admin/article/manage"><i class="fa fa-circle-o"></i> 文章管理</a></li>-->
+<#--                    </ul>-->
+<#--                </li>-->
+                <li><a href="admin/article/manage"><i class="fa fa-book"></i> <span>文章管理</span></a></li>
+                <li><a href="admin/tag/manage/1"><i class="fa fa-tag"></i> <span>标签管理</span></a></li>
+                <li><a href="admin/comment/manage/1"><i class="fa fa-comments"></i> <span>评论管理</span></a></li>
+                <li><a href="javascript:void(0)"><i class="fa fa-pie-chart"></i> <span>网站统计</span></a></li>
 
             </ul>
             <!-- /.sidebar-menu -->

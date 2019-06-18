@@ -1,192 +1,273 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bj.zzq.mapper.CommentEntityMapper" >
-  <resultMap id="BaseResultMap" type="com.bj.zzq.model.CommentEntity" >
-    <result column="id" property="id" jdbcType="CHAR" />
-    <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="user_id" property="userId" jdbcType="CHAR" />
-    <result column="article_id" property="articleId" jdbcType="CHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="pid" property="pid" jdbcType="CHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.bj.zzq.mapper.CommentEntityMapper">
+    <resultMap id="BaseResultMap" type="com.bj.zzq.model.CommentEntity">
+        <id column="id" property="id" jdbcType="CHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="CHAR"/>
+        <result column="article_id" property="articleId" jdbcType="CHAR"/>
+        <result column="is_read" property="isRead" jdbcType="CHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="pid" property="pid" jdbcType="CHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, content, user_id, article_id, is_read, create_time, pid
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bj.zzq.model.CommentEntityExample">
+        select
+        <if test="distinct">
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    id, content, user_id, article_id, create_time, pid
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bj.zzq.model.CommentEntityExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from blog_comment
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="com.bj.zzq.model.CommentEntityExample" >
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from blog_comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from blog_comment
+        where id = #{id,jdbcType=CHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from blog_comment
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
+    where id = #{id,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.bj.zzq.model.CommentEntity" >
+    <delete id="deleteByExample" parameterType="com.bj.zzq.model.CommentEntityExample">
+        delete from blog_comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.bj.zzq.model.CommentEntity">
     insert into blog_comment (id, content, user_id, 
-      article_id, create_time, pid
-      )
+      article_id, is_read, create_time, 
+      pid)
     values (#{id,jdbcType=CHAR}, #{content,jdbcType=VARCHAR}, #{userId,jdbcType=CHAR}, 
-      #{articleId,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{pid,jdbcType=CHAR}
-      )
+      #{articleId,jdbcType=CHAR}, #{isRead,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{pid,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.bj.zzq.model.CommentEntity" >
-    insert into blog_comment
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="content != null" >
-        content,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="articleId != null" >
-        article_id,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="pid != null" >
-        pid,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=CHAR},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=CHAR},
-      </if>
-      <if test="articleId != null" >
-        #{articleId,jdbcType=CHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="pid != null" >
-        #{pid,jdbcType=CHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.bj.zzq.model.CommentEntityExample" resultType="java.lang.Integer" >
-    select count(*) from blog_comment
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update blog_comment
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=CHAR},
-      </if>
-      <if test="record.content != null" >
+    <insert id="insertSelective" parameterType="com.bj.zzq.model.CommentEntity">
+        insert into blog_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="articleId != null">
+                article_id,
+            </if>
+            <if test="isRead != null">
+                is_read,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=CHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=CHAR},
+            </if>
+            <if test="articleId != null">
+                #{articleId,jdbcType=CHAR},
+            </if>
+            <if test="isRead != null">
+                #{isRead,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.bj.zzq.model.CommentEntityExample" resultType="java.lang.Integer">
+        select count(*) from blog_comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update blog_comment
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=CHAR},
+            </if>
+            <if test="record.content != null">
+                content = #{record.content,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=CHAR},
+            </if>
+            <if test="record.articleId != null">
+                article_id = #{record.articleId,jdbcType=CHAR},
+            </if>
+            <if test="record.isRead != null">
+                is_read = #{record.isRead,jdbcType=CHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.pid != null">
+                pid = #{record.pid,jdbcType=CHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update blog_comment
+        set id = #{record.id,jdbcType=CHAR},
         content = #{record.content,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=CHAR},
-      </if>
-      <if test="record.articleId != null" >
         article_id = #{record.articleId,jdbcType=CHAR},
-      </if>
-      <if test="record.createTime != null" >
+        is_read = #{record.isRead,jdbcType=CHAR},
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.pid != null" >
-        pid = #{record.pid,jdbcType=CHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
+        pid = #{record.pid,jdbcType=CHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bj.zzq.model.CommentEntity">
+        update blog_comment
+        <set>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=CHAR},
+            </if>
+            <if test="articleId != null">
+                article_id = #{articleId,jdbcType=CHAR},
+            </if>
+            <if test="isRead != null">
+                is_read = #{isRead,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=CHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=CHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bj.zzq.model.CommentEntity">
     update blog_comment
-    set id = #{record.id,jdbcType=CHAR},
-      content = #{record.content,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=CHAR},
-      article_id = #{record.articleId,jdbcType=CHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      pid = #{record.pid,jdbcType=CHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
+    set content = #{content,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=CHAR},
+      article_id = #{articleId,jdbcType=CHAR},
+      is_read = #{isRead,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      pid = #{pid,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
   </update>
-  <select id="selectCommentRespByArticleId" resultType="com.bj.zzq.model.dto.CommentUserResp">
+
+    <select id="selectCommentRespByArticleId" resultType="com.bj.zzq.model.dto.CommentUserResp">
     select  c.id as commentId, c.content as content, c.user_id as userId, c.article_id as articleId, c.create_time as commentCreateTime, c.pid as pid,u.name as name,u.email as email,u.personal_site as personalSite,u.create_time  as userCreateTime from blog_comment c,blog_user u where c.user_id=u.id and article_id=#{id} order by c.create_time asc
   </select>
+    <select id="selectAllCommentResp" resultType="com.bj.zzq.model.dto.CommentUserResp">
+        SELECT
+        c.id AS commentId,
+        c.content AS content,
+        c.user_id AS userId,
+        c.article_id AS articleId,
+        a.title AS articleName,
+        c.create_time AS commentCreateTime,
+        c.pid AS pid,
+        u.NAME AS NAME,
+        u.email AS email,
+        u.personal_site AS personalSite,
+        u.create_time AS userCreateTime
+        FROM
+        blog_comment c
+        LEFT JOIN blog_user u ON c.user_id = u.id
+        LEFT JOIN blog_article a ON a.id = c.article_id
+        where 1=1
+        <if test="selectKey!=null and selectKey!=''">
+         and ( c.content like #{selectKey} or a.title like #{selectKey} or u.name like #{selectKey} or u.email like #{selectKey} or u.personal_site like #{selectKey})
+         </if>
+        order by c.create_time desc
+    </select>
 </mapper>

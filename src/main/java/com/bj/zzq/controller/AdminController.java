@@ -2,7 +2,9 @@ package com.bj.zzq.controller;
 
 import com.bj.zzq.dao.ArticleDao;
 import com.bj.zzq.model.*;
+import com.bj.zzq.model.dto.CommentUserResp;
 import com.bj.zzq.service.ArticleTagService;
+import com.bj.zzq.service.CommentService;
 import com.bj.zzq.service.FileService;
 import com.bj.zzq.service.TagService;
 import com.bj.zzq.utils.CommonResponse;
@@ -29,10 +31,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -59,6 +58,9 @@ public class AdminController {
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private CommentService commentService;
 
     /**
      * 登陆页面
@@ -93,7 +95,66 @@ public class AdminController {
         tagEntityExample.setOrderByClause("create_time desc");
         List<TagEntity> tagEntities = tagService.selectByExample(tagEntityExample);
         map.put("tags", tagEntities);
-        return "admin/articleManage/add";
+        return "admin/article/add";
+    }
+
+    /**
+     * 请求单个文章内容
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/article/query", method = RequestMethod.POST)
+    public CommonResponse queryArticle(String articleId) {
+        ArticleEntityExample articleEntityExample = new ArticleEntityExample();
+        articleEntityExample.createCriteria().andIdEqualTo(articleId);
+        List<ArticleEntity> articleEntities = articleDao.selectArticleByExample(articleEntityExample);
+        if (articleEntities == null || articleEntities.size() == 0) {
+            return CommonResponse.fail("查询文章不存在");
+        }
+        ArticleEntity articleEntity = articleEntities.get(0);
+        List<TagEntity> tagEntities = articleDao.selectTagsByArticleId(articleId);
+        articleEntity.setTags(tagEntities);
+        TagEntityExample tagEntityExample = new TagEntityExample();
+        tagEntityExample.setOrderByClause("create_time desc");
+        List<TagEntity> tagEntities1 = tagService.selectByExample(tagEntityExample);
+        HashMap<Object, Object> map = new HashMap<>();
+        map.put("article", articleEntity);
+        map.put("allTags", tagEntities1);
+        return CommonResponse.success().setBody(map);
+    }
+
+    /**
+     * 标签下拉框内容
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/article/dropdown/query", method = RequestMethod.POST)
+    public CommonResponse queryArticleSelect(String articleId) {
+
+        List<TagEntity> tagEntities = articleDao.selectTagsByArticleId(articleId);
+        HashSet<String> selectIds = new HashSet<>();
+        for (int i = 0; i < tagEntities.size(); i++) {
+            selectIds.add(tagEntities.get(i).getId());
+        }
+        TagEntityExample tagEntityExample = new TagEntityExample();
+        tagEntityExample.setOrderByClause("create_time desc");
+        List<TagEntity> tagEntities1 = tagService.selectByExample(tagEntityExample);
+        ArrayList<Map> maps = new ArrayList<>();
+        for (int i = 0; i < tagEntities1.size(); i++) {
+            TagEntity tagEntity = tagEntities1.get(i);
+            HashMap<Object, Object> item = new HashMap<>();
+            item.put("id", tagEntity.getId());
+            item.put("text", tagEntity.getName());
+            if (selectIds.contains(tagEntity.getId())) {
+                item.put("selected", true);
+            }
+            maps.add(item);
+        }
+        HashMap<String, List> map = new HashMap<>();
+        map.put("results", maps);
+        return CommonResponse.success().setBody(map);
     }
 
     /**
@@ -113,7 +174,7 @@ public class AdminController {
      * @param map
      * @return
      */
-    @RequestMapping(value = "/article/manage/search", method = RequestMethod.POST)
+    @RequestMapping(value = "/article/manage/search", method = RequestMethod.GET)
     public String searchArticlePage(ModelMap map, String selectKey) {
         return manageArticlePageByPageNum(map, 1, selectKey);
     }
@@ -148,7 +209,7 @@ public class AdminController {
         if (StringUtils.isNotBlank(selectKey)) {
             map.put("selectKey", selectKey);
         }
-        return "admin/articleManage/manage";
+        return "admin/article/manage";
     }
 
 
@@ -160,16 +221,36 @@ public class AdminController {
      */
     @ResponseBody
     @RequestMapping(value = "/article/save", method = RequestMethod.POST)
-    public CommonResponse saveArticle(ModelMap map, String title, String[] tagIds, String content, String isDraft) {
+    public CommonResponse saveArticle(ModelMap map, String articleId, String title, String[] tagIds, String content, String isDraft) {
+
         ArticleEntity articleEntity = new ArticleEntity();
-        articleEntity.setId(CommonUtils.newUUID());
-        articleEntity.setContent(content);
-        articleEntity.setTitle(title);
+        if (StringUtils.isBlank(articleId)) {
+            articleEntity.setId(CommonUtils.newUUID());
+            articleEntity.setCreateTime(new Date());
+        } else {
+            articleEntity.setId(articleId);
+            articleEntity.setUpdateTime(new Date());
+        }
+        if (StringUtils.isNotBlank(content)) {
+            articleEntity.setContent(content);
+        }
+        if (StringUtils.isNotBlank(title)) {
+            articleEntity.setTitle(title);
+        }
         articleEntity.setAuthor("赵志强");
         articleEntity.setIsDraft(isDraft);
-        articleEntity.setCreateTime(new Date());
-        articleDao.insertArticle(articleEntity);
-        if (tagIds != null) {
+        if (StringUtils.isBlank(articleId)) {
+            articleDao.insertArticle(articleEntity);
+        } else {
+            ArticleEntityExample articleEntityExample = new ArticleEntityExample();
+            articleEntityExample.createCriteria().andIdEqualTo(articleId);
+            articleDao.updateArticle(articleEntity, articleEntityExample);
+        }
+        if (StringUtils.isNotBlank(articleId)) {
+            //先删除所有标签和文章的映射
+            articleTagService.deleteByArticleId(articleId);
+        }
+        if (tagIds != null && tagIds.length > 0) {
             for (int i = 0; i < tagIds.length; i++) {
                 String tagId = tagIds[i];
                 ArticleTagEntity articleTagEntity = new ArticleTagEntity();
@@ -289,22 +370,34 @@ public class AdminController {
         PageInfo info = new PageInfo(page, pageInfo.getNavigatePages());
         BeanUtils.copyProperties(info, pageInfo);
         map.put("pageInfo", pageInfo);
-        return "admin/articleManage/query";
+        return "admin/article/query";
     }
 
     /**
-     * 添加标签页面
+     * 标签管理页面
      *
      * @param mav
      * @return
      */
-    @RequestMapping(value = "/tag/add", method = RequestMethod.GET)
-    public String tagAdd(ModelMap mav) {
+    @RequestMapping(value = "/tag/manage/{pageNum}", method = RequestMethod.GET)
+    public String tagAdd(ModelMap mav, @PathVariable Integer pageNum, String selectKey) {
+        if (pageNum == null || pageNum <= 0) {
+            pageNum = 1;
+        }
         TagEntityExample tagEntityExample = new TagEntityExample();
+        TagEntityExample.Criteria criteria = tagEntityExample.createCriteria();
+        if (StringUtils.isNotBlank(selectKey)) {
+            criteria.andNameLike("%" + selectKey + "%");
+        }
         tagEntityExample.setOrderByClause("create_time desc");
+        PageHelper.startPage(pageNum, 10);
         List<TagEntity> tags = tagService.selectByExample(tagEntityExample);
-        mav.put("tags", tags);
-        return "admin/tagManage/add";
+        PageInfo<TagEntity> pageInfo = new PageInfo<>(tags);
+        mav.put("pageInfo", pageInfo);
+        if (selectKey != null) {
+            mav.put("selectKey", selectKey);
+        }
+        return "admin/tag/manage";
     }
 
     /**
@@ -383,5 +476,40 @@ public class AdminController {
         return CommonResponse.success();
     }
 
+    /**
+     * 评论管理页面
+     *
+     * @param mav
+     * @param selectKey
+     * @return
+     */
+    @RequestMapping(value = "/comment/manage/{pageNum}", method = RequestMethod.GET)
+    public String commentManage(ModelMap mav, String selectKey, @PathVariable Integer pageNum) {
+
+        HashMap<String, String> map = new HashMap<>();
+        if (StringUtils.isNotBlank(selectKey)) {
+            map.put("selectKey", "%" + selectKey + "%");
+            mav.put("selectKey", selectKey);
+        }
+        if (pageNum == null || pageNum <= 0) {
+            pageNum = 1;
+        }
+        PageHelper.startPage(pageNum, 7);
+        List<CommentUserResp> commentUserResps = commentService.selectAllCommentResp(map);
+        mav.put("pageInfo", new PageInfo<>(commentUserResps));
+        return "admin/comment/manage";
+    }
+
+    /**
+     * 删除评论
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/comment/manage/delete", method = RequestMethod.POST)
+    public CommonResponse commentManage(String commentId) {
+        commentService.deleteById(commentId);
+        return CommonResponse.success();
+    }
 
 }
