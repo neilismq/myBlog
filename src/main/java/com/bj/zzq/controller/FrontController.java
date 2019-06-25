@@ -1,5 +1,6 @@
 package com.bj.zzq.controller;
 
+import com.bj.zzq.config.SiteStatisticsFilter;
 import com.bj.zzq.dao.ArticleDao;
 import com.bj.zzq.model.*;
 import com.bj.zzq.model.dto.ArticleTagResp;
@@ -100,6 +101,7 @@ public class FrontController {
         //获取评论和用户信息
         List<CommentUserResp> CommentUserResp = articleDao.selectCommentRespByArticleId(articleEntity.getId());
         map.put("comments", CommentUserResp);
+        map.put("readCount", SiteStatisticsFilter.getArticleCount().get(articleId).get());
         return "front/article";
     }
 

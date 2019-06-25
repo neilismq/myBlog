@@ -15,6 +15,10 @@ public class ArticleService {
     private ArticleEntityMapper articleEntityMapper;
 
     public List<ArticleEntity> selectByExample(ArticleEntityExample example) {
-        return articleEntityMapper.selectByExample(example);
+        return articleEntityMapper.selectByExampleWithBLOBs(example);
+    }
+
+    public void updateByPrimaryKeySelective(ArticleEntity entity) {
+        articleEntityMapper.updateByPrimaryKeySelective(entity);
     }
 }

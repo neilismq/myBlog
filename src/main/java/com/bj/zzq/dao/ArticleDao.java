@@ -25,7 +25,7 @@ public class ArticleDao {
     private ArticleTagEntityMapper articleTagEntityMapper;
 
     public List<ArticleEntity> selectByExample(ArticleEntityExample example) {
-        return articleEntityMapper.selectByExample(example);
+        return articleEntityMapper.selectByExampleWithBLOBs(example);
     }
 
     public TagEntity selectTagByArticleId(String id) {
@@ -97,7 +97,7 @@ public class ArticleDao {
     }
 
     public List<ArticleEntity> selectArticleByExample(ArticleEntityExample example) {
-        return articleEntityMapper.selectByExample(example);
+        return articleEntityMapper.selectByExampleWithBLOBs(example);
     }
 
     public List<TagEntity> selectAllTagWithArticleCount() {

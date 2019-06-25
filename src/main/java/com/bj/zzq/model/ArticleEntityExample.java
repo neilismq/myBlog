@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ArticleEntityExample {
+
     //默认不开启limit
     protected boolean limit;
     //默认偏移量
@@ -15,6 +16,8 @@ public class ArticleEntityExample {
     protected String orderByClause;
 
     protected boolean distinct;
+
+    protected List<Criteria> oredCriteria;
 
     public boolean isLimit() {
         return limit;
@@ -39,8 +42,6 @@ public class ArticleEntityExample {
     public void setLimitStart(int limitStart) {
         this.limitStart = limitStart;
     }
-
-    protected List<Criteria> oredCriteria;
 
     public ArticleEntityExample() {
         oredCriteria = new ArrayList<Criteria>();
@@ -343,6 +344,136 @@ public class ArticleEntityExample {
 
         public Criteria andAuthorNotBetween(String value1, String value2) {
             addCriterion("author not between", value1, value2, "author");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftIsNull() {
+            addCriterion("is_draft is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftIsNotNull() {
+            addCriterion("is_draft is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftEqualTo(String value) {
+            addCriterion("is_draft =", value, "isDraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftNotEqualTo(String value) {
+            addCriterion("is_draft <>", value, "isDraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftGreaterThan(String value) {
+            addCriterion("is_draft >", value, "isDraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftGreaterThanOrEqualTo(String value) {
+            addCriterion("is_draft >=", value, "isDraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftLessThan(String value) {
+            addCriterion("is_draft <", value, "isDraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftLessThanOrEqualTo(String value) {
+            addCriterion("is_draft <=", value, "isDraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftLike(String value) {
+            addCriterion("is_draft like", value, "isDraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftNotLike(String value) {
+            addCriterion("is_draft not like", value, "isDraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftIn(List<String> values) {
+            addCriterion("is_draft in", values, "isDraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftNotIn(List<String> values) {
+            addCriterion("is_draft not in", values, "isDraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftBetween(String value1, String value2) {
+            addCriterion("is_draft between", value1, value2, "isDraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDraftNotBetween(String value1, String value2) {
+            addCriterion("is_draft not between", value1, value2, "isDraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitCountIsNull() {
+            addCriterion("visit_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitCountIsNotNull() {
+            addCriterion("visit_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitCountEqualTo(Integer value) {
+            addCriterion("visit_count =", value, "visitCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitCountNotEqualTo(Integer value) {
+            addCriterion("visit_count <>", value, "visitCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitCountGreaterThan(Integer value) {
+            addCriterion("visit_count >", value, "visitCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("visit_count >=", value, "visitCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitCountLessThan(Integer value) {
+            addCriterion("visit_count <", value, "visitCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitCountLessThanOrEqualTo(Integer value) {
+            addCriterion("visit_count <=", value, "visitCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitCountIn(List<Integer> values) {
+            addCriterion("visit_count in", values, "visitCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitCountNotIn(List<Integer> values) {
+            addCriterion("visit_count not in", values, "visitCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitCountBetween(Integer value1, Integer value2) {
+            addCriterion("visit_count between", value1, value2, "visitCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("visit_count not between", value1, value2, "visitCount");
             return (Criteria) this;
         }
 

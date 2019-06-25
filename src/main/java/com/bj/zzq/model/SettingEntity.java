@@ -1,14 +1,11 @@
 package com.bj.zzq.model;
 
-import java.io.Serializable;
-
-public class SettingEntity implements Serializable {
-    /**
-     * id
-     */
+public class SettingEntity {
     private String id;
 
-    private static final long serialVersionUID = 1L;
+    private String appKey;
+
+    private String appValue;
 
     public String getId() {
         return id;
@@ -18,15 +15,19 @@ public class SettingEntity implements Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+    public String getAppKey() {
+        return appKey;
+    }
+
+    public void setAppKey(String appKey) {
+        this.appKey = appKey == null ? null : appKey.trim();
+    }
+
+    public String getAppValue() {
+        return appValue;
+    }
+
+    public void setAppValue(String appValue) {
+        this.appValue = appValue == null ? null : appValue.trim();
     }
 }

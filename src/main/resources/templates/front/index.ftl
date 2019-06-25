@@ -4,7 +4,7 @@
             <div class="index-article-item">
                 <h2>${(article.title)!''}</h2>
                 <div style="margin: 1rem 0;" class="index-article-item-opacity-8 index-article-item-font-1-5"><i
-                            class="fa fa-calendar"></i>&nbsp;&nbsp;<span class="index-article-item-font-1-5" >${article.createTime?date}</span></div>
+                            class="fa fa-calendar"></i>&nbsp;&nbsp;<span class="index-article-item-font-1-5" >${article.createTime?date}</span><span style="margin-left: 2rem;float: right" class="index-article-item-font-1-5">阅读：${article.visitCount}</span></div>
                 <div style="margin: 1rem 0;" class="index-article-item-opacity-8 index-article-item-font-1-5"><i class="fa fa-tag"></i>&nbsp;
                     <#if article.tags?? && article.tags?size gt 0>
                         <#list article.tags as tag>

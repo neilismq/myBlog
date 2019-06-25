@@ -27,7 +27,7 @@
                     <ul>
                         <#list recentArticles  as item>
                             <li>${item.createTime?date}：<a
-                                        href="front/article/${item.id}">${item.title!''}</a>（${item.commentCount}条评论）
+                                        href="front/article/${item.id}">${item.title!''}</a>（${(item.commentCount)!0}条评论）
                             </li>
                         </#list>
                     </ul>

@@ -1,57 +1,26 @@
 package com.bj.zzq.model;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class ArticleEntity implements Serializable {
-    /**
-     * 文章id
-     */
+public class ArticleEntity {
     private String id;
 
-    /**
-     * 文章标题
-     */
     private String title;
 
-    /**
-     * 作者名称
-     */
     private String author;
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    /**
-     * 文章内容
-     */
-    private String content;
-    /**
-     * 是否是草稿，1-是,0-不是
-     */
     private String isDraft;
 
-    private Integer CommentCount;
+    private Integer visitCount;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private String content;
 
     private List<TagEntity> tags;
-    private static final long serialVersionUID = 1L;
-
-    public Integer getCommentCount() {
-        return CommentCount;
-    }
-
-    public void setCommentCount(Integer commentCount) {
-        CommentCount = commentCount;
-    }
-
     public String getId() {
         return id;
     }
@@ -74,6 +43,22 @@ public class ArticleEntity implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author == null ? null : author.trim();
+    }
+
+    public String getIsDraft() {
+        return isDraft;
+    }
+
+    public void setIsDraft(String isDraft) {
+        this.isDraft = isDraft == null ? null : isDraft.trim();
+    }
+
+    public Integer getVisitCount() {
+        return visitCount;
+    }
+
+    public void setVisitCount(Integer visitCount) {
+        this.visitCount = visitCount;
     }
 
     public Date getCreateTime() {
@@ -100,37 +85,11 @@ public class ArticleEntity implements Serializable {
         this.content = content == null ? null : content.trim();
     }
 
-    public String getIsDraft() {
-        return isDraft;
-    }
-
-    public void setIsDraft(String isDraft) {
-        this.isDraft = isDraft;
-    }
-
     public List<TagEntity> getTags() {
         return tags;
     }
 
     public void setTags(List<TagEntity> tags) {
         this.tags = tags;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", title=").append(title);
-        sb.append(", author=").append(author);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", content=").append(content);
-        sb.append(", isDraft=").append(isDraft);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
     }
 }

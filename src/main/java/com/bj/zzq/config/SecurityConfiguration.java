@@ -125,7 +125,9 @@ public class SecurityConfiguration {
     @Bean
     public DelegatingFilterProxyRegistrationBean delegatingFilterProxyRegistrationBean() {
         DelegatingFilterProxyRegistrationBean bean = new DelegatingFilterProxyRegistrationBean("proxyFilter");
+        bean.addInitParameter("targetFilterLifecycle", "true");
         bean.addUrlPatterns("/*");
+//        bean.addUrlPatterns("/admin/**","/front/**");
         return bean;
     }
 

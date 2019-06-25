@@ -27,8 +27,9 @@
     <div id="content">
         <div id="content-title">
             <h2>
-                <strong>${article.title!''}</strong>
+                <strong>${article.title!''}</strong> <span style="float: right;text-align: center">阅读：${readCount!0}</span>
             </h2>
+
         </div>
         <hr/>
         <div id="article">
