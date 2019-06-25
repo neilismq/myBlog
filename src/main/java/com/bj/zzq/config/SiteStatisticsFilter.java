@@ -45,6 +45,8 @@ public class SiteStatisticsFilter implements Filter {
         Timer timer = new Timer();
         AppTimerTask timerTask = new AppTimerTask(settingService, articleService);
         timer.schedule(timerTask, 30 * 1000, 5 * 1000);
+        ClearCacheTask clearCacheTask = new ClearCacheTask();
+        timer.schedule(clearCacheTask, 30 * 60 * 1000, 24 * 60 * 60 * 1000);
     }
 
     @Override
@@ -121,5 +123,13 @@ public class SiteStatisticsFilter implements Filter {
 
     public static HashMap<String, AtomicInteger> getArticleCount() {
         return articleCount;
+    }
+
+    public static ConcurrentHashMap<String, Set<String>> getArticleIpCaches() {
+        return articleIpCaches;
+    }
+
+    public static Set<String> getIpCaches() {
+        return ipCaches;
     }
 }

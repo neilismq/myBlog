@@ -17,7 +17,7 @@ public class SettingService {
         SettingEntity entity = new SettingEntity();
         entity.setAppValue(String.valueOf(count));
         SettingEntityExample settingEntityExample = new SettingEntityExample();
-        settingEntityExample.createCriteria().andIdEqualTo("1");
+        settingEntityExample.createCriteria().andAppKeyEqualTo("visitCount");
         settingDao.update(entity,settingEntityExample);
     }
 

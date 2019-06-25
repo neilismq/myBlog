@@ -10,11 +10,14 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+<#--    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+<#--    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">-->
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="plugins/Ionicons/css/ionicons.min.css">
+<#--    <link rel="stylesheet" href="plugins/Ionicons/css/ionicons.min.css">-->
+    <link href="https://cdn.bootcss.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet">
     <!-- Theme style -->
     <link rel="stylesheet" href="plugins/admin-lte/css/AdminLTE.min.css">
     <!-- iCheck -->
@@ -83,10 +86,13 @@
 <!-- /.login-box -->
 
 <!-- jQuery 3 -->
-<script src="js/jquery.js"></script>
+<#--<script src="js/jquery.js"></script>-->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/md5.min.js"></script>
-<script src="plugins/jquery-validation/jquery.validate.js"></script>
-<script src="plugins/bootstrap/js/bootstrap.js"></script>
+<#--<script src="plugins/jquery-validation/jquery.validate.js"></script>-->
+<script src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<#--<script src="plugins/bootstrap/js/bootstrap.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script>
 
     $(document).ready(function () {

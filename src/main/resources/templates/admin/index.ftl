@@ -13,11 +13,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="bookmark" href="img/favicon.ico"/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+<#--    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+<#--    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">-->
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="plugins/Ionicons/css/ionicons.min.css">
+<#--    <link rel="stylesheet" href="plugins/Ionicons/css/ionicons.min.css">-->
+    <link href="https://cdn.bootcss.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet">
     <!-- Theme style -->
     <link rel="stylesheet" href="plugins/admin-lte/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -25,10 +28,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
           apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="plugins/admin-lte/css/skins/skin-blue.min.css">
 
-    <link rel="stylesheet" href="plugins/select2/css/select2.css">
+<#--    <link rel="stylesheet" href="plugins/select2/css/select2.css">-->
+    <link href="https://cdn.bootcss.com/select2/4.0.7/css/select2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/common.css">
 
-    <!-- todo 去了解hack -->
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -380,15 +384,18 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="js/jquery.min.js"></script>
+<#--<script src="js/jquery.min.js"></script>-->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<#--<script src="plugins/bootstrap/js/bootstrap.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <!-- AdminLTE App -->
 <script src="plugins/admin-lte/js/adminlte.js"></script>
 <#--<script src="plugins/admin-lte/js/adminlte.min.js"></script>-->
-<script src="js/showdown.js"></script>
-<script src="plugins/select2/js/select2.full.js"></script>
-
+<#--<script src="js/showdown.js"></script>-->
+<script src="https://cdn.bootcss.com/showdown/1.9.0/showdown.min.js"></script>
+<#--<script src="plugins/select2/js/select2.full.js"></script>-->
+<script src="https://cdn.bootcss.com/select2/4.0.7/js/select2.full.min.js"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
