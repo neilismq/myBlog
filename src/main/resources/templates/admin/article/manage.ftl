@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-sm-4"></div>
                     <div class="col-sm-2">
-                        <form action="admin/article/manage/search" method="GET">
+                        <form action="${adminPath}/article/manage/search" method="GET">
                             <input class="form-control input-group-sm" placeholder="请输入文章名称" name="selectKey"
                                    value="${selectKey!''}">
                         </form>
@@ -112,7 +112,7 @@
                                                                     <span>剪贴板</span>
                                                                 </#if>
                                                             </td>
-                                                            <td class="">${article.commentCount}</td>
+                                                            <td class="">${(article.commentCount)!0}</td>
                                                             <td class="">${(article.author)!''}</td>
                                                             <td class="">${(article.isDraft=='0')?string('是','否')}</td>
                                                             <td>${article.createTime?date}</td>
@@ -219,7 +219,7 @@
             // $li.parent().attr('style', 'display:block');
             // $li.parent().parent().addClass('menu-open');
 
-            var $li = $("a[href='admin/article/manage']").parent();
+            var $li = $("a[href='${adminPath}/article/manage']").parent();
             $li.addClass('active');
             /**
              * 点击选择行
@@ -255,7 +255,7 @@
              * 删除确认
              */
             $("#ackDeleteArticleBtn").on("click", function () {
-                $.post("admin/article/delete", {articleId: $($("#article-table  tr[choose='1']")[0]).attr("articleId")}, function (data) {
+                $.post("${adminPath}/article/delete", {articleId: $($("#article-table  tr[choose='1']")[0]).attr("articleId")}, function (data) {
                     if (data.code == 200) {
                         $('#deleteArticleModal').modal('hide');
                         location.replace(location.href);
@@ -266,7 +266,8 @@
 
             $("#addArticleBtn").on('click',function () {
                 $("input[name='articleId'").val('');
-                $.post('http://localhost/admin/article/dropdown/query', {articleId: null}, function (data) {
+                <#--$.post('http://39.107.101.131/${adminPath}/article/dropdown/query', {articleId: null}, function (data) {-->
+                $.post('/${adminPath}/article/dropdown/query', {articleId: null}, function (data) {
                     $(".select2").select2({data: data.body.results});
                 });
                 $("#add-article").attr("hidden", "hidden");
@@ -283,10 +284,11 @@
                     return;
                 }
                 $("input[name='articleId'").val($val);
-                $.post('http://localhost/admin/article/dropdown/query', {articleId: $val}, function (data) {
+                // $.post('http://39.107.101.131/${adminPath}/article/dropdown/query', {articleId: $val}, function (data) {
+                $.post('/${adminPath}/article/dropdown/query', {articleId: $val}, function (data) {
                     $(".select2").select2({data: data.body.results});
                 });
-                $.post("admin/article/query", {articleId: $val}, function (data) {
+                $.post("${adminPath}/article/query", {articleId: $val}, function (data) {
                     if (data.code == 200) {
                         var article = data.body.article;
                         $("[name='title']").val(article.title);
@@ -331,7 +333,7 @@
         });
 
         function submitForm() {
-            $.post("admin/article/save", $("#aritcle-form").serialize(), function (data) {
+            $.post("${adminPath}/article/save", $("#aritcle-form").serialize(), function (data) {
                 alert(data.message);
             });
         }
@@ -340,9 +342,9 @@
             var selectKey = $("input[name='selectKey']").val();
             var addr;
             if (location.port) {
-                addr = "http://" + location.host + ":" + location.port + "/admin/article/manage/" + pageNum;
+                addr = "http://" + location.host + ":" + location.port + "/${adminPath}/article/manage/" + pageNum;
             } else {
-                addr = "http://" + location.host + "/admin/article/manage/" + pageNum;
+                addr = "http://" + location.host + "/${adminPath}/article/manage/" + pageNum;
             }
             if (selectKey) {
                 location.href = addr + "?selectKey=" + selectKey;
@@ -485,7 +487,7 @@
                         //上传文件到服务器
                         //_uploadToServer(formData, li, progress, percentage);
                         $.ajax({
-                            url: "admin/article/upload",
+                            url: "${adminPath}/article/upload",
                             type: "POST",
                             data: formData,
                             /**
@@ -525,7 +527,8 @@
              */
             function _uploadToServer(formData, li, progress, percentage) {
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", "http://localhost/admin/article/upload", true);
+                xhr.open("POST", "/${adminPath}/article/upload", true);
+                <#--xhr.open("POST", "http://39.107.101.131/${adminPath}/article/upload", true);-->
                 xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest', 'Content-Type', 'multipart/form-data;');
 
                 //HTML5新增的API，存储了上传过程中的信息

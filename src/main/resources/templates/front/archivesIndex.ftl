@@ -71,7 +71,7 @@
 <@override name="js">
     <script type="text/javascript">
         $(document).ready(function () {
-            var content = "${article.content?j_string}";
+            var content = "<#if (article.content)??>${article.content?j_string}</#if>";
             var contentArray = content.split("\r\n");
             var showText = "";
             if (contentArray.length > 2) {

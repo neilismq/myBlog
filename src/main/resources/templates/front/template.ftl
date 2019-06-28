@@ -34,7 +34,7 @@
             </div>
             <hr/>
         </div>
-        <div class="content-wrapper">
+        <div class="content-wrapper my-article-content" style="min-height: 500px">
             <@block name="content"></@block>
         </div>
     </div>

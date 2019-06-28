@@ -48,7 +48,7 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
         <!--    <p class="login-box-msg">填写登录信息</p>-->
-        <form action="admin/login" method="post" id="loginForm">
+        <form action="/${adminPath}/login" method="post" id="loginForm">
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" placeholder="用户名" name="username">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -137,7 +137,7 @@
             submitHandler: function (form) {
                 var $username = $("input[name='username']").val();
                 var $password = $("input[name='password']").val();
-                $password = md5($password + "${salt}")
+                $password = md5($password + "${salt}");
                 $.post(form.action, {username:$username,password:$password}, function (data, status, xhr) {
                     if (data.code == "200") {
                         window.location.href = "${base}" + data.body.adminIndexUrl;

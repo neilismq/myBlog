@@ -44,7 +44,7 @@ public class SiteStatisticsFilter implements Filter {
         initWebVisitCount();
         Timer timer = new Timer();
         AppTimerTask timerTask = new AppTimerTask(settingService, articleService);
-        timer.schedule(timerTask, 30 * 1000, 5 * 1000);
+        timer.schedule(timerTask, 60 * 1000, 5 * 1000);
         ClearCacheTask clearCacheTask = new ClearCacheTask();
         timer.schedule(clearCacheTask, 30 * 60 * 1000, 24 * 60 * 60 * 1000);
     }

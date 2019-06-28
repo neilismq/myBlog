@@ -44,6 +44,9 @@ public class SecurityConfiguration {
     @Value("${shiro.unauthorizedUrl}")
     private String unauthorizedUrl;
 
+    @Value("${application.admin.path}")
+    private String adminPath;
+
 
     /**
      * 启用shiro过滤器
@@ -70,7 +73,9 @@ public class SecurityConfiguration {
         map.put("/**/*.gif", "anon");
         map.put("/front/**", "anon");
         map.put(logoutUrl, "logout");
-        map.put("/admin/**", "authc");
+//        map.put("/admin/**", "authc");
+        String authcPath = "/" + adminPath + "/**";
+        map.put(authcPath, "authc");
         map.put("/**", "anon");
         HashMap<String, Filter> filterHashMap = new HashMap<>();
         LogoutFilter logoutFilter = new LogoutFilter();

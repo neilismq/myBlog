@@ -34,7 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/{application.admin.path}")
 //@RequestMapping(value = "/admin-admin-admin123456")
 public class AdminController {
     @Value(value = "${shiro.loginSuccessUrl}")
@@ -273,6 +273,7 @@ public class AdminController {
     @RequestMapping(value = "/article/delete", method = RequestMethod.POST)
     public CommonResponse deleteArticle(String articleId) {
         articleDao.deleteArticleById(articleId);
+        articleDao.deleteRelationTagByArticleId(articleId);
         return CommonResponse.success();
     }
 

@@ -86,13 +86,13 @@
                 submitForm();
             });
             $("#cancleBtn").on('click', function () {
-                location.href = "admin/index";
+                location.href = "${adminPath}/index";
             });
 
         });
 
         function submitForm() {
-            $.post("admin/article/save", $("#aritcle-form").serialize(), function (data) {
+            $.post("${adminPath}/article/save", $("#aritcle-form").serialize(), function (data) {
                 alert(data.message);
             });
         }
@@ -231,7 +231,7 @@
                         //上传文件到服务器
                         //_uploadToServer(formData, li, progress, percentage);
                         $.ajax({
-                            url: "admin/article/upload",
+                            url: "${adminPath}/article/upload",
                             type: "POST",
                             data: formData,
                             /**
@@ -267,7 +267,8 @@
              */
             function _uploadToServer(formData, li, progress, percentage) {
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", "http://localhost/admin/article/upload", true);
+                xhr.open("POST", "${adminPath}/article/upload", true);
+                <#--xhr.open("POST", "http://39.107.101.131/${adminPath}/article/upload", true);-->
                 xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest', 'Content-Type', 'multipart/form-data;');
 
                 //HTML5新增的API，存储了上传过程中的信息
@@ -399,7 +400,7 @@
             fd.append("image", obj, "imgtest.png");
 
             //使用ajax发送
-            xhr.open('POST', 'admin/article/upload', true);//第二个参数是服务器处理action，各个语言提供方式不一样，我这是.net mvc 后台处理的，具体方法见步骤5
+            xhr.open('POST', '${adminPath}/article/upload', true);
             xhr.send(fd);
         }
 

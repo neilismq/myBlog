@@ -125,4 +125,10 @@ public class ArticleDao {
     public void updateArticle(ArticleEntity articleEntity, ArticleEntityExample articleEntityExample) {
         articleEntityMapper.updateByExampleSelective(articleEntity, articleEntityExample);
     }
+
+    public void deleteRelationTagByArticleId(String articleId) {
+        ArticleTagEntityExample articleTagEntityExample = new ArticleTagEntityExample();
+        articleTagEntityExample.createCriteria().andArticleIdEqualTo(articleId);
+        articleTagEntityMapper.deleteByExample(articleTagEntityExample);
+    }
 }

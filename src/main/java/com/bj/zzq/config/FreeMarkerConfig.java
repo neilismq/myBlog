@@ -7,6 +7,7 @@ import freemarker.template.TemplateModelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -25,16 +26,17 @@ public class FreeMarkerConfig {
     @Autowired
     private ServletContext servletContext;
 
+    @Value("${application.admin.path}")
+    private String adminPath;
+
     @PostConstruct
     public void setSharedVariable() throws TemplateModelException {
-
-
         configuration.setSharedVariable("base", servletContext.getContextPath());
         configuration.setSharedVariable("block", new BlockDirective());
         configuration.setSharedVariable("override", new OverrideDirective());
         configuration.setSharedVariable("extends", new ExtendsDirective());
+        configuration.setSharedVariable("adminPath", adminPath);
     }
-
 
 
 }

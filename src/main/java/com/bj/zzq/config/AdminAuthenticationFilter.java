@@ -1,12 +1,18 @@
 package com.bj.zzq.config;
 
+import com.bj.zzq.utils.ApplicationContextUtils;
 import com.bj.zzq.utils.CommonResponse;
 import com.bj.zzq.utils.JsonUtils;
 import com.bj.zzq.utils.WebUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -102,7 +108,9 @@ public class AdminAuthenticationFilter extends FormAuthenticationFilter {
             response.setStatus(HttpStatus.OK.value());
             response.setCharacterEncoding("utf-8");
             HashMap<String, String> body = new HashMap<>();
-            body.put("adminIndexUrl", "admin/index");
+            ApplicationContext context = ApplicationContextUtils.getContext();
+            String adminPath = context.getEnvironment().getProperty("shiro.loginSuccessUrl", "admin/index");
+            body.put("adminIndexUrl", adminPath);
             JsonUtils.writeValue(response.getWriter(), CommonResponse.success().setBody(body));
             return false;
         }
@@ -126,9 +134,9 @@ public class AdminAuthenticationFilter extends FormAuthenticationFilter {
             String errorMessage;
             if (authenticationException instanceof IncorrectCredentialsException) {
                 errorMessage = "用户名密码不正确！";
-            } else if(authenticationException instanceof UnknownAccountException){
+            } else if (authenticationException instanceof UnknownAccountException) {
                 errorMessage = "用户不存在！";
-            }else {
+            } else {
                 errorMessage = "登录时出现未知错误！";
             }
             try {

@@ -190,7 +190,7 @@ desired effect
                     <#--                                    <a href="#" class="btn btn-default btn-flat">Profile</a>-->
                     <#--                                </div>-->
                     <#--                                <div class="pull-right">-->
-                    <#--                                    <a href="admin/logout" class="btn btn-default btn-flat">Sign out</a>-->
+                    <#--                                    <a href="adminnijiushicaibudaozade/logout" class="btn btn-default btn-flat">Sign out</a>-->
                     <#--                                </div>-->
                     <#--                            </li>-->
                     <#--                        </ul>-->
@@ -200,7 +200,7 @@ desired effect
                     <#--                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>-->
                     <#--                    </li>-->
                     <li>
-                        <a href="admin/logout" title="退出登录"><i class="fa fa-sign-out"></i></a>
+                        <a href="${adminPath}/logout" title="退出登录"><i class="fa fa-sign-out"></i></a>
                     </li>
                 </ul>
             </div>
@@ -253,9 +253,9 @@ desired effect
 <#--                        <li><a href="admin/article/manage"><i class="fa fa-circle-o"></i> 文章管理</a></li>-->
 <#--                    </ul>-->
 <#--                </li>-->
-                <li><a href="admin/article/manage"><i class="fa fa-book"></i> <span>文章管理</span></a></li>
-                <li><a href="admin/tag/manage/1"><i class="fa fa-tag"></i> <span>标签管理</span></a></li>
-                <li><a href="admin/comment/manage/1"><i class="fa fa-comments"></i> <span>评论管理</span></a></li>
+                <li><a href="${adminPath}/article/manage"><i class="fa fa-book"></i> <span>文章管理</span></a></li>
+                <li><a href="${adminPath}/tag/manage/1"><i class="fa fa-tag"></i> <span>标签管理</span></a></li>
+                <li><a href="${adminPath}/comment/manage/1"><i class="fa fa-comments"></i> <span>评论管理</span></a></li>
                 <li><a href="javascript:void(0)"><i class="fa fa-pie-chart"></i> <span>网站统计</span></a></li>
 
             </ul>

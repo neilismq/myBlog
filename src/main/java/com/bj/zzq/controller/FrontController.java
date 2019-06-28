@@ -44,7 +44,7 @@ public class FrontController {
             articleEntity.setTags(tagEntities);
             //转换显示内容
             String content = articleEntity.getContent();
-            String showText = content.split("/r/n/r/n")[0];
+            String showText = content.split("\r\n\r\n")[0];
             articleEntity.setContent(showText);
         }
 

@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-sm-4"></div>
                 <div class="col-sm-2">
-                    <form action="admin/comment/manage/1" method="GET">
+                    <form action="${adminPath}/comment/manage/1" method="GET">
                         <input class="form-control input-group-sm" placeholder="请输入评论关键字" name="selectKey"
                                value="${selectKey!''}">
                     </form>
@@ -140,7 +140,7 @@
             });
 
             $("#ackDeleteBtn").on('click', function () {
-                $.post('admin/comment/manage/delete', {commentId: $("#deleteCommentId").val()}, function (data) {
+                $.post('${adminPath}/comment/manage/delete', {commentId: $("#deleteCommentId").val()}, function (data) {
                     alert(data.message);
                     if (data.code == 200) {
                         $('#deleteTagModal').modal('hide');
@@ -156,7 +156,7 @@
                 var $tagId = $("#tagId").val();
                 if ($tagId) {
                     //更新
-                    $.post("admin/tag/update", {tagId: $tagId, tagName: $name}, function (data) {
+                    $.post("${adminPath}/tag/update", {tagId: $tagId, tagName: $name}, function (data) {
                         alert(data.message);
                         if (data.code == 200) {
                             $('#addTagModal').modal('hide');
@@ -165,7 +165,7 @@
                     });
                 } else {
                     //插入
-                    $.post("admin/tag/add", {tagName: $name}, function (data) {
+                    $.post("${adminPath}/tag/add", {tagName: $name}, function (data) {
                         alert(data.message);
                         if (data.code == 200) {
                             $('#addTagModal').modal('hide');
@@ -174,7 +174,7 @@
                     });
                 }
             });
-            var $li = $("a[href^='admin/comment/manage']").parent();
+            var $li = $("a[href^='${adminPath}/comment/manage']").parent();
             $li.addClass('active');
 
         });
@@ -188,9 +188,9 @@
             var selectKey = $("input[name='selectKey']").val();
             var addr;
             if (location.port) {
-                addr = "http://" + location.host + ":" + location.port + "/admin/comment/manage/" + pageNum;
+                addr = "http://" + location.host + ":" + location.port + "/${adminPath}/comment/manage/" + pageNum;
             } else {
-                addr = "http://" + location.host + "/admin/comment/manage/" + pageNum;
+                addr = "http://" + location.host + "/${adminPath}/comment/manage/" + pageNum;
             }
             if (selectKey) {
                 location.href = addr + "?selectKey=" + selectKey;

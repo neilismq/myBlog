@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ClearCacheTask extends TimerTask {
     @Override
     public void run() {
-        //每23小时清除一次缓存
+        //每24小时清除一次缓存
         Set<String> ipCaches = SiteStatisticsFilter.getIpCaches();
         ipCaches.clear();
         ConcurrentHashMap<String, Set<String>> articleIpCaches = SiteStatisticsFilter.getArticleIpCaches();

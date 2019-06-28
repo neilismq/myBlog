@@ -232,13 +232,34 @@ p {
 .index-article-item {
     margin-bottom: 4rem;
 }
-
+.index-article-item p,.index-article-item h1,.index-article-item h2,.index-article-item h3,.index-article-item h4,.index-article-item h5{
+    max-width: 100%;
+    height: auto;
+    word-wrap:break-word;
+    word-break:break-all;
+    overflow: hidden;
+}
+.archives-content-article p,.archives-content-article h1,.archives-content-article h2,.archives-content-article h3,.archives-content-article h4,.archives-content-article h5{
+    max-width: 100%;
+    height: auto;
+    word-wrap:break-word;
+    word-break:break-all;
+    overflow: hidden;
+}
 .index-article-item img {
     max-width: 100%;
 }
 
 .zq-margin-top-2{
     margin-top: 2rem;
+}
+
+.my-article-content p,.my-article-content h1,.my-article-content h2,.my-article-content h3,.my-article-content h4,.my-article-content h5{
+    max-width: 100%;
+    height: auto;
+    word-wrap:break-word;
+    word-break:break-all;
+    overflow: hidden;
 }
 
 
