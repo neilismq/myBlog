@@ -6,3 +6,5 @@
 .settings
 /.vscode
 .gitignore
+application.properties
+*.properties
