@@ -37,6 +37,8 @@ public class FrontController {
         PageHelper.startPage(pageNum, pageSize);
         ArticleEntityExample articleEntityExample = new ArticleEntityExample();
         articleEntityExample.setOrderByClause("create_time desc");
+        ArticleEntityExample.Criteria criteria = articleEntityExample.createCriteria();
+        criteria.andIsDraftNotEqualTo("1");
         List<ArticleEntity> articleEntities = articleDao.selectArticleByExample(articleEntityExample);
         for (int i = 0; i < articleEntities.size(); i++) {
             ArticleEntity articleEntity = articleEntities.get(i);
@@ -258,6 +260,7 @@ public class FrontController {
             //最新文章评论数量
             map.put("commentCount", commentCount);
             ArticleEntityExample articleEntityExample = new ArticleEntityExample();
+            articleEntityExample.createCriteria().andIsDraftNotEqualTo("1");
             int articleCount = articleDao.selectArticleCountByExample(articleEntityExample);
 
             //全部文章数量
