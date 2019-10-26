@@ -29,7 +29,7 @@ public class CommonUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(getMD5("Zzq798828932","3287hdsfi87#fdsfds!@#^^*&fd"));
+        System.out.println(getMD5("123456","3287hdsfi87#fdsfds!@#^^*&fd"));
         String a="dsfdsfdsfjdsfds";
         a.split("\r\n\r\n");
         System.out.println();

@@ -256,7 +256,7 @@ desired effect
                 <li><a href="${adminPath}/article/manage"><i class="fa fa-book"></i> <span>文章管理</span></a></li>
                 <li><a href="${adminPath}/tag/manage/1"><i class="fa fa-tag"></i> <span>标签管理</span></a></li>
                 <li><a href="${adminPath}/comment/manage/1"><i class="fa fa-comments"></i> <span>评论管理</span></a></li>
-                <li><a href="javascript:void(0)"><i class="fa fa-pie-chart"></i> <span>网站统计</span></a></li>
+<#--                <li><a href="javascript:void(0)"><i class="fa fa-pie-chart"></i> <span>网站统计</span></a></li>-->
 
             </ul>
             <!-- /.sidebar-menu -->

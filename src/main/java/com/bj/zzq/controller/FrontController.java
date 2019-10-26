@@ -5,6 +5,7 @@ import com.bj.zzq.dao.ArticleDao;
 import com.bj.zzq.model.*;
 import com.bj.zzq.model.dto.ArticleTagResp;
 import com.bj.zzq.model.dto.CommentUserResp;
+import com.bj.zzq.utils.CommonUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
@@ -101,8 +102,14 @@ public class FrontController {
         }
 
         //获取评论和用户信息
-        List<CommentUserResp> CommentUserResp = articleDao.selectCommentRespByArticleId(articleEntity.getId());
-        map.put("comments", CommentUserResp);
+        List<CommentUserResp> commentUserResps = articleDao.selectCommentRespByArticleId(articleEntity.getId());
+        commentUserResps.stream().forEach(entity -> {
+            String personalSite = entity.getPersonalSite();
+            if (StringUtils.isNotBlank(personalSite) && !personalSite.contains("http:")) {
+                entity.setPersonalSite("http://" + personalSite);
+            }
+        });
+        map.put("comments", commentUserResps);
         map.put("readCount", SiteStatisticsFilter.getArticleCount().get(articleId).get());
         return "front/article";
     }
