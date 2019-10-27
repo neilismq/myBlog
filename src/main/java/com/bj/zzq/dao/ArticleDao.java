@@ -104,8 +104,8 @@ public class ArticleDao {
         return tagEntityMapper.selectAllTagWithArticleCount();
     }
 
-    public List<ArticleEntity> selectArticleWithCommentCount(HashMap map) {
-        return articleEntityMapper.selectArticleWithCommentCount(map);
+    public List<ArticleEntity> selectArticle(HashMap map) {
+        return articleEntityMapper.selectArticle(map);
     }
 
     public List<ArticleEntity> selectAllClipboardArticles() {

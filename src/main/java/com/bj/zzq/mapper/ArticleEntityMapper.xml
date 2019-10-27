@@ -1,136 +1,139 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bj.zzq.mapper.ArticleEntityMapper" >
-  <resultMap id="BaseResultMap" type="com.bj.zzq.model.ArticleEntity" >
-    <id column="id" property="id" jdbcType="CHAR" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="author" property="author" jdbcType="VARCHAR" />
-    <result column="is_draft" property="isDraft" jdbcType="CHAR" />
-    <result column="visit_count" property="visitCount" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.bj.zzq.model.ArticleEntity" extends="BaseResultMap" >
-    <result column="content" property="content" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.bj.zzq.mapper.ArticleEntityMapper">
+    <resultMap id="BaseResultMap" type="com.bj.zzq.model.ArticleEntity">
+        <id column="id" property="id" jdbcType="CHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="author" property="author" jdbcType="VARCHAR"/>
+        <result column="is_draft" property="isDraft" jdbcType="CHAR"/>
+        <result column="visit_count" property="visitCount" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.bj.zzq.model.ArticleEntity" extends="BaseResultMap">
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     id, title, author, is_draft, visit_count, create_time, update_time
   </sql>
-  <sql id="Blob_Column_List" >
+    <sql id="Blob_Column_List">
     content
   </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.bj.zzq.model.ArticleEntityExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from blog_article
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bj.zzq.model.ArticleEntityExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from blog_article
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-    <if test="limit">
-      limit ${limitStart},${limitOffset}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from blog_article
-    where id = #{id,jdbcType=CHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs"
+            parameterType="com.bj.zzq.model.ArticleEntityExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from blog_article
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bj.zzq.model.ArticleEntityExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from blog_article
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limit">
+            limit ${limitStart},${limitOffset}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from blog_article
+        where id = #{id,jdbcType=CHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from blog_article
     where id = #{id,jdbcType=CHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.bj.zzq.model.ArticleEntityExample" >
-    delete from blog_article
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.bj.zzq.model.ArticleEntity" >
+    <delete id="deleteByExample" parameterType="com.bj.zzq.model.ArticleEntityExample">
+        delete from blog_article
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.bj.zzq.model.ArticleEntity">
     insert into blog_article (id, title, author, 
       is_draft, visit_count, create_time, 
       update_time, content)
@@ -138,154 +141,154 @@
       #{isDraft,jdbcType=CHAR}, #{visitCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.bj.zzq.model.ArticleEntity" >
-    insert into blog_article
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="title != null" >
-        title,
-      </if>
-      <if test="author != null" >
-        author,
-      </if>
-      <if test="isDraft != null" >
-        is_draft,
-      </if>
-      <if test="visitCount != null" >
-        visit_count,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="content != null" >
-        content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=CHAR},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="author != null" >
-        #{author,jdbcType=VARCHAR},
-      </if>
-      <if test="isDraft != null" >
-        #{isDraft,jdbcType=CHAR},
-      </if>
-      <if test="visitCount != null" >
-        #{visitCount,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.bj.zzq.model.ArticleEntityExample" resultType="java.lang.Integer" >
-    select count(*) from blog_article
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update blog_article
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=CHAR},
-      </if>
-      <if test="record.title != null" >
+    <insert id="insertSelective" parameterType="com.bj.zzq.model.ArticleEntity">
+        insert into blog_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+            <if test="isDraft != null">
+                is_draft,
+            </if>
+            <if test="visitCount != null">
+                visit_count,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=CHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="isDraft != null">
+                #{isDraft,jdbcType=CHAR},
+            </if>
+            <if test="visitCount != null">
+                #{visitCount,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.bj.zzq.model.ArticleEntityExample" resultType="java.lang.Integer">
+        select count(*) from blog_article
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update blog_article
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=CHAR},
+            </if>
+            <if test="record.title != null">
+                title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.author != null">
+                author = #{record.author,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDraft != null">
+                is_draft = #{record.isDraft,jdbcType=CHAR},
+            </if>
+            <if test="record.visitCount != null">
+                visit_count = #{record.visitCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.content != null">
+                content = #{record.content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update blog_article
+        set id = #{record.id,jdbcType=CHAR},
         title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.author != null" >
         author = #{record.author,jdbcType=VARCHAR},
-      </if>
-      <if test="record.isDraft != null" >
         is_draft = #{record.isDraft,jdbcType=CHAR},
-      </if>
-      <if test="record.visitCount != null" >
         visit_count = #{record.visitCount,jdbcType=INTEGER},
-      </if>
-      <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.content != null" >
-        content = #{record.content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update blog_article
-    set id = #{record.id,jdbcType=CHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      author = #{record.author,jdbcType=VARCHAR},
-      is_draft = #{record.isDraft,jdbcType=CHAR},
-      visit_count = #{record.visitCount,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      content = #{record.content,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update blog_article
-    set id = #{record.id,jdbcType=CHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      author = #{record.author,jdbcType=VARCHAR},
-      is_draft = #{record.isDraft,jdbcType=CHAR},
-      visit_count = #{record.visitCount,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bj.zzq.model.ArticleEntity" >
-    update blog_article
-    <set >
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="author != null" >
-        author = #{author,jdbcType=VARCHAR},
-      </if>
-      <if test="isDraft != null" >
-        is_draft = #{isDraft,jdbcType=CHAR},
-      </if>
-      <if test="visitCount != null" >
-        visit_count = #{visitCount,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bj.zzq.model.ArticleEntity" >
+        content = #{record.content,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update blog_article
+        set id = #{record.id,jdbcType=CHAR},
+        title = #{record.title,jdbcType=VARCHAR},
+        author = #{record.author,jdbcType=VARCHAR},
+        is_draft = #{record.isDraft,jdbcType=CHAR},
+        visit_count = #{record.visitCount,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bj.zzq.model.ArticleEntity">
+        update blog_article
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                author = #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="isDraft != null">
+                is_draft = #{isDraft,jdbcType=CHAR},
+            </if>
+            <if test="visitCount != null">
+                visit_count = #{visitCount,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=CHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bj.zzq.model.ArticleEntity">
     update blog_article
     set title = #{title,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
@@ -296,7 +299,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bj.zzq.model.ArticleEntity" >
+    <update id="updateByPrimaryKey" parameterType="com.bj.zzq.model.ArticleEntity">
     update blog_article
     set title = #{title,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
@@ -308,17 +311,17 @@
   </update>
 
 
-  <select id="selectArticlesByTagId" resultMap="BaseResultMap">
+    <select id="selectArticlesByTagId" resultMap="BaseResultMap">
       select a.* from blog_article a,blog_tag t,blog_article_tag a_t where a.id=a_t.article_id and t.id=a_t.tag_id  and a_t.tag_id=#{id} and a.is_draft = '0'  order by a.create_time desc
   </select>
-  <select id="selectArticleWithCommentCount" resultMap="BaseResultMap" parameterType="map">
-    select a.* ,(select count(*) from blog_comment c where c.article_id=a.id) as commentCount from blog_article a
-    where 1=1
-    <if test="isDraft!=null"> and a.is_draft =#{isDraft,jdbcType=CHAR}</if>
-    <if test="selectKey!=null"> and a.title like #{selectKey,jdbcType=VARCHAR}</if>
-    order by a.create_time desc
-  </select>
-  <select id="selectAllClipboardArticles" resultMap="BaseResultMap">
+    <select id="selectArticle" resultMap="BaseResultMap" parameterType="map">
+        select a.* from blog_article a
+        where 1=1
+        <if test="isDraft!=null">and a.is_draft =#{isDraft,jdbcType=CHAR}</if>
+        <if test="selectKey!=null">and a.title like #{selectKey,jdbcType=VARCHAR}</if>
+        order by a.create_time desc
+    </select>
+    <select id="selectAllClipboardArticles" resultMap="BaseResultMap">
     select a.id, a.title, a.author, a.create_time, a.update_time,a.content from blog_article a where not EXISTS(SELECT * from blog_article_tag a_t WHERE a_t.article_id=a.id ) and a.is_draft = '0' order by a.create_time desc
   </select>
 </mapper>

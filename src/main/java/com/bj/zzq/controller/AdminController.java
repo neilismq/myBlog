@@ -2,6 +2,7 @@ package com.bj.zzq.controller;
 
 import com.bj.zzq.dao.ArticleDao;
 import com.bj.zzq.model.*;
+import com.bj.zzq.model.dto.ArticleWithCommentCountDTO;
 import com.bj.zzq.model.dto.CommentUserResp;
 import com.bj.zzq.service.ArticleTagService;
 import com.bj.zzq.service.CommentService;
@@ -198,13 +199,21 @@ public class AdminController {
         if (StringUtils.isNotBlank(selectKey)) {
             mapParam.put("selectKey", "%" + selectKey + "%");
         }
-        List<ArticleEntity> articleEntities = articleDao.selectArticleWithCommentCount(mapParam);
+        List<ArticleEntity> articleEntities = articleDao.selectArticle(mapParam);
+        ArrayList<ArticleWithCommentCountDTO> articleWithCommentCountDTOS = new ArrayList<>();
         for (int i = 0; i < articleEntities.size(); i++) {
             ArticleEntity articleEntity = articleEntities.get(i);
             List<TagEntity> tagEntities = articleDao.selectTagsByArticleId(articleEntity.getId());
             articleEntity.setTags(tagEntities);
+            ArticleWithCommentCountDTO articleWithCommentCountDTO = new ArticleWithCommentCountDTO();
+            BeanUtils.copyProperties(articleEntity,articleWithCommentCountDTO);
+            CommentEntityExample commentEntityExample = new CommentEntityExample();
+            commentEntityExample.createCriteria().andArticleIdEqualTo(articleEntity.getId());
+            int commentCount = articleDao.selectCommentsCountByExample(commentEntityExample);
+            articleWithCommentCountDTO.setCommentCount(commentCount);
+            articleWithCommentCountDTOS.add(articleWithCommentCountDTO);
         }
-        PageInfo<ArticleEntity> pageInfo = new PageInfo<>(articleEntities, 5);
+        PageInfo<ArticleWithCommentCountDTO> pageInfo = new PageInfo<>(articleWithCommentCountDTOS, 5);
         map.put("pageInfo", pageInfo);
         if (StringUtils.isNotBlank(selectKey)) {
             map.put("selectKey", selectKey);

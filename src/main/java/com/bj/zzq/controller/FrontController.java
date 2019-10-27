@@ -4,6 +4,7 @@ import com.bj.zzq.config.SiteStatisticsFilter;
 import com.bj.zzq.dao.ArticleDao;
 import com.bj.zzq.model.*;
 import com.bj.zzq.model.dto.ArticleTagResp;
+import com.bj.zzq.model.dto.ArticleWithCommentCountDTO;
 import com.bj.zzq.model.dto.CommentUserResp;
 import com.bj.zzq.utils.CommonUtils;
 import com.github.pagehelper.PageHelper;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.websocket.server.PathParam;
 import java.util.*;
 import java.util.prefs.BackingStoreException;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -236,14 +238,34 @@ public class FrontController {
     @RequestMapping(value = "/archivesIndex", method = RequestMethod.GET)
     public String archives_index(Map map) {
         PageHelper.startPage(1, 10);
+
+        //查询档案信息
         HashMap<String, String> mapParam = new HashMap<>();
         mapParam.put("isDraft", "0");
-        List<ArticleEntity> list = articleDao.selectArticleWithCommentCount(mapParam);
+        List<ArticleEntity> list = articleDao.selectArticle(mapParam);
+
+        //最新文章列表，默认显示20篇
+        if (list != null) {
+            List<ArticleWithCommentCountDTO> collect = list.stream().map(articleEntity -> {
+                ArticleWithCommentCountDTO articleWithCommentCountDTO = new ArticleWithCommentCountDTO();
+                BeanUtils.copyProperties(articleEntity, articleWithCommentCountDTO);
+                CommentEntityExample commentEntityExample = new CommentEntityExample();
+                commentEntityExample.createCriteria().andArticleIdEqualTo(articleEntity.getId());
+                int commentCount = articleDao.selectCommentsCountByExample(commentEntityExample);
+                articleWithCommentCountDTO.setCommentCount(commentCount);
+                return articleWithCommentCountDTO;
+            }).collect(Collectors.toList());
+            map.put("recentArticles", collect);
+        }
+
         if (list != null && list.size() > 0) {
             ArticleEntity articleEntity = list.get(0);
+
+            //设置第一段内容
             String content = articleEntity.getContent();
             content = content.substring(0, content.indexOf("\\n") == -1 ? content.length() : content.indexOf("\\n"));
             articleEntity.setContent(content);
+
             //最新文章
             map.put("article", articleEntity);
             List<CommentUserResp> commentUserResps = articleDao.selectCommentRespByArticleId(articleEntity.getId());
@@ -252,8 +274,6 @@ public class FrontController {
                 //最新文章的第一条评论
                 map.put("currentArticleFirstComment", commentUserResp);
             }
-            //最新文章列表，默认显示20篇
-            map.put("recentArticles", list);
 
             //最新文章所属标签
             TagEntity tagEntity = articleDao.selectTagByArticleId(articleEntity.getId());

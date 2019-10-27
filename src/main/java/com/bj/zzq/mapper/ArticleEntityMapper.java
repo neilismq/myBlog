@@ -39,7 +39,7 @@ public interface ArticleEntityMapper {
 
     List<ArticleEntity> selectArticlesByTagId(HashMap<Object, Object> map);
 
-    List<ArticleEntity> selectArticleWithCommentCount(HashMap map);
+    List<ArticleEntity> selectArticle(HashMap map);
 
     List<ArticleEntity> selectAllClipboardArticles();
 }
