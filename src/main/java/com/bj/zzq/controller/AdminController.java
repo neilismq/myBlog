@@ -34,7 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
-@RequestMapping(value = "/{application.admin.path}")
+@RequestMapping(value = "/${application.admin.path}")
 //@RequestMapping(value = "/admin-admin-admin123456")
 public class AdminController {
     @Value(value = "${shiro.loginSuccessUrl}")
